@@ -1,3 +1,4 @@
+"use client"
 import { usePunchClock } from "@/lib/mutations/punch-clock";
 import { Button } from "../button";
 
@@ -7,9 +8,8 @@ export default function PunchClockButton({ punchOut = false, disabled = false }:
 
     return (
         <Button
-            disabled={isPending}
-            className={disabled ? 'bg-gray-300 text-gray-500 cursor-not-allowed' : ''}
-            onClick={() => mutate()}
+            disabled={isPending || disabled}
+            onClick={() => mutate(punchOut)}
         >
             {punchOut ? "Punch Out" : "Punch In"}
         </Button>

@@ -5,7 +5,7 @@ CREATE TABLE time_clock (
     user_id VARCHAR(50) NOT NULL,
     org_id VARCHAR(50) NOT NULL,
     time_in TIMESTAMP NOT NULL,
-    time_out DATE
+    time_out TIMESTAMP
 );
 
 select * from time_clock;

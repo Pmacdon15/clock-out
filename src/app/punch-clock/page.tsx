@@ -1,7 +1,9 @@
 import TimeInput from "@/components/ui/inputs/time-input";
+import { getTimeCard } from "@/lib/DAL/punch-clock";
 import { OrganizationSwitcher, SignedIn, UserButton } from "@clerk/nextjs";
 
-export default function Page() {
+export default async function Page() {
+    const timeCard = await getTimeCard()
     return (
         <div className="flex justify-center p-4 mt-8">
             <div className="rounded-xl p-1 bg-gradient-to-r from-blue-500 to-cyan-500 w-5/6 mdw-4/6">
@@ -12,8 +14,8 @@ export default function Page() {
                             <OrganizationSwitcher />
                         </div>
                     </SignedIn>
-                    <TimeInput disabled={false} />
-                    <TimeInput punchOut disabled />
+                    <TimeInput disabled={!!timeCard} clockInTime={timeCard?.time_in}/>
+                    <TimeInput punchOut disabled={!timeCard}  />
                 </div>
             </div>
         </div>
