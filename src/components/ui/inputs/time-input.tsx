@@ -15,22 +15,19 @@ export default function TimeInput({ punchOut = false, disabled, clockInTime }: {
     }, []);
 
     const formattedCurrentTime = formatTime(currentTime);
-    const displayTime = punchOut ? formattedCurrentTime : (clockInTime ? formatTime(new Date(clockInTime)) : formattedCurrentTime);
+    const displayTime = punchOut
+        ? formattedCurrentTime
+        : (clockInTime ? formatTime(new Date(clockInTime)) : formattedCurrentTime);
 
-    let elapsedTime = "";
-    if (punchOut && clockInTime) {
-        const diff = currentTime.getTime() - new Date(clockInTime).getTime();
-        const hours = Math.floor(diff / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-        elapsedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-    }
+    const elapsedTime = punchOut && clockInTime
+        ? calculateElapsedTime(clockInTime, currentTime)
+        : "";
 
     return (
         <div className="flex flex-col gap-3">
-            {punchOut && clockInTime && (
+            {punchOut && clockInTime &&
                 <>
-                    <Label className={`px-1 text-gray-400`}>
+                    <Label className="px-1 text-gray-400">
                         Time Worked:
                     </Label>
                     <div className="flex items-center gap-2">
@@ -44,7 +41,7 @@ export default function TimeInput({ punchOut = false, disabled, clockInTime }: {
                         <Clock size={28} />
                     </div>
                 </>
-            )}
+            }
             <Label htmlFor="time-picker" className={`px-1 ${disabled ? 'text-gray-400' : ''}`}>
                 {punchOut ? "Punch Out Time:" : "Punch In Time:"}
             </Label>
@@ -71,7 +68,7 @@ export default function TimeInput({ punchOut = false, disabled, clockInTime }: {
     );
 }
 
-// helper at bottom
+// helper to format time
 function formatTime(date: Date) {
     const hours = date.getHours();
     const minutes = date.getMinutes().toString().padStart(2, '0');
@@ -79,4 +76,13 @@ function formatTime(date: Date) {
     const ampm = hours >= 12 ? 'PM' : 'AM';
     const formattedHours = (hours % 12 || 12).toString().padStart(2, '0');
     return `${formattedHours}:${minutes}:${seconds} ${ampm}`;
+}
+
+// helper to calculate elapsed time
+function calculateElapsedTime(startTime: Date, endTime: Date) {
+    const diff = endTime.getTime() - new Date(startTime).getTime();
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 }
