@@ -7,35 +7,43 @@ import PunchClockButton from "../buttons/punch-clock";
 import { Clock } from "lucide-react";
 
 export default function TimeInput({ punchOut = false, disabled, clockInTime }: { punchOut?: boolean, disabled: boolean, clockInTime?: Date }) {
-    const [currentTime, setCurrentTime] = useState("");
+    const [currentTime, setCurrentTime] = useState(new Date());
 
     useEffect(() => {
-        const updateTime = () => setCurrentTime(formatTime(new Date()));
-        updateTime();
-        const interval = setInterval(updateTime, 1000);
+        const interval = setInterval(() => setCurrentTime(new Date()), 1000);
         return () => clearInterval(interval);
     }, []);
 
-    const displayTime = punchOut ? currentTime : (clockInTime ? formatTime(new Date(clockInTime)) : currentTime);
+    const formattedCurrentTime = formatTime(currentTime);
+    const displayTime = punchOut ? formattedCurrentTime : (clockInTime ? formatTime(new Date(clockInTime)) : formattedCurrentTime);
+
+    let elapsedTime = "";
+    if (punchOut && clockInTime) {
+        const diff = currentTime.getTime() - new Date(clockInTime).getTime();
+        const hours = Math.floor(diff / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        elapsedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
 
     return (
         <div className="flex flex-col gap-3">
             {punchOut && clockInTime && (
-                <div className="flex flex-col gap-3">
+                <>
                     <Label className={`px-1 text-gray-400`}>
-                        Punch In Time:
+                        Time Worked:
                     </Label>
                     <div className="flex items-center gap-2">
                         <Input
                             type="text"
-                            value={formatTime(new Date(clockInTime))}
+                            value={elapsedTime}
                             readOnly
                             disabled
-                            className={`bg-background appearance-none w-30 bg-gray-200 text-gray-400 cursor-not-allowed`}
+                            className="w-30"
                         />
                         <Clock size={28} />
                     </div>
-                </div>
+                </>
             )}
             <Label htmlFor="time-picker" className={`px-1 ${disabled ? 'text-gray-400' : ''}`}>
                 {punchOut ? "Punch Out Time:" : "Punch In Time:"}

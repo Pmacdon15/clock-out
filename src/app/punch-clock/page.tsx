@@ -15,7 +15,7 @@ export default async function Page() {
                         </div>
                     </SignedIn>
                     <TimeInput disabled={!!timeCard} clockInTime={timeCard?.time_in}/>
-                    <TimeInput punchOut disabled={!timeCard}  />
+                    <TimeInput punchOut disabled={!timeCard} clockInTime={timeCard?.time_in} />
                 </div>
             </div>
         </div>
