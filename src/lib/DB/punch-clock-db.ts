@@ -41,3 +41,25 @@ export async function getTimeCardDb(userId: string, orgId: string): Promise<Time
 
     return result as TimeCard[];
 }
+
+export interface HoursWorked {
+    date: string;
+    hours: number;
+}
+
+export async function getHoursWorkedDb(userId: string, orgId: string): Promise<HoursWorked[]> {
+    const sql = neon(process.env.DATABASE_URL!);
+    const result = await sql`
+        SELECT
+            DATE(time_in) as date,
+            SUM(EXTRACT(EPOCH FROM (time_out - time_in))) / 3600 as hours
+        FROM time_clock
+        WHERE user_id = ${userId} AND org_id = ${orgId} AND time_out IS NOT NULL
+        GROUP BY DATE(time_in)
+        ORDER BY date;
+    `;
+    return result.map((row: any) => ({
+        ...row,
+        hours: parseFloat(row.hours),
+    })) as HoursWorked[];
+}
