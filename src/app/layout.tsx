@@ -1,12 +1,10 @@
+import { ClerkProvider } from "@clerk/nextjs";
+import { dark } from "@clerk/themes";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/ui/headers/layout-header";
-import { ClerkProvider } from "@clerk/nextjs";
-import { dark } from '@clerk/themes'
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
-const queryClient = new QueryClient()
+import { Providers } from "./providers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,16 +32,16 @@ export default function RootLayout({
         baseTheme: dark,
       }}
     >
-      <QueryClientProvider client={queryClient}>
-        <html lang="en">
-          <body
-            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-          >
+      <html lang="en">
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          <Providers>
             <Header />
             {children}
-          </body>
-        </html>
-      </QueryClientProvider>
+          </Providers>
+        </body>
+      </html>
     </ClerkProvider>
   );
 }
