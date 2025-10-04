@@ -20,7 +20,7 @@ export function HoursWorkedChart({ data }: { data: HoursWorked[] }) {
                     tickFormatter={(value) => new Date(value).toLocaleDateString()}
                 />
                 <YAxis domain={[0, 'auto']} />
-                <Bar dataKey="hours" fill={chartConfig.hours.color} />
+                <Bar dataKey="hours" fill={chartConfig.hours.color} barSize={100} />
                 <ChartTooltip content={<ChartTooltipContent />} />
             </BarChart>
         </ChartContainer>

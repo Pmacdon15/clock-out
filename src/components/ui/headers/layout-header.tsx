@@ -13,12 +13,7 @@ export default function Header() {
                             <SignInButton forceRedirectUrl={'punch-clock'} />
                             <SignUpButton forceRedirectUrl={'punch-clock'} />
                         </div>
-                    </SignedOut>
-                    <SignedIn>
-                        <Link href="/hours-worked">
-                            <Button>Hours Worked</Button>
-                        </Link>
-                    </SignedIn>
+                    </SignedOut>                    
                 </div>
             </div>
             <div className="flex items-center justify-center w-5/6 md:w-3/6 p-4 mx-auto rounded-full border-[3px] border-dashed border-blue-400">
