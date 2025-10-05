@@ -1,7 +1,5 @@
-import { SignedIn, SignedOut, SignInButton, SignUpButton } from "@clerk/nextjs";
+import { SignedOut, SignInButton, SignUpButton } from "@clerk/nextjs";
 import { ClockAlert } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
 
 export default function Header() {
     return (

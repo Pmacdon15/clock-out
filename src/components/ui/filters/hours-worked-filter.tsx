@@ -14,13 +14,14 @@ interface HoursWorkedFilterProps {
 }
 
 export function HoursWorkedFilter({ initialHoursPromise, weeks, currentWeek }: HoursWorkedFilterProps) {
-  const initialHours =  use(initialHoursPromise);
+  const initialHours = use(initialHoursPromise);
 
   const [hours, setHours] = useState(initialHours);
   const [selectedWeek, setSelectedWeek] = useState(currentWeek);
 
   const handleWeekChange = async (event: React.ChangeEvent<HTMLSelectElement>) => {
     const week = event.target.value;
+    if (week === "") return
     setSelectedWeek(week);
     const newHours = await getWeeklyHours(week);
     setHours(newHours);
