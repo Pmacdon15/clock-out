@@ -17,7 +17,7 @@ export default async function PrivacyPage() {
   const privacyContent = await getPrivacyContent();
 
   return (
-    <div className=" flex flex-col min-h-screen bg-background text-foreground p-8 w-full items-center gap-4">
+    <div className=" flex flex-col min-h-screen bg-background text-foreground pt-4 md:pt-8 p-2 w-full items-center gap-4">
       <TermsContainer typeOfContainer={'Privacy Policy'}>
         <ReactMarkdown remarkPlugins={[remarkGfm]}>
           {privacyContent}
