@@ -1,7 +1,7 @@
-import { Button } from '@/components/ui/button';
 import { OrganizationSwitcher, SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from '@clerk/nextjs';
-import Link from 'next/link';
 import { Suspense } from 'react';
+import LinkWithPath from '../components/ui/links/link';
+import BlueTextLink from '@/components/ui/links/blue-text-link';
 
 export default function Home() {
   return (
@@ -15,32 +15,15 @@ export default function Home() {
         <SignedIn>
           <UserButton />
           <OrganizationSwitcher />
-        </SignedIn>
-      </Suspense>
-      <Suspense>
-        <SignedIn>
           <nav className="flex space-x-4">
-            <Link href={'/punch-clock'}>
-              <Button>
-                Punch Clock
-              </Button>
-            </Link>
-            <Link href={'/hours-worked'}>
-              <Button>
-                Hours Worked
-              </Button>
-            </Link>
+            <LinkWithPath path={'/punch-clock'} text={'Punch Clock'} />
+            <LinkWithPath path={'/hours-worked'} text={'Hours Worked'} />
           </nav>
         </SignedIn>
       </Suspense>
       <nav className="flex space-x-4">
-
-        <Link href="/terms" className="text-blue-500 hover:underline">
-          Terms of Service
-        </Link>
-        <Link href="/privacy" className="text-blue-500 hover:underline">
-          Privacy Policy
-        </Link>
+        <BlueTextLink path={'/terms'} text={'Terms of Service'} />
+        <BlueTextLink path={'/privacy'} text={' Privacy Policy'} />
       </nav>
     </div>
   );

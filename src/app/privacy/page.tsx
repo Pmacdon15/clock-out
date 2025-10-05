@@ -1,5 +1,11 @@
+import { Button } from '@/components/ui/button';
+import TermsContainer from '@/components/ui/containers/terms-container';
+import BackHomeLink from '@/components/ui/links/back-home-link';
 import fs from 'fs/promises';
+import Link from 'next/link';
 import path from 'path';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 async function getPrivacyContent() {
   const filePath = path.join(process.cwd(), 'PRIVACY_POLICY.md');
@@ -11,13 +17,13 @@ export default async function PrivacyPage() {
   const privacyContent = await getPrivacyContent();
 
   return (
-    <div className="min-h-screen bg-background text-foreground p-8">
-      <div className="max-w-3xl mx-auto">
-        <h1 className="text-3xl font-bold mb-6">Privacy Policy</h1>
-        <pre className="whitespace-pre-wrap font-sans">
+    <div className=" flex flex-col min-h-screen bg-background text-foreground p-8 w-full items-center gap-4">
+      <TermsContainer typeOfContainer={'Privacy Policy'}>
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>
           {privacyContent}
-        </pre>
-      </div>
-    </div>
+        </ReactMarkdown>
+      </TermsContainer>
+      <BackHomeLink />
+    </div >
   );
 }
