@@ -1,6 +1,8 @@
 import TermsContainer from '@/components/ui/containers/terms-container';
 import fs from 'fs/promises';
 import path from 'path';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 async function getTermsContent() {
   const filePath = path.join(process.cwd(), 'TERMS_OF_SERVICE.md');
@@ -14,7 +16,9 @@ export default async function TermsPage() {
   return (
     <div className="min-h-screen bg-background text-foreground p-8 w-full">
       <TermsContainer typeOfContainer={'Terms of Service'}>
-        {termsContent}
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          {termsContent}
+        </ReactMarkdown>
       </TermsContainer>
     </div>
   );
