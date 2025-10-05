@@ -1,5 +1,5 @@
 import { auth } from "@clerk/nextjs/server";
-import { TimeCard, getTimeCardDb, getHoursWorkedDb, HoursWorked } from "../DB/punch-clock-db";
+import { TimeCard, getTimeCardDb, getHoursWorkedDb, HoursWorked, getAllWeeksWithWorkDb, Week } from "../DB/punch-clock-db";
 
 export async function getTimeCard(): Promise<TimeCard | null> {
     const { userId, orgId } = await auth.protect()
@@ -16,11 +16,22 @@ export async function getTimeCard(): Promise<TimeCard | null> {
 
 }
 
-export async function getHoursWorked(): Promise<HoursWorked[]> {
+export async function getHoursWorked(week?: string): Promise<HoursWorked[]> {
     const { userId, orgId } = await auth.protect()
     try {
-        const hoursWorked = await getHoursWorkedDb(userId, orgId || userId)
+        const hoursWorked = await getHoursWorkedDb(userId, orgId || userId, week)
         return hoursWorked;
+    } catch (e) {
+        console.error("Error: ", e)
+        return [];
+    }
+}
+
+export async function getAllWeeksWithWork(): Promise<Week[]> {
+    const { userId, orgId } = await auth.protect()
+    try {
+        const weeks = await getAllWeeksWithWorkDb(userId, orgId || userId)
+        return weeks;
     } catch (e) {
         console.error("Error: ", e)
         return [];

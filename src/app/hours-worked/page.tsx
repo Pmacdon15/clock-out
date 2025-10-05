@@ -1,12 +1,22 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { HoursWorkedChart } from "@/components/ui/charts/hours-worked-chart";
-import { getHoursWorked } from "@/lib/DAL/punch-clock";
+import { HoursWorkedFilter } from "@/components/ui/filters/hours-worked-filter";
+import { getAllWeeksWithWork, getHoursWorked } from "@/lib/DAL/punch-clock";
+import { getWeekNumber } from "@/lib/utils";
 import { SignedIn } from "@clerk/nextjs";
 import Link from "next/link";
 
 export default async function HoursWorkedPage() {
-  const hoursWorked = await getHoursWorked();
+  
+  const weeks = await getAllWeeksWithWork();
+
+  // Get current week
+  const now = new Date();
+  const [currentYear, currentWeekNum] = getWeekNumber(now);
+  const currentWeekValue = `${currentYear}-W${String(currentWeekNum).padStart(2, '0')}`;
+
+  // Start to fetch data for the current week
+  const hoursWorkedPromise =  getHoursWorked(currentWeekValue);
+
   return (
     <>
       <div className="flex justify-end p-6">
@@ -17,16 +27,7 @@ export default async function HoursWorkedPage() {
         </SignedIn>
       </div>
       <div className="p-6">
-        <Card>
-          <CardHeader>
-            <CardTitle>Hours Worked</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="h-96">
-              <HoursWorkedChart data={hoursWorked} className="h-full aspect-auto" />
-            </div>
-          </CardContent>
-        </Card>
+        <HoursWorkedFilter initialHoursPromise={hoursWorkedPromise} weeks={weeks} currentWeek={currentWeekValue} />
       </div>
     </>
   );
