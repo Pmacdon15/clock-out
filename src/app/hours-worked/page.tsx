@@ -29,15 +29,13 @@ export default async function HoursWorkedPage(props: PageProps<"/hours-worked">)
     <div className="flex flex-col items-center mt-4 md:mt-8 p-4 gap-4">
       <div className="rounded-xl p-1 bg-gradient-to-r from-blue-500 to-cyan-500 w-full md:w-4/6">
         <div className="flex flex-col gap-4 rounded-xl p-4 bg-black">
-          <SignedIn>
-            <div className="flex text-white justify-center">
-              <UserButton />
-              <OrganizationSwitcher />
-              <Link href="/punch-clock">
-                <Button>Punch Clock</Button>
-              </Link>
-            </div>
-          </SignedIn>
+          <div className="flex text-white justify-center">
+            <UserButton />
+            <OrganizationSwitcher />
+            <Link href="/punch-clock">
+              <Button>Punch Clock</Button>
+            </Link>
+          </div>
         </div>
       </div>
       <div className="p-2 w-full md:w-5/6">
