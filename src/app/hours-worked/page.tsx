@@ -6,6 +6,8 @@ import { getWeekNumber } from "@/lib/utils";
 import { SignedIn } from "@clerk/nextjs";
 import Link from "next/link";
 import { Suspense } from "react";
+import { YearlyHoursWorked } from "./yearly-hours-worked";
+import { CardSkeleton } from "@/components/ui/card";
 
 export default async function HoursWorkedPage(props: PageProps<"/hours-worked">) {
  const [weeks, searchParams] = await Promise.all([
@@ -36,6 +38,12 @@ export default async function HoursWorkedPage(props: PageProps<"/hours-worked">)
           <HoursWorkedFilter initialHoursPromise={hoursWorkedPromise} weeks={weeks} currentWeek={currentWeekValue} />
         </Suspense>
       </div>
+      <div className="p-6">
+        <Suspense fallback={<CardSkeleton />}>
+          <YearlyHoursWorked />
+        </Suspense>
+      </div>
     </>
   );
 }
+

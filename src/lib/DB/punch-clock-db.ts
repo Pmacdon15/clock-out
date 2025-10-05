@@ -53,6 +53,11 @@ export interface Week {
     value: string;
 }
 
+export interface MonthlyHours {
+    month: string;
+    hours: number;
+}
+
 export async function getHoursWorkedDb(userId: string, orgId: string, week?: string): Promise<HoursWorked[]> {
     const sql = neon(process.env.DATABASE_URL!);
 
@@ -133,4 +138,37 @@ export async function getAllWeeksWithWorkDb(userId: string, orgId: string): Prom
 
         return { label, value };
     });
+}
+
+export async function getHoursWorkedByYearDb(userId: string, orgId: string, year: number): Promise<MonthlyHours[]> {
+    const sql = neon(process.env.DATABASE_URL!);
+
+    const result = await sql`
+        SELECT
+            to_char(time_in, 'Month') as month,
+            EXTRACT(MONTH FROM time_in) as month_number,
+            SUM(EXTRACT(EPOCH FROM (time_out - time_in))) / 3600 as hours
+        FROM time_clock
+        WHERE user_id = ${userId}
+          AND org_id = ${orgId}
+          AND time_out IS NOT NULL
+          AND EXTRACT(YEAR FROM time_in) = ${year}
+        GROUP BY month, month_number
+        ORDER BY month_number;
+    `;
+
+    const monthlyHoursMap = new Map<string, number>();
+    result.forEach((row: any) => {
+        monthlyHoursMap.set(row.month.trim(), parseFloat(row.hours));
+    });
+
+    const allMonths = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
+
+    return allMonths.map(month => ({
+        month: month,
+        hours: monthlyHoursMap.get(month) || 0
+    }));
 }

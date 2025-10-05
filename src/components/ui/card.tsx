@@ -81,6 +81,15 @@ function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+function CardSkeleton({ className, ...props }: React.ComponentProps<"div">) {
+    return (
+        <div
+            className={cn("animate-pulse rounded-xl bg-muted/70", className)}
+            {...props}
+        />
+    )
+}
+
 export {
   Card,
   CardHeader,
@@ -89,4 +98,5 @@ export {
   CardAction,
   CardDescription,
   CardContent,
+  CardSkeleton
 }
