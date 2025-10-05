@@ -1,21 +1,26 @@
 import { Button } from "@/components/ui/button";
+import HoursWorkedFilterFallback from "@/components/ui/fallbacks/hours-worked-filter-fallback";
 import { HoursWorkedFilter } from "@/components/ui/filters/hours-worked-filter";
 import { getAllWeeksWithWork, getHoursWorked } from "@/lib/DAL/punch-clock";
 import { getWeekNumber } from "@/lib/utils";
 import { SignedIn } from "@clerk/nextjs";
 import Link from "next/link";
+import { Suspense } from "react";
 
-export default async function HoursWorkedPage() {
-  
-  const weeks = await getAllWeeksWithWork();
+export default async function HoursWorkedPage(props: PageProps<"/hours-worked">) {
+ const [weeks, searchParams] = await Promise.all([
+  getAllWeeksWithWork(),
+  props.searchParams
+ ])  
 
-  // Get current week
-  const now = new Date();
+  const dateParam = searchParams.date;
+  const dateValue = Array.isArray(dateParam) ? dateParam[0] : dateParam;
+  const now = dateValue ? new Date(dateValue) : new Date();
+
   const [currentYear, currentWeekNum] = getWeekNumber(now);
   const currentWeekValue = `${currentYear}-W${String(currentWeekNum).padStart(2, '0')}`;
 
-  // Start to fetch data for the current week
-  const hoursWorkedPromise =  getHoursWorked(currentWeekValue);
+  const hoursWorkedPromise = getHoursWorked(currentWeekValue);
 
   return (
     <>
@@ -27,7 +32,9 @@ export default async function HoursWorkedPage() {
         </SignedIn>
       </div>
       <div className="p-6">
-        <HoursWorkedFilter initialHoursPromise={hoursWorkedPromise} weeks={weeks} currentWeek={currentWeekValue} />
+        <Suspense fallback={<HoursWorkedFilterFallback />}>
+          <HoursWorkedFilter initialHoursPromise={hoursWorkedPromise} weeks={weeks} currentWeek={currentWeekValue} />
+        </Suspense>
       </div>
     </>
   );
