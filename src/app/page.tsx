@@ -1,6 +1,4 @@
-import { Button } from '@/components/ui/button';
 import { OrganizationSwitcher, SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from '@clerk/nextjs';
-import Link from 'next/link';
 import { Suspense } from 'react';
 import LinkWithPath from '../components/ui/links/link';
 import BlueTextLink from '@/components/ui/links/blue-text-link';
