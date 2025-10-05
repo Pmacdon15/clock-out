@@ -1,8 +1,6 @@
-import { Button } from '@/components/ui/button';
 import TermsContainer from '@/components/ui/containers/terms-container';
 import BackHomeLink from '@/components/ui/links/back-home-link';
 import fs from 'fs/promises';
-import Link from 'next/link';
 import path from 'path';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
