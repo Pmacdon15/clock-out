@@ -1,7 +1,7 @@
 "use client"
 
 import { TrendingUp } from "lucide-react"
-import { Area, AreaChart, CartesianGrid, XAxis } from "recharts"
+import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts"
 
 import {
   Card,
@@ -43,9 +43,11 @@ export function YearlyHoursChart({data, year}: {data: MonthlyHours[], year: numb
             margin={{
               left: 12,
               right: 12,
+              top: 24,
             }}
           >
             <CartesianGrid vertical={false} />
+            <YAxis domain={[0, 'auto']} />
             <XAxis
               dataKey="month"
               tickLine={false}
@@ -75,8 +77,9 @@ export function YearlyHoursChart({data, year}: {data: MonthlyHours[], year: numb
             </div>
             <div className="text-muted-foreground flex items-center gap-2 leading-none">
               January - December {year}
-            </div>
+            
           </div>
+        </div>
         </div>
       </CardFooter>
     </Card>
