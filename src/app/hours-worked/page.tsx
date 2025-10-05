@@ -3,7 +3,7 @@ import HoursWorkedFilterFallback from "@/components/ui/fallbacks/hours-worked-fi
 import { HoursWorkedFilter } from "@/components/ui/filters/hours-worked-filter";
 import { getAllWeeksWithWork, getHoursWorked, getHoursWorkedByYear } from "@/lib/DAL/punch-clock";
 import { getWeekNumber } from "@/lib/utils";
-import { SignedIn } from "@clerk/nextjs";
+import { OrganizationSwitcher, SignedIn, UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 import { Suspense } from "react";
 import { CardSkeleton } from "@/components/ui/card";
@@ -26,25 +26,32 @@ export default async function HoursWorkedPage(props: PageProps<"/hours-worked">)
   const hoursWorkedByYearPromise = getHoursWorkedByYear(now.getFullYear());
 
   return (
-    <>
-      <div className="flex justify-end p-6">
-        <SignedIn>
-          <Link href="/punch-clock">
-            <Button>Punch Clock</Button>
-          </Link>
-        </SignedIn>
+    <div className="flex flex-col items-center">
+
+      <div className="rounded-xl p-1 bg-gradient-to-r from-blue-500 to-cyan-500 w-5/6 mdw-4/6">
+        <div className="flex flex-col gap-4 rounded-xl p-8 bg-black">
+          <SignedIn>
+            <div className="flex text-white justify-center">
+              <UserButton />
+              <OrganizationSwitcher />
+              <Link href="/punch-clock">
+                <Button>Punch Clock</Button>
+              </Link>
+            </div>
+          </SignedIn>
+        </div>
       </div>
-      <div className="p-6">
+      <div className="p-6 w-full md:w-5/6">
         <Suspense fallback={<HoursWorkedFilterFallback />}>
           <HoursWorkedFilter initialHoursPromise={hoursWorkedPromise} weeks={weeks} currentWeek={currentWeekValue} />
         </Suspense>
       </div>
-      <div className="p-6">
+      <div className="p-6 w-full md:w-5/6">
         <Suspense fallback={<CardSkeleton />}>
           <YearlyHoursWorked hoursWorkedByYearPromise={hoursWorkedByYearPromise} currentYear={now.getFullYear()} />
         </Suspense>
       </div>
-    </>
+    </div>
   );
 }
 
