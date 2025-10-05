@@ -7,4 +7,3 @@ At Clock-Out, your privacy is a top priority. This policy outlines how we handle
 3.  **Data Security:** We are committed to ensuring the security of your data.
 4.  **Data Access and Revocation:** You have full control over your data. You can access, modify, or request the deletion of your data and revoke your access to the service at any time.
 
-This is a basic outline and not a legally binding document. Please consult with a legal professional to create a comprehensive and legally compliant Privacy Policy.
