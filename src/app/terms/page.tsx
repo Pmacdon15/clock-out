@@ -1,4 +1,5 @@
 import TermsContainer from '@/components/ui/containers/terms-container';
+import BackHomeLink from '@/components/ui/links/back-home-link';
 import fs from 'fs/promises';
 import path from 'path';
 import ReactMarkdown from 'react-markdown';
@@ -20,6 +21,7 @@ export default async function TermsPage() {
           {termsContent}
         </ReactMarkdown>
       </TermsContainer>
+      <BackHomeLink/>
     </div>
   );
 }
