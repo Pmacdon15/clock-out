@@ -1,4 +1,3 @@
-import { SignedOut, SignInButton, SignUpButton } from "@clerk/nextjs";
 import { ClockAlert } from "lucide-react";
 import Link from "next/link";
 
