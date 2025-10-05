@@ -1,8 +1,42 @@
+import { Button } from '@/components/ui/button';
+import { OrganizationSwitcher, SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from '@clerk/nextjs';
+import Link from 'next/link';
 
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      test
+    <div className="min-h-screen bg-background text-foreground flex flex-col items-center p-8 gap-8 ">
+      <h1 className="text-4xl font-bold mb-8 mt-16 text-center">Welcome to Clock-Out</h1>
+      <SignedOut>
+        <SignInButton />
+        <SignUpButton />
+      </SignedOut>
+      <SignedIn>
+        <UserButton />
+        <OrganizationSwitcher />
+      </SignedIn>
+      <SignedIn>
+        <nav className="flex space-x-4">
+          <Link href={'/punch-clock'}>
+            <Button>
+              Punch Clock
+            </Button>
+          </Link>
+          <Link href={'/hours-worked'}>
+            <Button>
+              Hours Worked
+            </Button>
+          </Link>
+        </nav>
+      </SignedIn>
+      <nav className="flex space-x-4">
+
+        <Link href="/terms" className="text-blue-500 hover:underline">
+          Terms of Service
+        </Link>
+        <Link href="/privacy" className="text-blue-500 hover:underline">
+          Privacy Policy
+        </Link>
+      </nav>
     </div>
   );
 }
