@@ -45,6 +45,7 @@ export async function getTimeCardDb(userId: string, orgId: string): Promise<Time
 export interface HoursWorked {
     date: string;
     hours: number;
+    fill?: string;
 }
 
 export async function getHoursWorkedDb(userId: string, orgId: string): Promise<HoursWorked[]> {
@@ -58,8 +59,13 @@ export async function getHoursWorkedDb(userId: string, orgId: string): Promise<H
         GROUP BY DATE(time_in)
         ORDER BY date;
     `;
-    return result.map((row: any) => ({
-        ...row,
-        hours: parseFloat(row.hours),
-    })) as HoursWorked[];
+    return result.map((row: any) => {
+        const hours = parseFloat(row.hours);
+        const lightness = Math.max(30, 60 - hours * 3);
+        return {
+            ...row,
+            hours,
+            fill: `hsl(220, 80%, ${lightness}%)`
+        }
+    }) as HoursWorked[];
 }

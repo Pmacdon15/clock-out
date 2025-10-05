@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { HoursWorkedChart } from "@/components/ui/charts/hours-worked-chart";
 import { getHoursWorked } from "@/lib/DAL/punch-clock";
 import { SignedIn } from "@clerk/nextjs";
@@ -16,8 +17,16 @@ export default async function HoursWorkedPage() {
         </SignedIn>
       </div>
       <div className="p-6">
-        <h1 className="text-xl font-semibold mb-4">Hours Worked</h1>
-        <HoursWorkedChart data={hoursWorked} />
+        <Card>
+          <CardHeader>
+            <CardTitle>Hours Worked</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="h-96">
+              <HoursWorkedChart data={hoursWorked} className="h-full aspect-auto" />
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </>
   );
