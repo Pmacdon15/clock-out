@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Punch Out",
+  title: "Clock Out",
   description: "Track your Working hours",
 };
 
