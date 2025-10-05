@@ -9,5 +9,7 @@ export const config = {
     // Always run for API routes
     '/(api|trpc)(.*)',
     '/(punch-clock)(.*)',
+    '/(hours-worked)(.*)',
   ],
+  protectedRoutes: ['/punch-clock', 'hours-worked'],
 }
