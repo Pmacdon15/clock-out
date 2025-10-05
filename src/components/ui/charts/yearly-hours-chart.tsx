@@ -1,6 +1,6 @@
 "use client"
 
-import { TrendingUp } from "lucide-react"
+import { TrendingDown, TrendingUp } from "lucide-react"
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts"
 
 import {
@@ -27,7 +27,32 @@ const chartConfig = {
 } satisfies ChartConfig
 
 export function YearlyHoursChart({ data, year }: { data: MonthlyHours[], year: number }) {
-  console.log("Data:", data)
+  // Get the last month with hours and the month before it
+  const monthsWithHours = data.filter((month) => month.hours > 0);
+  const lastMonthWithHours = monthsWithHours[monthsWithHours.length - 1];
+  const secondLastMonthWithHours = monthsWithHours[monthsWithHours.length - 2];
+
+  let trendingMessage = "Not enough data to show trend"
+  let trendingIcon = null
+
+  if (lastMonthWithHours && secondLastMonthWithHours) {
+    const currentMonthHours = lastMonthWithHours.hours
+    const previousMonthHours = secondLastMonthWithHours.hours
+
+    if (previousMonthHours !== 0) {
+      const percentageChange = ((currentMonthHours - previousMonthHours) / previousMonthHours) * 100
+      const trend = percentageChange >= 0 ? "up" : "down"
+      const absPercentageChange = Math.abs(percentageChange).toFixed(1)
+      trendingMessage = `Trending ${trend} by ${absPercentageChange}% this month`
+      trendingIcon = percentageChange >= 0 ? <TrendingUp className="h-4 w-4" /> : <TrendingDown className="h-4 w-4" />
+    } else if (currentMonthHours > 0) {
+      trendingMessage = `Trending up by 100.0% this month`
+      trendingIcon = <TrendingUp className="h-4 w-4" />
+    } else {
+      trendingMessage = `No change this month`
+    }
+  }
+
   return (
     <Card>
       <CardHeader>
@@ -75,11 +100,10 @@ export function YearlyHoursChart({ data, year }: { data: MonthlyHours[], year: n
         <div className="flex w-full items-start gap-2 text-sm">
           <div className="grid gap-2">
             <div className="flex items-center gap-2 leading-none font-medium">
-              Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+              {trendingMessage} {trendingIcon}
             </div>
             <div className="text-muted-foreground flex items-center gap-2 leading-none">
               January - December {year}
-
             </div>
           </div>
         </div>
