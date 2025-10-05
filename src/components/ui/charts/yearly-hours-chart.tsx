@@ -26,7 +26,8 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
-export function YearlyHoursChart({data, year}: {data: MonthlyHours[], year: number}) {
+export function YearlyHoursChart({ data, year }: { data: MonthlyHours[], year: number }) {
+  console.log("Data:", data)
   return (
     <Card>
       <CardHeader>
@@ -61,10 +62,11 @@ export function YearlyHoursChart({data, year}: {data: MonthlyHours[], year: numb
             />
             <Area
               dataKey="hours"
-              type="natural"
+              type="monotoneX"
               fill="var(--color-hours)"
               fillOpacity={0.4}
               stroke="var(--color-hours)"
+              baseLine={0}
             />
           </AreaChart>
         </ChartContainer>
@@ -77,9 +79,9 @@ export function YearlyHoursChart({data, year}: {data: MonthlyHours[], year: numb
             </div>
             <div className="text-muted-foreground flex items-center gap-2 leading-none">
               January - December {year}
-            
+
+            </div>
           </div>
-        </div>
         </div>
       </CardFooter>
     </Card>
