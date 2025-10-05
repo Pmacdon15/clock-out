@@ -129,7 +129,7 @@ export async function getAllWeeksWithWorkDb(userId: string, orgId: string): Prom
         const year = row.year;
         const week = String(row.week).padStart(2, '0');
         const value = `${year}-W${week}`;
-        
+
         const date = new Date(row.week_start_date);
         const month = date.toLocaleString('default', { month: 'long' });
         const dayOfMonth = date.getDate();
@@ -167,6 +167,7 @@ export async function getHoursWorkedByYearDb(userId: string, orgId: string, year
         "July", "August", "September", "October", "November", "December"
     ];
 
+    console.log("allMonths: ", monthlyHoursMap)
     return allMonths.map(month => ({
         month: month,
         hours: monthlyHoursMap.get(month) || 0
