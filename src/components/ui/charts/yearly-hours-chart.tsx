@@ -37,7 +37,7 @@ export function YearlyHoursChart({ data, year }: { data: MonthlyHours[], year: n
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig}>
+        <ChartContainer config={chartConfig} className="aspect-auto h-96 w-full">
           <AreaChart
             accessibilityLayer
             data={data}
