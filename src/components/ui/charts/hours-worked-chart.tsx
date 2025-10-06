@@ -1,9 +1,9 @@
 'use client'
 
-import { HoursWorked } from "@/lib/DB/punch-clock-db"
 import { ChartContainer, ChartTooltip, ChartTooltipContent, ChartConfig } from "../chart"
 import { Bar, BarChart, Cell, XAxis, YAxis } from "recharts";
 import { use } from "react";
+import { HoursWorked } from "@/lib/types/punch-clock-types";
 
 const chartConfig = {
     hours: {
@@ -11,8 +11,8 @@ const chartConfig = {
     },
 } satisfies ChartConfig;
 
-export function HoursWorkedChart({ initialHoursPromise, className }: { initialHoursPromise: Promise<HoursWorked[]>, className?: string }) {
-    const hours = use(initialHoursPromise);
+export function HoursWorkedChart({ hoursPromise, className }: { hoursPromise: Promise<HoursWorked[]>, className?: string }) {
+    const hours = use(hoursPromise);
     return (
         <ChartContainer config={chartConfig} id="hours-worked-chart" className={className}>
             <BarChart data={hours}>

@@ -12,3 +12,4 @@ export function getWeekNumber(d: Date): [number, number] {
     var weekNo = Math.ceil(( ( (d.valueOf() - yearStart.valueOf()) / 86400000) + 1)/7);
     return [d.getUTCFullYear(), weekNo];
 }
+

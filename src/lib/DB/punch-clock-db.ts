@@ -1,12 +1,5 @@
 import { neon } from "@neondatabase/serverless";
-
-export interface TimeCard {
-    id: number;
-    user_id: string;
-    org_id: string;
-    time_in: Date;
-    time_out: Date | null;
-}
+import { HoursWorked, MonthlyHours, TimeCard, Week } from "../types/punch-clock-types";
 
 export async function punchInOrOutDB(punchOut: boolean, userId: string, orgId: string): Promise<TimeCard[]> {
     const sql = neon(process.env.DATABASE_URL!);
@@ -42,21 +35,7 @@ export async function getTimeCardDb(userId: string, orgId: string): Promise<Time
     return result as TimeCard[];
 }
 
-export interface HoursWorked {
-    date: string;
-    hours: number;
-    fill?: string;
-}
 
-export interface Week {
-    label: string;
-    value: string;
-}
-
-export interface MonthlyHours {
-    month: string;
-    hours: number;
-}
 
 export async function getHoursWorkedDb(userId: string, orgId: string, week?: string): Promise<HoursWorked[]> {
     const sql = neon(process.env.DATABASE_URL!);

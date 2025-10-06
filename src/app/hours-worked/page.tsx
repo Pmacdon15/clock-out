@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import HoursWorkedFilterFallback from "@/components/ui/fallbacks/hours-worked-filter-fallback";
-import { HoursWorkedFilter } from "@/components/ui/filters/hours-worked-filter";
 import { getAllWeeksWithWork, getHoursWorked, getHoursWorkedByYear } from "@/lib/DAL/punch-clock";
 import { getWeekNumber } from "@/lib/utils";
 import { OrganizationSwitcher, SignedIn, UserButton } from "@clerk/nextjs";
@@ -8,6 +7,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { CardSkeleton } from "@/components/ui/card";
 import { YearlyHoursWorked } from "@/components/ui/hours-worked/yearly-hours-worked";
+import { HoursWorkedContainer } from "@/components/ui/hours-worked/hours-worked";
 
 export default async function HoursWorkedPage(props: PageProps<"/hours-worked">) {
   const [weeks, searchParams] = await Promise.all([
@@ -40,7 +40,7 @@ export default async function HoursWorkedPage(props: PageProps<"/hours-worked">)
       </div>
       <div className="p-2 w-full md:w-5/6">
         <Suspense fallback={<HoursWorkedFilterFallback />}>
-          <HoursWorkedFilter initialHoursPromise={hoursWorkedPromise} weeks={weeks} currentWeek={currentWeekValue} />
+          <HoursWorkedContainer hoursPromise={hoursWorkedPromise} weeks={weeks} />
         </Suspense>
       </div>
       <div className="p-2 w-full md:w-5/6">

@@ -60,7 +60,7 @@ export default function TimeInput({ punchOut = false, disabled, clockInTime }: {
                 <TooltipTrigger asChild>
                     <PunchClockButton disabled={disabled} punchOut={punchOut} />
                 </TooltipTrigger>
-                <TooltipContent>
+                <TooltipContent side="bottom" align="center" sideOffset={5}>
                     <p>Must Allow Location</p>
                 </TooltipContent>
             </Tooltip>
