@@ -2,7 +2,6 @@
 import { Label } from "@radix-ui/react-label";
 import { Input } from "../input";
 import { useEffect, useState } from "react";
-import { Tooltip, TooltipContent, TooltipTrigger } from "../tooltip";
 import PunchClockButton from "../buttons/punch-clock";
 import { Clock } from "lucide-react";
 
@@ -56,14 +55,7 @@ export default function TimeInput({ punchOut = false, disabled, clockInTime }: {
                 />
                 <Clock size={28} />
             </div>
-            <Tooltip>
-                <TooltipTrigger asChild>
-                    <PunchClockButton disabled={disabled} punchOut={punchOut} />
-                </TooltipTrigger>
-                <TooltipContent side="bottom" align="center" sideOffset={5}>
-                    <p>Must Allow Location</p>
-                </TooltipContent>
-            </Tooltip>
+            <PunchClockButton disabled={disabled} punchOut={punchOut} />
         </div>
     );
 }
