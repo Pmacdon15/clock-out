@@ -39,14 +39,12 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          <Providers>
-            {/* <TooltipProvider> */}
+          <Providers>            
             <div className="p-4">
               <Header />
               {children}
               <Analytics />
-            </div>
-            {/* </TooltipProvider> */}
+            </div>            
           </Providers>
         </body>
       </html>
