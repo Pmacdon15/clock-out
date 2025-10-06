@@ -56,14 +56,7 @@ export default function TimeInput({ punchOut = false, disabled, clockInTime }: {
                 />
                 <Clock size={28} />
             </div>
-            <Tooltip>
-                <TooltipTrigger asChild>
-                    <PunchClockButton disabled={disabled} punchOut={punchOut} />
-                </TooltipTrigger>
-                <TooltipContent>
-                    <p>Must Allow Location</p>
-                </TooltipContent>
-            </Tooltip>
+            <PunchClockButton disabled={disabled} punchOut={punchOut} />
         </div>
     );
 }

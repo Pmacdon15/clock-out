@@ -1,5 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
-import { TimeCard, getTimeCardDb, getHoursWorkedDb, HoursWorked, getAllWeeksWithWorkDb, Week, getHoursWorkedByYearDb, MonthlyHours } from "../DB/punch-clock-db";
+import { HoursWorked, MonthlyHours, TimeCard, Week } from "../types/punch-clock-types";
+import { getAllWeeksWithWorkDb, getHoursWorkedByYearDb, getHoursWorkedDb, getTimeCardDb } from "../DB/punch-clock-db";
 
 export async function getTimeCard(): Promise<TimeCard | null> {
     const { userId, orgId } = await auth.protect()

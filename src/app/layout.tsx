@@ -1,3 +1,4 @@
+import { TooltipProvider } from "@/components/ui/tooltip";
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import type { Metadata } from "next";
@@ -39,10 +40,12 @@ export default function RootLayout({
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
           <Providers>
-            <div className="p-4">
-            <Header />
-            {children}
-            </div>
+            {/* <TooltipProvider> */}
+              <div className="p-4">
+                <Header />
+                {children}
+              </div>
+            {/* </TooltipProvider> */}
           </Providers>
         </body>
       </html>

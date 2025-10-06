@@ -17,7 +17,8 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
-import { MonthlyHours } from "@/lib/DB/punch-clock-db"
+import { MonthlyHours } from "@/lib/types/punch-clock-types"
+
 
 const chartConfig = {
   hours: {
