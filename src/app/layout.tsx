@@ -6,7 +6,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/ui/headers/layout-header";
 import { Providers } from "../components/providers";
-
+import { Analytics } from "@vercel/analytics/next"
 export const experimental_ppr = true
 
 const geistSans = Geist({
@@ -41,10 +41,11 @@ export default function RootLayout({
         >
           <Providers>
             {/* <TooltipProvider> */}
-              <div className="p-4">
-                <Header />
-                {children}
-              </div>
+            <div className="p-4">
+              <Header />
+              {children}
+              <Analytics />
+            </div>
             {/* </TooltipProvider> */}
           </Providers>
         </body>
