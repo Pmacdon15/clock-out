@@ -2,6 +2,7 @@
 import { Label } from "@radix-ui/react-label";
 import { Input } from "../input";
 import { useEffect, useState } from "react";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../tooltip";
 import PunchClockButton from "../buttons/punch-clock";
 import { Clock } from "lucide-react";
 
