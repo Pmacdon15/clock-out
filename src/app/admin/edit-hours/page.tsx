@@ -1,5 +1,6 @@
 import BorderBox from "@/components/ui/containers/border-box";
 import ListItemEditHours from "@/components/ui/edit-hours/list-item-edit-hours";
+import OrgMembersFilter from "@/components/ui/filters/org-member-filter";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { fetchOrgMembers } from "@/lib/DAL/org-members";
 import { OrgMember } from "@/lib/types/org-members";
@@ -16,32 +17,12 @@ const dummyHours = [
 ];
 
 export default async function Page() {
-    const orgMembers = await fetchOrgMembers();
-    console.log("orgMembers:", JSON.stringify(orgMembers, null, 2))
+    const orgMembersPromise = fetchOrgMembers();
+
     return (
         <BorderBox>
             <h1 className="text-2xl font-bold mb-4">Edit Hours</h1>
-            <h2 className="flex gap-4 items-center">
-                <span>For</span>
-                <Select>
-                    <SelectTrigger className="w-[180px]">
-                        <SelectValue placeholder="Select a member" />
-                    </SelectTrigger>
-                    <SelectContent>
-                        <SelectGroup>
-                            <SelectLabel>Members</SelectLabel>
-                            {orgMembers.map((member: OrgMember) => (
-                                <SelectItem
-                                    key={member.userId}
-                                    value={member.firstName + " " + member.lastName}
-                                >
-                                    {member.firstName + " " + member.lastName}
-                                </SelectItem>
-                            ))}
-                        </SelectGroup>
-                    </SelectContent>
-                </Select>
-            </h2>
+            <OrgMembersFilter orgMemberPromise={orgMembersPromise} />
             <ul className="divide-y divide-gray-200">
                 {dummyHours.map((entry) => (
                     <ListItemEditHours key={entry.id} entry={entry} />
