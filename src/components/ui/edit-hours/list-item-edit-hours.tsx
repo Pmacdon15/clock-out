@@ -1,24 +1,44 @@
 'use client'
 import { Edit } from "lucide-react";
 import { Activity, useState } from "react";
+import { Input } from "../input";
+import { Button } from "../button";
 
-export default function ListItemEditHours({ key, entry }: { key: number, entry: any }) {
+export default function ListItemEditHours({ entry }: { key: number, entry: any }) {
     const [editHours, setEditHours] = useState(false)
+
+
     return (
-        <li key={entry.id} className="py-4 grid grid-cols-4 gap-4 items-center w-full">
-            <Activity mode={!editHours ? "visible" : "hidden"} >
-                <p className="text-sm text-gray-500">In: {new Date(entry.time_in).toLocaleString()}</p>
-                <p className="text-sm text-gray-500">Out: {new Date(entry.time_out).toLocaleString()}</p>
-                <p className="text-center">
+        <li key={entry.id} className="py-4 grid grid-cols-2 lg:grid-cols-6 gap-4 items-center w-full">
+            <div className="col-span-2 lg:col-span-4">
+                <Activity mode={!editHours ? "visible" : "hidden"} >
+                    <div className="grid grid-cols-2 gap-4">
+                        <p className="text-sm text-gray-500">{new Date(entry.time_in).toLocaleString()}</p>
+                        <p className="text-sm text-gray-500">{new Date(entry.time_out).toLocaleString()}</p>
+                    </div>
+                </Activity>
+                <Activity mode={editHours ? "visible" : "hidden"} >
+                    <form className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                        <Input
+                            className="w-full"
+                            type="time"
+                            defaultValue={entry.time_in.split(" ")[1]}
+                        />
+                        <Input
+                            className="w-full"
+                            type="time"
+                            defaultValue={entry.time_out.split(" ")[1]}
+                        />
+                        <Button className="w-full lg:w-auto">Save</Button>
+                    </form>
+                </Activity>
+            </div>
+            <div className="col-span-1 lg:col-span-1 mt-4 lg:mt-0 text-left">
+                <p className="text-sm text-gray-500">
                     Hours: {((new Date(entry.time_out).getTime() - new Date(entry.time_in).getTime()) / (60 * 60 * 1000)).toFixed(2)}
                 </p>
-            </Activity>
-             <Activity mode={editHours ? "visible" : "hidden"} >
-                <form>
-                    <h1>test</h1>
-                </form>
-             </Activity>
-            <div className="col-start-4 flex justify-end w-full">
+            </div>
+            <div className="col-span-1 lg:col-span-1 flex justify-end lg:justify-end mt-4 lg:mt-0">
                 <button
                     onClick={() => setEditHours(!editHours)}
                     type="button"
@@ -27,6 +47,6 @@ export default function ListItemEditHours({ key, entry }: { key: number, entry: 
                     <Edit size={20} />
                 </button>
             </div>
-        </li>
+        </li >
     )
 }
