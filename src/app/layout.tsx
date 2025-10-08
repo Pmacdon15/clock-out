@@ -40,8 +40,8 @@ export default function RootLayout({
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
           <Providers>
+            <Header />
             <PageContainer>
-              <Header />
               {children}
               <Analytics />
             </PageContainer>

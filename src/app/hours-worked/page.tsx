@@ -26,7 +26,8 @@ export default async function HoursWorkedPage(props: PageProps<"/hours-worked">)
   const hoursWorkedByYearPromise = getHoursWorkedByYear(now.getFullYear());
 
   return (
-    <div className="flex flex-col items-center mt-4 md:mt-8 p-4 gap-4">
+    // <div className="flex flex-col items-center mt-4 md:mt-8 p-4 gap-4">
+    <>
       <div className="rounded-xl p-1 bg-gradient-to-r from-blue-500 to-cyan-500 w-full md:w-4/6">
         <div className="flex flex-col gap-4 rounded-xl p-4 bg-black">
           <div className="flex text-white justify-center">
@@ -48,7 +49,7 @@ export default async function HoursWorkedPage(props: PageProps<"/hours-worked">)
           <YearlyHoursWorked hoursWorkedByYearPromise={hoursWorkedByYearPromise} currentYear={now.getFullYear()} />
         </Suspense>
       </div>
-    </div>
+    </>
   );
 }
 

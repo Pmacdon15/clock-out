@@ -8,22 +8,20 @@ import Link from "next/link";
 export default async function Page() {
     const timeCard = await getTimeCard()
     return (
-        <div className="flex justify-center p-4 mt-8">
-            <BorderBox>
-                <SignedIn>
-                    <div className="flex text-white justify-center">
-                        <UserButton />
-                        <OrganizationSwitcher />
-                    </div>
-                    <div className="flex justify-end ">
-                        <Link href="/hours-worked">
-                            <Button>Hours Worked</Button>
-                        </Link>
-                    </div>
-                </SignedIn>
-                <TimeInput disabled={!!timeCard} clockInTime={timeCard?.time_in} />
-                <TimeInput punchOut disabled={!timeCard} clockInTime={timeCard?.time_in} />
-            </BorderBox>
-        </div>
+        <BorderBox>
+            <SignedIn>
+                <div className="flex text-white justify-center">
+                    <UserButton />
+                    <OrganizationSwitcher />
+                </div>
+                <div className="flex justify-end ">
+                    <Link href="/hours-worked">
+                        <Button>Hours Worked</Button>
+                    </Link>
+                </div>
+            </SignedIn>
+            <TimeInput disabled={!!timeCard} clockInTime={timeCard?.time_in} />
+            <TimeInput punchOut disabled={!timeCard} clockInTime={timeCard?.time_in} />
+        </BorderBox>
     );
 }
