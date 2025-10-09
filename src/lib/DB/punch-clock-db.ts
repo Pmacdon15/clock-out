@@ -183,12 +183,21 @@ export async function getAllWeeksWithWorkDb(
   });
 }
 
+
+interface Row {
+  month: string;
+  month_number: number;
+  hours: string;
+}
+
 export async function getHoursWorkedByYearDb(
   userId: string,
   orgId: string,
-  year: number,
+  year?: number,
 ): Promise<MonthlyHours[]> {
   const sql = neon(process.env.DATABASE_URL!);
+  const currentYear = new Date().getFullYear();
+  const targetYear = year ?? currentYear;
 
   const result = await sql`
         SELECT
@@ -199,13 +208,13 @@ export async function getHoursWorkedByYearDb(
         WHERE user_id = ${userId}
           AND org_id = ${orgId}
           AND time_out IS NOT NULL
-          AND EXTRACT(YEAR FROM time_in) = ${year}
+          AND EXTRACT(YEAR FROM time_in) = ${targetYear}
         GROUP BY month, month_number
         ORDER BY month_number;
     `;
 
   const monthlyHoursMap = new Map<string, number>();
-  result.forEach((row: any) => {
+  result.forEach((row) => {
     monthlyHoursMap.set(row.month.trim(), parseFloat(row.hours));
   });
 
@@ -224,7 +233,6 @@ export async function getHoursWorkedByYearDb(
     "December",
   ];
 
-  console.log("allMonths: ", monthlyHoursMap);
   return allMonths.map((month) => ({
     month: month,
     hours: monthlyHoursMap.get(month) || 0,

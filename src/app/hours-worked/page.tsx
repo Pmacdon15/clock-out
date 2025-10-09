@@ -14,17 +14,17 @@ export default async function HoursWorkedPage(props: PageProps<"/hours-worked">)
 
 
   const dateParam = searchParams.date;
-  const dateValue = Array.isArray(dateParam) ? dateParam[0] : dateParam;
-  const now = dateValue ? new Date(dateValue) : new Date();
+  const date = Array.isArray(dateParam) ? dateParam[0] : dateParam;
 
-  const [currentYear, currentWeekNum] = getWeekNumber(now);
-  const currentWeekValue = `${currentYear}-W${String(currentWeekNum).padStart(2, '0')}`;
+  const dateObject = date ? new Date(date) : undefined;
+  const weekNumberResult = getWeekNumber(dateObject);
+  const currentYear = weekNumberResult?.[0];
 
   const weeksPromise = getAllWeeksWithWork();
-  const hoursWorkedPromise = getHoursWorked(currentWeekValue);
-  const hoursWorkedByYearPromise = getHoursWorkedByYear(now.getFullYear());
+  const hoursWorkedPromise = getHoursWorked(date);
+  const hoursWorkedByYearPromise = currentYear !== undefined ? getHoursWorkedByYear(currentYear) : Promise.resolve([]);
   return (
-   
+
     <>
       <div className="rounded-xl p-1 bg-gradient-to-r from-blue-500 to-cyan-500 w-full md:w-4/6">
         <div className="flex flex-col gap-4 rounded-xl p-4 bg-black">
@@ -44,7 +44,7 @@ export default async function HoursWorkedPage(props: PageProps<"/hours-worked">)
       </div>
       <div className="p-2 w-full md:w-5/6">
         <Suspense fallback={<CardSkeleton />}>
-          <YearlyHoursWorked hoursWorkedByYearPromise={hoursWorkedByYearPromise} currentYear={now.getFullYear()} />
+          <YearlyHoursWorked hoursWorkedByYearPromise={hoursWorkedByYearPromise} currentYear={currentYear} />
         </Suspense>
       </div>
     </>

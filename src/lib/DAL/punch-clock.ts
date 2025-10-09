@@ -84,7 +84,7 @@ export async function getAllWeeksWithWorkForEmployee(
 }
 
 export async function getHoursWorkedByYear(
-  year: number,
+  year?: number,
 ): Promise<MonthlyHours[]> {
   const { userId, orgId } = await auth.protect();
   try {
