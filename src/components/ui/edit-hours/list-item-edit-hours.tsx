@@ -29,7 +29,7 @@ export default function ListItemEditHours({ entry }: { key: number, entry: any }
                             type="time"
                             defaultValue={new Date(entry.time_out).toTimeString().slice(0, 5)}
                         />
-                        <Button className="w-full lg:w-auto">Save</Button>
+                        <Button variant={"outline"} className="w-full lg:w-auto">Save</Button>
                     </form>
                 </Activity>
             </div>

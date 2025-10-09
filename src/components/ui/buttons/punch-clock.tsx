@@ -3,15 +3,16 @@ import { usePunchClock } from "@/lib/mutations/punch-clock";
 import { Button } from "../button";
 export default function PunchClockButton({
   punchOut = false,
-  disabled = false,  
+  disabled = false,
 }: {
   punchOut?: boolean,
-  disabled?: boolean, 
+  disabled?: boolean,
 }) {
   const { mutate, isPending } = usePunchClock();
 
   return (
-    <Button     
+    <Button
+      variant={"outline"}
       disabled={isPending || disabled}
       onClick={() => mutate(punchOut)}
     >

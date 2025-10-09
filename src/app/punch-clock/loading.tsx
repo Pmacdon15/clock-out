@@ -10,7 +10,7 @@ export default function Loading() {
                 </div>
                 <div className="flex justify-end ">
                     <Link href="/hours-worked">
-                        <Button>Hours Worked</Button>
+                        <Button variant={"outline"} >Hours Worked</Button>
                     </Link>
                 </div>
                 <TimeInput disabled={false} />

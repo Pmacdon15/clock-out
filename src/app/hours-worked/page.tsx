@@ -32,7 +32,7 @@ export default async function HoursWorkedPage(props: PageProps<"/hours-worked">)
             <UserButton />
             <OrganizationSwitcher />
             <Link href="/punch-clock">
-              <Button>Punch Clock</Button>
+              <Button variant={"outline"}>Punch Clock</Button>
             </Link>
           </div>
         </div>

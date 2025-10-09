@@ -13,7 +13,7 @@ export default function Loading() {
                         <UserButton />
                         <OrganizationSwitcher />
                         <Link href="/punch-clock">
-                            <Button>Punch Clock</Button>
+                            <Button variant={"outline"}>Punch Clock</Button>
                         </Link>
                     </div>
                 </div>
