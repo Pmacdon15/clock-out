@@ -22,12 +22,12 @@ export default function ListItemEditHours({ entry }: { key: number, entry: any }
                         <Input
                             className="w-full"
                             type="time"
-                            defaultValue={entry.time_in.split(" ")[1]}
+                            defaultValue={new Date(entry.time_in).toTimeString().slice(0, 5)}
                         />
                         <Input
                             className="w-full"
                             type="time"
-                            defaultValue={entry.time_out.split(" ")[1]}
+                            defaultValue={new Date(entry.time_out).toTimeString().slice(0, 5)}
                         />
                         <Button className="w-full lg:w-auto">Save</Button>
                     </form>
