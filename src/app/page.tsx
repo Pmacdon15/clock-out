@@ -42,7 +42,7 @@ export default function Home() {
                 <UserButton />
                 <OrganizationSwitcher />
               </div>
-              <nav className="flex flex-col sm:flex-row gap-4">
+              <nav className="flex flex-col sm:flex-row gap-4 items-center">
                 <LinkWithPath path={"/punch-clock"} text={"Punch Clock"} />
                 <LinkWithPath path={"/hours-worked"} text={"Hours Worked"} />
               </nav>
