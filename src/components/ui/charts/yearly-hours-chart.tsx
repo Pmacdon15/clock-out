@@ -27,7 +27,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
-export function YearlyHoursChart({ data, year }: { data: MonthlyHours[], year: number }) {
+export function YearlyHoursChart({ data, year }: { data: MonthlyHours[], year?: number }) {
   // Get the last month with hours and the month before it
   const monthsWithHours = data.filter((month) => month.hours > 0);
   const lastMonthWithHours = monthsWithHours[monthsWithHours.length - 1];

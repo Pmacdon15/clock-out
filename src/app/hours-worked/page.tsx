@@ -22,7 +22,8 @@ export default async function HoursWorkedPage(props: PageProps<"/hours-worked">)
 
   const weeksPromise = getAllWeeksWithWork();
   const hoursWorkedPromise = getHoursWorked(date);
-  const hoursWorkedByYearPromise = currentYear !== undefined ? getHoursWorkedByYear(currentYear) : Promise.resolve([]);
+  const hoursWorkedByYearPromise =  getHoursWorkedByYear(currentYear) 
+  
   return (
 
     <>

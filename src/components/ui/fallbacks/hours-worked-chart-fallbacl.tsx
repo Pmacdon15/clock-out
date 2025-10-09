@@ -22,7 +22,6 @@ export default function HoursWorkedChartFallback() {
                         <label htmlFor="week-select" className="mr-2">Filter by week:</label>
                         <select id="week-select" className="border p-1 rounded">
                             <option value={""}>Select a Week</option>
-
                         </select>
                     </div>
                     <div className="h-96">
