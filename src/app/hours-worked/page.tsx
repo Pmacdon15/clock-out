@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import HoursWorkedFilterFallback from "@/components/ui/fallbacks/hours-worked-filter-fallback";
 import { getAllWeeksWithWork, getHoursWorked, getHoursWorkedByYear } from "@/lib/DAL/punch-clock";
 import { getWeekNumber } from "@/lib/utils";
-import { OrganizationSwitcher, SignedIn, UserButton } from "@clerk/nextjs";
+import { OrganizationSwitcher, UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 import { Suspense } from "react";
 import { CardSkeleton } from "@/components/ui/card";

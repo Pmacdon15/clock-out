@@ -1,10 +1,9 @@
 import BorderBox from "@/components/ui/containers/border-box";
 import ListItemEditHours from "@/components/ui/edit-hours/list-item-edit-hours";
 import OrgMembersFilter from "@/components/ui/filters/org-member-filter";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { fetchOrgMembers } from "@/lib/DAL/org-members";
-import { OrgMember } from "@/lib/types/org-members";
-
+import { getAllWeeksWithWorkForEmployee } from "@/lib/DAL/punch-clock";
+import { Suspense } from "react";
 
 // Dummy data for hours worked
 const dummyHours = [
@@ -16,13 +15,18 @@ const dummyHours = [
     { id: 6, user_id: 'Bob', org_id: 'org1', time_in: '2024-03-23 09:00:00', time_out: '2024-03-23 17:30:00' },
 ];
 
-export default async function Page() {
+export default async function Page(props: PageProps<'/admin/edit-hours'>) {
+    const searchParams = await props.searchParams
+    const employeeId = searchParams.employee
+    const employeeIdValue = Array.isArray(employeeId) ? employeeId[0] : employeeId;
+
     const orgMembersPromise = fetchOrgMembers();
+    const weeksPromise = await getAllWeeksWithWorkForEmployee(employeeIdValue);
 
     return (
         <BorderBox>
             <h1 className="text-2xl font-bold mb-4">Edit Hours</h1>
-            <OrgMembersFilter orgMemberPromise={orgMembersPromise} />
+            <Suspense><OrgMembersFilter orgMemberPromise={orgMembersPromise} /></Suspense>
             <ul className="divide-y divide-gray-200">
                 {dummyHours.map((entry) => (
                     <ListItemEditHours key={entry.id} entry={entry} />

@@ -1,5 +1,6 @@
 'use client';
 
+import { useHandleParamChange } from '@/lib/utils/filter-utils';
 import { useRouter, useSearchParams } from 'next/navigation'
 
 interface WeekSelectorProps {
@@ -7,19 +8,10 @@ interface WeekSelectorProps {
 }
 
 export function WeekSelector({ weeks }: WeekSelectorProps) {
-  const router = useRouter();
+ 
   const searchParams = useSearchParams();
   const currentWeek = searchParams.get('week');
-
-  const handleParamChange = (paramName: string, paramValue: string, path: string) => {
-    const params = new URLSearchParams(searchParams.toString());
-    if (paramValue) {
-      params.set(paramName, paramValue);
-    } else {
-      params.delete(paramName);
-    }
-    router.push(`${path}?${params.toString()}`);
-  };
+  const handleParamChange = useHandleParamChange();
 
   const handleWeekChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     handleParamChange('week', event.target.value, '/hours-worked');

@@ -39,6 +39,19 @@ export async function getAllWeeksWithWork(): Promise<Week[]> {
     }
 }
 
+export async function getAllWeeksWithWorkForEmployee(employeeId?: string): Promise<Week[]> {
+    const { userId, orgId } = await auth.protect()
+    if (!employeeId) return []
+    try {
+        const weeks = await getAllWeeksWithWorkDb(employeeId, orgId || userId)
+        return weeks;
+    } catch (e) {
+        console.error("Error: ", e)
+        return [];
+    }
+}
+
+
 export async function getHoursWorkedByYear(year: number): Promise<MonthlyHours[]> {
     const { userId, orgId } = await auth.protect()
     try {
