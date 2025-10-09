@@ -1,6 +1,7 @@
 import BorderBox from "@/components/ui/containers/border-box";
 import ListItemEditHours from "@/components/ui/edit-hours/list-item-edit-hours";
 import OrgMembersFilter from "@/components/ui/filters/org-member-filter";
+import { WeekSelector } from "@/components/ui/filters/week-selector";
 import { fetchOrgMembers } from "@/lib/DAL/org-members";
 import { getAllWeeksWithWorkForEmployee } from "@/lib/DAL/punch-clock";
 import { Suspense } from "react";
@@ -21,12 +22,13 @@ export default async function Page(props: PageProps<'/admin/edit-hours'>) {
     const employeeIdValue = Array.isArray(employeeId) ? employeeId[0] : employeeId;
 
     const orgMembersPromise = fetchOrgMembers();
-    const weeksPromise = await getAllWeeksWithWorkForEmployee(employeeIdValue);
+    const weeksPromise = getAllWeeksWithWorkForEmployee(employeeIdValue);
 
     return (
         <BorderBox>
             <h1 className="text-2xl font-bold mb-4">Edit Hours</h1>
             <Suspense><OrgMembersFilter orgMemberPromise={orgMembersPromise} /></Suspense>
+            <Suspense><WeekSelector weeksPromise={weeksPromise}/></Suspense>
             <ul className="divide-y divide-gray-200">
                 {dummyHours.map((entry) => (
                     <ListItemEditHours key={entry.id} entry={entry} />

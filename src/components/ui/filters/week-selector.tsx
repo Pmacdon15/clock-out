@@ -1,14 +1,17 @@
 'use client';
 
+import { Week } from '@/lib/types/punch-clock-types';
 import { useHandleParamChange } from '@/lib/utils/filter-utils';
 import { useRouter, useSearchParams } from 'next/navigation'
+import { use } from 'react';
 
 interface WeekSelectorProps {
-  weeks: { label: string, value: string }[];
+  weeksPromise: Promise<Week[]>
 }
 
-export function WeekSelector({ weeks }: WeekSelectorProps) {
- 
+export function WeekSelector({ weeksPromise }: WeekSelectorProps) {
+
+  const weeks = use(weeksPromise)
   const searchParams = useSearchParams();
   const currentWeek = searchParams.get('week');
   const handleParamChange = useHandleParamChange();

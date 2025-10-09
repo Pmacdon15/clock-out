@@ -10,10 +10,8 @@ import { YearlyHoursWorked } from "@/components/ui/hours-worked/yearly-hours-wor
 import { HoursWorkedContainer } from "@/components/ui/hours-worked/hours-worked";
 
 export default async function HoursWorkedPage(props: PageProps<"/hours-worked">) {
-  const [weeks, searchParams] = await Promise.all([
-    getAllWeeksWithWork(),
-    props.searchParams
-  ])
+  const searchParams = await props.searchParams
+
 
   const dateParam = searchParams.date;
   const dateValue = Array.isArray(dateParam) ? dateParam[0] : dateParam;
@@ -22,11 +20,11 @@ export default async function HoursWorkedPage(props: PageProps<"/hours-worked">)
   const [currentYear, currentWeekNum] = getWeekNumber(now);
   const currentWeekValue = `${currentYear}-W${String(currentWeekNum).padStart(2, '0')}`;
 
+  const weeksPromise = getAllWeeksWithWork();
   const hoursWorkedPromise = getHoursWorked(currentWeekValue);
   const hoursWorkedByYearPromise = getHoursWorkedByYear(now.getFullYear());
-
   return (
-    // <div className="flex flex-col items-center mt-4 md:mt-8 p-4 gap-4">
+   
     <>
       <div className="rounded-xl p-1 bg-gradient-to-r from-blue-500 to-cyan-500 w-full md:w-4/6">
         <div className="flex flex-col gap-4 rounded-xl p-4 bg-black">
@@ -41,7 +39,7 @@ export default async function HoursWorkedPage(props: PageProps<"/hours-worked">)
       </div>
       <div className="p-2 w-full md:w-5/6">
         <Suspense fallback={<HoursWorkedFilterFallback />}>
-          <HoursWorkedContainer hoursPromise={hoursWorkedPromise} weeks={weeks} />
+          <HoursWorkedContainer hoursPromise={hoursWorkedPromise} weeksPromise={weeksPromise} />
         </Suspense>
       </div>
       <div className="p-2 w-full md:w-5/6">
