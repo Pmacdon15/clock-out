@@ -41,9 +41,12 @@ export async function getAllWeeksWithWork(): Promise<Week[]> {
 
 export async function getAllWeeksWithWorkForEmployee(employeeId?: string): Promise<Week[]> {
     const { userId, orgId } = await auth.protect()
-    if (!employeeId) return []
+    let idToSubmit
+    if (!employeeId) idToSubmit = userId
+    else idToSubmit = employeeId
+
     try {
-        const weeks = await getAllWeeksWithWorkDb(employeeId, orgId || userId)
+        const weeks = await getAllWeeksWithWorkDb(idToSubmit, orgId || userId)
         return weeks;
     } catch (e) {
         console.error("Error: ", e)

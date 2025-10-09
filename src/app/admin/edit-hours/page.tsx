@@ -28,7 +28,7 @@ export default async function Page(props: PageProps<'/admin/edit-hours'>) {
         <BorderBox>
             <h1 className="text-2xl font-bold mb-4">Edit Hours</h1>
             <Suspense><OrgMembersFilter orgMemberPromise={orgMembersPromise} /></Suspense>
-            <Suspense><WeekSelector weeksPromise={weeksPromise}/></Suspense>
+            <Suspense><WeekSelector weeksPromise={weeksPromise} variant="/admin/edit-hours" /></Suspense>
             <ul className="divide-y divide-gray-200">
                 {dummyHours.map((entry) => (
                     <ListItemEditHours key={entry.id} entry={entry} />

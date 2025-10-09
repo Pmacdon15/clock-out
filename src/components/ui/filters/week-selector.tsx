@@ -2,38 +2,38 @@
 
 import { Week } from '@/lib/types/punch-clock-types';
 import { useHandleParamChange } from '@/lib/utils/filter-utils';
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation';
 import { use } from 'react';
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "../select";
 
 interface WeekSelectorProps {
   weeksPromise: Promise<Week[]>
+  variant?: "/hours-worked" | "/admin/edit-hours"
 }
 
-export function WeekSelector({ weeksPromise }: WeekSelectorProps) {
+export function WeekSelector({ weeksPromise, variant = "/hours-worked" }: WeekSelectorProps) {
 
   const weeks = use(weeksPromise)
   const searchParams = useSearchParams();
   const currentWeek = searchParams.get('week');
   const handleParamChange = useHandleParamChange();
 
-  const handleWeekChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    handleParamChange('week', event.target.value, '/hours-worked');
-  };
-
   return (
-    <div className="mb-4">
+    <div className="mb-4 flex gap-4 items-center">
       <label htmlFor="week-select" className="mr-2">Filter by week:</label>
-      <select
-        id="week-select"
-        value={currentWeek || ''}
-        onChange={handleWeekChange}
-        className="border p-1 rounded"
-      >
-        <option value="">Select a Week</option>
-        {weeks.map(week => (
-          <option key={week.value} value={week.value}>{week.label}</option>
-        ))}
-      </select>
+      <Select defaultValue={currentWeek || undefined} onValueChange={(value) => handleParamChange('week', value, variant)}>
+        <SelectTrigger >
+          <SelectValue placeholder="Select a Week" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            <SelectLabel>Weeks</SelectLabel>
+            {weeks.map(week => (
+              <SelectItem key={week.value} value={week.value}>{week.label}</SelectItem>
+            ))}
+          </SelectGroup>
+        </SelectContent>
+      </Select>
     </div>
   );
 }
