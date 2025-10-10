@@ -31,7 +31,7 @@ export default function Home() {
 				<SignedOut>
 					<div className="rounded-xl p-1 bg-gradient-to-r from-blue-500 to-cyan-500 w-full max-w-md">
 						<div className="bg-black text-white rounded-lg p-4">
-							<div className="flex flex-col sm:flex-row gap-4">
+							<div className="flex flex-col sm:flex-row gap-4 items-center w-full justify-center">
 								<SignInButton />
 								<SignUpButton />
 							</div>
