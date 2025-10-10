@@ -5,6 +5,7 @@
 		"source.fixAll.biome": "explicit",
 		"source.organizeImports.biome": "always",
 		"source.addMissingImports.ts": "always",
-		"source.removeUnusedImports": "always"
+		"source.removeUnusedImports": "always",
+		"source.action.useSortedProperties.biome": "explicit"
 	}
 }
