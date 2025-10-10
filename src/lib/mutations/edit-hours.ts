@@ -1,17 +1,17 @@
-import { useMutation } from "@tanstack/react-query";
-import { revalidatePathAction } from "../actions/revalidate";
-import { editHours } from "../actions/edit-hours";
+import { useMutation } from '@tanstack/react-query'
+import { revalidatePathAction } from '../actions/revalidate'
+import { editHours } from '../actions/edit-hours'
 
 export const usePunchClock = () => {
 	return useMutation({
 		mutationFn: (formData: FormData) => {
-			return editHours(formData);
+			return editHours(formData)
 		},
 		onSuccess: () => {
-			revalidatePathAction("/admin/edit-hours");
+			revalidatePathAction('/admin/edit-hours')
 		},
 		onError: (error) => {
-			console.error("Mutation error:", error);
+			console.error('Mutation error:', error)
 		},
-	});
-};
+	})
+}

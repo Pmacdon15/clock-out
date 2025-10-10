@@ -1,9 +1,9 @@
-"use client";
+'use client'
 
-import { Week } from "@/lib/types/punch-clock-types";
-import { useHandleParamChange } from "@/lib/utils/filter-utils";
-import { useSearchParams } from "next/navigation";
-import { use } from "react";
+import { Week } from '@/lib/types/punch-clock-types'
+import { useHandleParamChange } from '@/lib/utils/filter-utils'
+import { useSearchParams } from 'next/navigation'
+import { use } from 'react'
 import {
 	Select,
 	SelectContent,
@@ -12,21 +12,21 @@ import {
 	SelectLabel,
 	SelectTrigger,
 	SelectValue,
-} from "../select";
+} from '../select'
 
 interface WeekSelectorProps {
-	weeksPromise: Promise<Week[]>;
-	variant?: "/hours-worked" | "/admin/edit-hours";
+	weeksPromise: Promise<Week[]>
+	variant?: '/hours-worked' | '/admin/edit-hours'
 }
 
 export function WeekSelector({
 	weeksPromise,
-	variant = "/hours-worked",
+	variant = '/hours-worked',
 }: WeekSelectorProps) {
-	const weeks = use(weeksPromise);
-	const searchParams = useSearchParams();
-	const currentWeek = searchParams.get("week");
-	const handleParamChange = useHandleParamChange();
+	const weeks = use(weeksPromise)
+	const searchParams = useSearchParams()
+	const currentWeek = searchParams.get('week')
+	const handleParamChange = useHandleParamChange()
 
 	return (
 		<div className="mb-4 flex gap-4 items-center">
@@ -36,7 +36,7 @@ export function WeekSelector({
 			<Select
 				defaultValue={currentWeek || undefined}
 				onValueChange={(value) =>
-					handleParamChange("week", value, variant)
+					handleParamChange('week', value, variant)
 				}
 			>
 				<SelectTrigger>
@@ -54,5 +54,5 @@ export function WeekSelector({
 				</SelectContent>
 			</Select>
 		</div>
-	);
+	)
 }

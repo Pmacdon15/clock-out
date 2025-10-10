@@ -1,5 +1,5 @@
-"use client";
-import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
+'use client'
+import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from 'recharts'
 import {
 	Card,
 	CardContent,
@@ -7,20 +7,20 @@ import {
 	CardFooter,
 	CardHeader,
 	CardTitle,
-} from "../card";
+} from '../card'
 import {
 	ChartConfig,
 	ChartContainer,
 	ChartTooltip,
 	ChartTooltipContent,
-} from "../chart";
+} from '../chart'
 
 const chartConfig = {
 	hours: {
-		label: "Hours",
-		color: "var(--chart-1)",
+		label: 'Hours',
+		color: 'var(--chart-1)',
 	},
-} satisfies ChartConfig;
+} satisfies ChartConfig
 
 export default function YearlyHoursWorkedFallback() {
 	return (
@@ -46,7 +46,7 @@ export default function YearlyHoursWorkedFallback() {
 						}}
 					>
 						<CartesianGrid vertical={false} />
-						<YAxis domain={[0, "auto"]} />
+						<YAxis domain={[0, 'auto']} />
 						<XAxis
 							dataKey="month"
 							tickLine={false}
@@ -80,5 +80,5 @@ export default function YearlyHoursWorkedFallback() {
 				</div>
 			</CardFooter>
 		</Card>
-	);
+	)
 }

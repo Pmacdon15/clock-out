@@ -1,7 +1,7 @@
-"use client";
+'use client'
 
-import { TrendingDown, TrendingUp } from "lucide-react";
-import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
+import { TrendingDown, TrendingUp } from 'lucide-react'
+import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from 'recharts'
 
 import {
 	Card,
@@ -10,61 +10,60 @@ import {
 	CardFooter,
 	CardHeader,
 	CardTitle,
-} from "@/components/ui/card";
+} from '@/components/ui/card'
 import {
 	ChartConfig,
 	ChartContainer,
 	ChartTooltip,
 	ChartTooltipContent,
-} from "@/components/ui/chart";
-import { MonthlyHours } from "@/lib/types/punch-clock-types";
+} from '@/components/ui/chart'
+import { MonthlyHours } from '@/lib/types/punch-clock-types'
 
 const chartConfig = {
 	hours: {
-		label: "Hours",
-		color: "var(--chart-1)",
+		label: 'Hours',
+		color: 'var(--chart-1)',
 	},
-} satisfies ChartConfig;
+} satisfies ChartConfig
 
 export function YearlyHoursChart({
 	data,
 	year,
 }: {
-	data: MonthlyHours[];
-	year?: number;
+	data: MonthlyHours[]
+	year?: number
 }) {
 	// Get the last month with hours and the month before it
-	const monthsWithHours = data.filter((month) => month.hours > 0);
-	const lastMonthWithHours = monthsWithHours[monthsWithHours.length - 1];
-	const secondLastMonthWithHours =
-		monthsWithHours[monthsWithHours.length - 2];
+	const monthsWithHours = data.filter((month) => month.hours > 0)
+	const lastMonthWithHours = monthsWithHours[monthsWithHours.length - 1]
+	const secondLastMonthWithHours = monthsWithHours[monthsWithHours.length - 2]
 
-	let trendingMessage = "Not enough data to show trend";
-	let trendingIcon = null;
+	let trendingMessage = 'Not enough data to show trend'
+	let trendingIcon = null
 
 	if (lastMonthWithHours && secondLastMonthWithHours) {
-		const currentMonthHours = lastMonthWithHours.hours;
-		const previousMonthHours = secondLastMonthWithHours.hours;
+		const currentMonthHours = lastMonthWithHours.hours
+		const previousMonthHours = secondLastMonthWithHours.hours
 
 		if (previousMonthHours !== 0) {
 			const percentageChange =
 				((currentMonthHours - previousMonthHours) /
 					previousMonthHours) *
-				100;
-			const trend = percentageChange >= 0 ? "up" : "down";
-			const absPercentageChange = Math.abs(percentageChange).toFixed(1);
-			trendingMessage = `Trending ${trend} by ${absPercentageChange}% this month`;
+				100
+			const trend = percentageChange >= 0 ? 'up' : 'down'
+			const absPercentageChange = Math.abs(percentageChange).toFixed(1)
+			trendingMessage = `Trending ${trend} by ${absPercentageChange}% this month`
 			trendingIcon =
 				percentageChange >= 0 ? (
 					<TrendingUp className="h-4 w-4" />
 				) : (
 					<TrendingDown className="h-4 w-4" />
-				);
+				)
 		} else if (currentMonthHours > 0) {
-			trendingMessage = `Trending up by 100.0% this month`;
-			trendingIcon = <TrendingUp className="h-4 w-4" />;
+			trendingMessage = `Trending up by 100.0% this month`
+			trendingIcon = <TrendingUp className="h-4 w-4" />
 		} else {
-			trendingMessage = `No change this month`;
+			trendingMessage = `No change this month`
 		}
 	}
 
@@ -91,7 +90,7 @@ export function YearlyHoursChart({
 						}}
 					>
 						<CartesianGrid vertical={false} />
-						<YAxis domain={[0, "auto"]} />
+						<YAxis domain={[0, 'auto']} />
 						<XAxis
 							dataKey="month"
 							tickLine={false}
@@ -127,5 +126,5 @@ export function YearlyHoursChart({
 				</div>
 			</CardFooter>
 		</Card>
-	);
+	)
 }

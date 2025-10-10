@@ -1,22 +1,22 @@
-"use client";
-import { usePunchClock } from "@/lib/mutations/punch-clock";
-import { Button } from "../button";
+'use client'
+import { usePunchClock } from '@/lib/mutations/punch-clock'
+import { Button } from '../button'
 export default function PunchClockButton({
 	punchOut = false,
 	disabled = false,
 }: {
-	punchOut?: boolean;
-	disabled?: boolean;
+	punchOut?: boolean
+	disabled?: boolean
 }) {
-	const { mutate, isPending } = usePunchClock();
+	const { mutate, isPending } = usePunchClock()
 
 	return (
 		<Button
-			variant={"outline"}
+			variant={'outline'}
 			disabled={isPending || disabled}
 			onClick={() => mutate(punchOut)}
 		>
-			{punchOut ? "Punch Out" : "Punch In"}
+			{punchOut ? 'Punch Out' : 'Punch In'}
 		</Button>
-	);
+	)
 }

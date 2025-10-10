@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button";
-import TimeInput from "@/components/ui/inputs/time-input";
-import Link from "next/link";
+import { Button } from '@/components/ui/button'
+import TimeInput from '@/components/ui/inputs/time-input'
+import Link from 'next/link'
 
 export default function Loading() {
 	return (
@@ -9,12 +9,12 @@ export default function Loading() {
 				<div className="flex text-white justify-center"></div>
 				<div className="flex justify-end ">
 					<Link href="/hours-worked">
-						<Button variant={"outline"}>Hours Worked</Button>
+						<Button variant={'outline'}>Hours Worked</Button>
 					</Link>
 				</div>
 				<TimeInput disabled={false} />
 				<TimeInput punchOut disabled={true} />
 			</div>
 		</div>
-	);
+	)
 }

@@ -5,10 +5,10 @@ import {
 	SignInButton,
 	SignUpButton,
 	UserButton,
-} from "@clerk/nextjs";
-import { Suspense } from "react";
-import LinkWithPath from "../components/ui/links/link";
-import BlueTextLink from "@/components/ui/links/blue-text-link";
+} from '@clerk/nextjs'
+import { Suspense } from 'react'
+import LinkWithPath from '../components/ui/links/link'
+import BlueTextLink from '@/components/ui/links/blue-text-link'
 
 export default function Home() {
 	return (
@@ -47,12 +47,12 @@ export default function Home() {
 							</div>
 							<nav className="flex flex-col sm:flex-row gap-4 items-center">
 								<LinkWithPath
-									path={"/punch-clock"}
-									text={"Punch Clock"}
+									path={'/punch-clock'}
+									text={'Punch Clock'}
 								/>
 								<LinkWithPath
-									path={"/hours-worked"}
-									text={"Hours Worked"}
+									path={'/hours-worked'}
+									text={'Hours Worked'}
 								/>
 							</nav>
 						</div>
@@ -64,16 +64,16 @@ export default function Home() {
 				<div className="bg-black text-white rounded-lg p-4">
 					<nav className="flex flex-col sm:flex-row gap-4 text-sm justify-center items-center">
 						<BlueTextLink
-							path={"/terms"}
-							text={"Terms of Service"}
+							path={'/terms'}
+							text={'Terms of Service'}
 						/>
 						<BlueTextLink
-							path={"/privacy"}
-							text={"Privacy Policy"}
+							path={'/privacy'}
+							text={'Privacy Policy'}
 						/>
 					</nav>
 				</div>
 			</div>
 		</div>
-	);
+	)
 }

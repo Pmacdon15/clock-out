@@ -1,19 +1,19 @@
-"use client";
+'use client'
 
-import { Bar, BarChart, XAxis, YAxis } from "recharts";
-import { Card, CardContent, CardHeader, CardTitle } from "../card";
+import { Bar, BarChart, XAxis, YAxis } from 'recharts'
+import { Card, CardContent, CardHeader, CardTitle } from '../card'
 import {
 	ChartConfig,
 	ChartContainer,
 	ChartTooltip,
 	ChartTooltipContent,
-} from "../chart";
+} from '../chart'
 
 const chartConfig = {
 	hours: {
-		label: "Hours",
+		label: 'Hours',
 	},
-} satisfies ChartConfig;
+} satisfies ChartConfig
 
 export default function HoursWorkedChartFallback() {
 	return (
@@ -28,7 +28,7 @@ export default function HoursWorkedChartFallback() {
 							Filter by week:
 						</label>
 						<select id="week-select" className="border p-1 rounded">
-							<option value={""}>Select a Week</option>
+							<option value={''}>Select a Week</option>
 						</select>
 					</div>
 					<div className="h-96">
@@ -44,7 +44,7 @@ export default function HoursWorkedChartFallback() {
 										new Date(value).toLocaleDateString()
 									}
 								/>
-								<YAxis domain={[0, "auto"]} />
+								<YAxis domain={[0, 'auto']} />
 								<Bar dataKey="hours" barSize={100}></Bar>
 								<ChartTooltip
 									cursor={false}
@@ -56,5 +56,5 @@ export default function HoursWorkedChartFallback() {
 				</div>
 			</CardContent>
 		</Card>
-	);
+	)
 }

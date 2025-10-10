@@ -1,14 +1,14 @@
-"use client";
+'use client'
 
-import { HoursWorkedChart } from "@/components/ui/charts/hours-worked-chart";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { WeekSelector } from "../filters/week-selector";
-import { HoursWorked, Week } from "@/lib/types/punch-clock-types";
+import { HoursWorkedChart } from '@/components/ui/charts/hours-worked-chart'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { WeekSelector } from '../filters/week-selector'
+import { HoursWorked, Week } from '@/lib/types/punch-clock-types'
 
 interface HoursWorkedFilterProps {
-	hoursPromise: Promise<HoursWorked[]>;
+	hoursPromise: Promise<HoursWorked[]>
 	// weeks: { label: string, value: string }[];
-	weeksPromise: Promise<Week[]>;
+	weeksPromise: Promise<Week[]>
 }
 
 export function HoursWorkedContainer({
@@ -32,5 +32,5 @@ export function HoursWorkedContainer({
 				</div>
 			</CardContent>
 		</Card>
-	);
+	)
 }

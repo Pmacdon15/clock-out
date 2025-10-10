@@ -1,105 +1,105 @@
-import { auth } from "@clerk/nextjs/server";
+import { auth } from '@clerk/nextjs/server'
 import {
 	HoursWorked,
 	MonthlyHours,
 	TimeCard,
 	Week,
-} from "../types/punch-clock-types";
+} from '../types/punch-clock-types'
 import {
 	getAllWeeksWithWorkDb,
 	getHoursWorkedByYearDb,
 	getHoursWorkedDb,
 	getTimeCardDb,
 	getTimeCardsDb,
-} from "../DB/punch-clock-db";
+} from '../DB/punch-clock-db'
 
 export async function getTimeCard(): Promise<TimeCard | null> {
-	const { userId, orgId } = await auth.protect();
+	const { userId, orgId } = await auth.protect()
 	try {
-		const timeCards = await getTimeCardDb(userId, orgId || userId);
+		const timeCards = await getTimeCardDb(userId, orgId || userId)
 		if (timeCards.length > 0) {
-			return timeCards[0];
+			return timeCards[0]
 		}
-		return null;
+		return null
 	} catch (e) {
-		console.error("Error: ", e);
-		return null;
+		console.error('Error: ', e)
+		return null
 	}
 }
 export async function getEmployeeTimeCards(
 	week?: string,
 	employeeId?: string,
 ): Promise<TimeCard[] | null> {
-	const { userId, orgId } = await auth.protect();
-	let idToUse;
-	if (employeeId) idToUse = employeeId;
-	else idToUse = userId;
+	const { userId, orgId } = await auth.protect()
+	let idToUse
+	if (employeeId) idToUse = employeeId
+	else idToUse = userId
 
 	try {
-		const timeCards = await getTimeCardsDb(idToUse, orgId || userId, week);
-		return timeCards;
+		const timeCards = await getTimeCardsDb(idToUse, orgId || userId, week)
+		return timeCards
 	} catch (e) {
-		console.error("Error: ", e);
-		return null;
+		console.error('Error: ', e)
+		return null
 	}
 }
 
 export async function getHoursWorked(week?: string): Promise<HoursWorked[]> {
-	const { userId, orgId } = await auth.protect();
+	const { userId, orgId } = await auth.protect()
 	try {
 		const hoursWorked = await getHoursWorkedDb(
 			userId,
 			orgId || userId,
 			week,
-		);
-		return hoursWorked;
+		)
+		return hoursWorked
 	} catch (e) {
-		console.error("Error: ", e);
-		return [];
+		console.error('Error: ', e)
+		return []
 	}
 }
 
 export async function getAllWeeksWithWork(): Promise<Week[]> {
-	const { userId, orgId } = await auth.protect();
+	const { userId, orgId } = await auth.protect()
 	try {
-		const weeks = await getAllWeeksWithWorkDb(userId, orgId || userId);
-		return weeks;
+		const weeks = await getAllWeeksWithWorkDb(userId, orgId || userId)
+		return weeks
 	} catch (e) {
-		console.error("Error: ", e);
-		return [];
+		console.error('Error: ', e)
+		return []
 	}
 }
 
 export async function getAllWeeksWithWorkForEmployee(
 	employeeId?: string,
 ): Promise<Week[]> {
-	const { userId, orgId } = await auth.protect();
-	let idToSubmit;
-	if (!employeeId) idToSubmit = userId;
-	else idToSubmit = employeeId;
+	const { userId, orgId } = await auth.protect()
+	let idToSubmit
+	if (!employeeId) idToSubmit = userId
+	else idToSubmit = employeeId
 
 	try {
-		const weeks = await getAllWeeksWithWorkDb(idToSubmit, orgId || userId);
-		return weeks;
+		const weeks = await getAllWeeksWithWorkDb(idToSubmit, orgId || userId)
+		return weeks
 	} catch (e) {
-		console.error("Error: ", e);
-		return [];
+		console.error('Error: ', e)
+		return []
 	}
 }
 
 export async function getHoursWorkedByYear(
 	year?: number,
 ): Promise<MonthlyHours[]> {
-	const { userId, orgId } = await auth.protect();
+	const { userId, orgId } = await auth.protect()
 	try {
 		const hoursWorked = await getHoursWorkedByYearDb(
 			userId,
 			orgId || userId,
 			year,
-		);
-		return hoursWorked;
+		)
+		return hoursWorked
 	} catch (e) {
-		console.error("Error: ", e);
-		return [];
+		console.error('Error: ', e)
+		return []
 	}
 }

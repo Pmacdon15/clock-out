@@ -1,12 +1,12 @@
-import { Button } from "@/components/ui/button";
-import BorderBox from "@/components/ui/containers/border-box";
-import TimeInput from "@/components/ui/inputs/time-input";
-import { getTimeCard } from "@/lib/DAL/punch-clock";
-import { OrganizationSwitcher, SignedIn, UserButton } from "@clerk/nextjs";
-import Link from "next/link";
+import { Button } from '@/components/ui/button'
+import BorderBox from '@/components/ui/containers/border-box'
+import TimeInput from '@/components/ui/inputs/time-input'
+import { getTimeCard } from '@/lib/DAL/punch-clock'
+import { OrganizationSwitcher, SignedIn, UserButton } from '@clerk/nextjs'
+import Link from 'next/link'
 
 export default async function Page() {
-	const timeCard = await getTimeCard();
+	const timeCard = await getTimeCard()
 	return (
 		<BorderBox>
 			<SignedIn>
@@ -27,5 +27,5 @@ export default async function Page() {
 				clockInTime={timeCard?.time_in}
 			/>
 		</BorderBox>
-	);
+	)
 }

@@ -1,16 +1,16 @@
-"use client";
-import { Edit } from "lucide-react";
-import { Activity, useState } from "react";
-import { Input } from "../input";
-import { Button } from "../button";
+'use client'
+import { Edit } from 'lucide-react'
+import { Activity, useState } from 'react'
+import { Input } from '../input'
+import { Button } from '../button'
 
 export default function ListItemEditHours({
 	entry,
 }: {
-	key: number;
-	entry: any;
+	key: number
+	entry: any
 }) {
-	const [editHours, setEditHours] = useState(false);
+	const [editHours, setEditHours] = useState(false)
 
 	return (
 		<li
@@ -18,7 +18,7 @@ export default function ListItemEditHours({
 			className="py-4 grid grid-cols-2 lg:grid-cols-6 gap-4 items-center w-full"
 		>
 			<div className="col-span-2 lg:col-span-4">
-				<Activity mode={!editHours ? "visible" : "hidden"}>
+				<Activity mode={!editHours ? 'visible' : 'hidden'}>
 					<div className="grid grid-cols-2 gap-4">
 						<p className="text-sm text-gray-500">
 							{new Date(entry.time_in).toLocaleString()}
@@ -28,7 +28,7 @@ export default function ListItemEditHours({
 						</p>
 					</div>
 				</Activity>
-				<Activity mode={editHours ? "visible" : "hidden"}>
+				<Activity mode={editHours ? 'visible' : 'hidden'}>
 					<form className="grid grid-cols-1 lg:grid-cols-3 gap-4">
 						<Input
 							className="w-full"
@@ -45,7 +45,7 @@ export default function ListItemEditHours({
 								.slice(0, 5)}
 						/>
 						<Button
-							variant={"outline"}
+							variant={'outline'}
 							className="w-full lg:w-auto"
 						>
 							Save
@@ -55,7 +55,7 @@ export default function ListItemEditHours({
 			</div>
 			<div className="col-span-1 lg:col-span-1 mt-4 lg:mt-0 text-left">
 				<p className="text-sm text-gray-500">
-					Hours:{" "}
+					Hours:{' '}
 					{(
 						(new Date(entry.time_out).getTime() -
 							new Date(entry.time_in).getTime()) /
@@ -73,5 +73,5 @@ export default function ListItemEditHours({
 				</button>
 			</div>
 		</li>
-	);
+	)
 }

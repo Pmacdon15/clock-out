@@ -1,16 +1,16 @@
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from 'next/navigation'
 
 export function useHandleParamChange() {
-	const router = useRouter();
-	const searchParams = useSearchParams();
+	const router = useRouter()
+	const searchParams = useSearchParams()
 
 	return (paramName: string, paramValue: string, path: string) => {
-		const params = new URLSearchParams(searchParams.toString());
+		const params = new URLSearchParams(searchParams.toString())
 		if (paramValue) {
-			params.set(paramName, paramValue);
+			params.set(paramName, paramValue)
 		} else {
-			params.delete(paramName);
+			params.delete(paramName)
 		}
-		router.push(`${path}?${params.toString()}`);
-	};
+		router.push(`${path}?${params.toString()}`)
+	}
 }

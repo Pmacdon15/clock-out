@@ -1,11 +1,11 @@
-import BorderBox from "./border-box";
+import BorderBox from './border-box'
 
 export default function TermsContainer({
 	children,
 	typeOfContainer,
 }: {
-	children: React.ReactNode;
-	typeOfContainer: string;
+	children: React.ReactNode
+	typeOfContainer: string
 }) {
 	return (
 		<BorderBox>
@@ -14,5 +14,5 @@ export default function TermsContainer({
 				<pre className="whitespace-pre-wrap font-sans">{children}</pre>
 			</div>
 		</BorderBox>
-	);
+	)
 }

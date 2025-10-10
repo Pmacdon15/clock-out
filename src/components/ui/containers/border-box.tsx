@@ -5,5 +5,5 @@ export default function BorderBox({ children }: { children: React.ReactNode }) {
 				{children}
 			</div>
 		</div>
-	);
+	)
 }

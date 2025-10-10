@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from "../card";
+import { Card, CardContent, CardHeader, CardTitle } from '../card'
 
 export default function HoursWorkedFilterFallback() {
 	return (
@@ -21,5 +21,5 @@ export default function HoursWorkedFilterFallback() {
 				</div>
 			</CardContent>
 		</Card>
-	);
+	)
 }
