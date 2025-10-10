@@ -1,5 +1,5 @@
 import { neon } from '@neondatabase/serverless'
-import {
+import type {
 	HoursWorked,
 	MonthlyHours,
 	TimeCard,
@@ -11,7 +11,7 @@ export async function punchInOrOutDB(
 	userId: string,
 	orgId: string,
 ): Promise<TimeCard[]> {
-	const sql = neon(process.env.DATABASE_URL!)
+	const sql = neon(process.env.DATABASE_URL || '')
 	const currentTime = new Date()
 
 	if (punchOut) {
@@ -38,7 +38,7 @@ export async function getTimeCardDb(
 	userId: string,
 	orgId: string,
 ): Promise<TimeCard[]> {
-	const sql = neon(process.env.DATABASE_URL!)
+	const sql = neon(process.env.DATABASE_URL || '')
 	const result = await sql`
         SELECT * FROM time_clock
         WHERE user_id = ${userId} AND org_id = ${orgId} AND time_out IS NULL
@@ -52,7 +52,7 @@ export async function getTimeCardsDb(
 	orgId: string,
 	week?: string,
 ): Promise<TimeCard[]> {
-	const sql = neon(process.env.DATABASE_URL!)
+	const sql = neon(process.env.DATABASE_URL || '')
 
 	let weekToUse = week
 	if (!weekToUse) {
@@ -100,7 +100,7 @@ export async function getHoursWorkedDb(
 	orgId: string,
 	week?: string,
 ): Promise<HoursWorked[]> {
-	const sql = neon(process.env.DATABASE_URL!)
+	const sql = neon(process.env.DATABASE_URL || '')
 
 	if (week && week !== '') {
 		const [year, weekNumber] = week.split('-W').map(Number)
@@ -157,7 +157,7 @@ export async function getAllWeeksWithWorkDb(
 	userId: string,
 	orgId: string,
 ): Promise<Week[]> {
-	const sql = neon(process.env.DATABASE_URL!)
+	const sql = neon(process.env.DATABASE_URL || '')
 	const result = await sql`
         SELECT DISTINCT
             to_char(time_in, 'IYYY') as year,
