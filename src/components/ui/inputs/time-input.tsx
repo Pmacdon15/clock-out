@@ -4,7 +4,6 @@ import { Clock } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import PunchClockButton from '../buttons/punch-clock'
 import { Input } from '../input'
-import { Tooltip, TooltipContent, TooltipTrigger } from '../tooltip'
 
 export default function TimeInput({
 	punchOut = false,

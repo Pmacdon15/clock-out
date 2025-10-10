@@ -20,7 +20,7 @@ export default function OrgMembersFilter({
 	const orgMembers = use(orgMemberPromise)
 	const handleParamChange = useHandleParamChange()
 
-	const handleEmployeeChange = (
+	const _handleEmployeeChange = (
 		event: React.ChangeEvent<HTMLSelectElement>,
 	) => {
 		handleParamChange('employee', event.target.value, '/admin/edit-hours')
@@ -44,7 +44,7 @@ export default function OrgMembersFilter({
 								key={member.userId}
 								value={member.userId}
 							>
-								{member.firstName + ' ' + member.lastName}
+								{`${member.firstName} ${member.lastName}`}
 							</SelectItem>
 						))}
 					</SelectGroup>

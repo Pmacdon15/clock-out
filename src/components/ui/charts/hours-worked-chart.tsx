@@ -39,8 +39,8 @@ export function HoursWorkedChart({
 				/>
 				<YAxis domain={[0, 'auto']} />
 				<Bar barSize={100} dataKey="hours">
-					{hours.map((entry, index) => (
-						<Cell fill={entry.fill} key={`cell-${index}`} />
+					{hours.map((entry) => (
+						<Cell fill={entry.fill} key={entry.date} />
 					))}
 				</Bar>
 				<ChartTooltip
