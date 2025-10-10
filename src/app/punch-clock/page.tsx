@@ -6,22 +6,26 @@ import { OrganizationSwitcher, SignedIn, UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 
 export default async function Page() {
-    const timeCard = await getTimeCard()
-    return (
-        <BorderBox>
-            <SignedIn>
-                <div className="flex text-white justify-center">
-                    <UserButton />
-                    <OrganizationSwitcher />
-                </div>
-                <div className="flex justify-end ">
-                    <Link href="/hours-worked">
-                        <Button>Hours Worked</Button>
-                    </Link>
-                </div>
-            </SignedIn>
-            <TimeInput disabled={!!timeCard} clockInTime={timeCard?.time_in} />
-            <TimeInput punchOut disabled={!timeCard} clockInTime={timeCard?.time_in} />
-        </BorderBox>
-    );
+	const timeCard = await getTimeCard();
+	return (
+		<BorderBox>
+			<SignedIn>
+				<div className="flex text-white justify-center">
+					<UserButton />
+					<OrganizationSwitcher />
+				</div>
+				<div className="flex justify-end ">
+					<Link href="/hours-worked">
+						<Button>Hours Worked</Button>
+					</Link>
+				</div>
+			</SignedIn>
+			<TimeInput disabled={!!timeCard} clockInTime={timeCard?.time_in} />
+			<TimeInput
+				punchOut
+				disabled={!timeCard}
+				clockInTime={timeCard?.time_in}
+			/>
+		</BorderBox>
+	);
 }

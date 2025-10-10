@@ -1,22 +1,23 @@
 import { auth, clerkClient } from "@clerk/nextjs/server";
 import { OrgMember } from "../types/org-members";
 
-
 export async function fetchOrgMembers(): Promise<OrgMember[]> {
-    const { orgId } = await auth.protect();
+	const { orgId } = await auth.protect();
 
-    if (!orgId) throw new Error("No org")
+	if (!orgId) throw new Error("No org");
 
-    const clerk = await clerkClient()
+	const clerk = await clerkClient();
 
-    const members = await clerk.organizations.getOrganizationMembershipList({ organizationId: orgId });
+	const members = await clerk.organizations.getOrganizationMembershipList({
+		organizationId: orgId,
+	});
 
-    // Filter to only include user names and IDs
-    const membersInfo = members.data.map(member => ({
-        userId: member.publicUserData?.userId ?? "",
-        firstName: member.publicUserData?.firstName ?? "",
-        lastName: member.publicUserData?.lastName ?? "",
-    }));
+	// Filter to only include user names and IDs
+	const membersInfo = members.data.map((member) => ({
+		userId: member.publicUserData?.userId ?? "",
+		firstName: member.publicUserData?.firstName ?? "",
+		lastName: member.publicUserData?.lastName ?? "",
+	}));
 
-    return membersInfo.filter(member => member.userId !== "")
+	return membersInfo.filter((member) => member.userId !== "");
 }

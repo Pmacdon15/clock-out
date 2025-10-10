@@ -1,14 +1,14 @@
 import { useMutation } from "@tanstack/react-query";
-import { punchInOrOutAction } from "../actions/punch-clock";
 import { revalidatePathAction } from "../actions/revalidate";
+import { editHours } from "../actions/edit-hours";
 
 export const usePunchClock = () => {
 	return useMutation({
-		mutationFn: (punchOut: boolean) => {
-			return punchInOrOutAction(punchOut);
+		mutationFn: (formData: FormData) => {
+			return editHours(formData);
 		},
 		onSuccess: () => {
-			revalidatePathAction("/punch-clock");
+			revalidatePathAction("/admin/edit-hours");
 		},
 		onError: (error) => {
 			console.error("Mutation error:", error);
