@@ -32,8 +32,8 @@ export default async function Page(props: PageProps<'/admin/edit-hours'>) {
 			</Suspense>
 			<Suspense>
 				<WeekSelector
-					weeksPromise={weeksPromise}
 					variant="/admin/edit-hours"
+					weeksPromise={weeksPromise}
 				/>
 			</Suspense>
 			<Suspense>

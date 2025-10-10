@@ -95,6 +95,11 @@ export async function getTimeCardsDb(
 	}
 }
 
+interface HoursWorkedRow {
+	date: string
+	hours: string
+}
+
 export async function getHoursWorkedDb(
 	userId: string,
 	orgId: string,
@@ -109,7 +114,7 @@ export async function getHoursWorkedDb(
 		const endDate = new Date(startDate)
 		endDate.setDate(endDate.getDate() + 6) // Sunday
 
-		const result = await sql`
+		const result = (await sql`
             SELECT
                 DATE(time_in) as date,
                 SUM(EXTRACT(EPOCH FROM (time_out - time_in))) / 3600 as hours
@@ -119,9 +124,9 @@ export async function getHoursWorkedDb(
               AND DATE(time_in) <= ${endDate.toISOString().split('T')[0]}
             GROUP BY DATE(time_in)
             ORDER BY date;
-        `
+        `) as HoursWorkedRow[]
 
-		return result.map((row: any) => {
+		return result.map((row) => {
 			const hours = parseFloat(row.hours)
 			const lightness = Math.max(30, 60 - hours * 3)
 			return {
@@ -129,9 +134,9 @@ export async function getHoursWorkedDb(
 				hours,
 				fill: `hsl(220, 80%, ${lightness}%)`,
 			}
-		}) as HoursWorked[]
+		})
 	} else {
-		const result = await sql`
+		const result = (await sql`
             SELECT
                 DATE(time_in) as date,
                 SUM(EXTRACT(EPOCH FROM (time_out - time_in))) / 3600 as hours
@@ -139,9 +144,9 @@ export async function getHoursWorkedDb(
             WHERE user_id = ${userId} AND org_id = ${orgId} AND time_out IS NOT NULL
             GROUP BY DATE(time_in)
             ORDER BY date;
-        `
+        `) as HoursWorkedRow[]
 
-		return result.map((row: any) => {
+		return result.map((row) => {
 			const hours = parseFloat(row.hours)
 			const lightness = Math.max(30, 60 - hours * 3)
 			return {
@@ -149,8 +154,14 @@ export async function getHoursWorkedDb(
 				hours,
 				fill: `hsl(220, 80%, ${lightness}%)`,
 			}
-		}) as HoursWorked[]
+		})
 	}
+}
+
+interface WeekRow {
+	year: string
+	week: string
+	week_start_date: string
 }
 
 export async function getAllWeeksWithWorkDb(
@@ -158,7 +169,7 @@ export async function getAllWeeksWithWorkDb(
 	orgId: string,
 ): Promise<Week[]> {
 	const sql = neon(process.env.DATABASE_URL || '')
-	const result = await sql`
+	const result = (await sql`
         SELECT DISTINCT
             to_char(time_in, 'IYYY') as year,
             to_char(time_in, 'IW') as week,
@@ -166,9 +177,9 @@ export async function getAllWeeksWithWorkDb(
         FROM time_clock
         WHERE user_id = ${userId} AND org_id = ${orgId} AND time_out IS NOT NULL
         ORDER BY year DESC, week DESC;
-    `
+    `) as WeekRow[]
 
-	return result.map((row: any) => {
+	return result.map((row) => {
 		const year = row.year
 		const week = String(row.week).padStart(2, '0')
 		const value = `${year}-W${week}`
@@ -183,18 +194,13 @@ export async function getAllWeeksWithWorkDb(
 	})
 }
 
-interface Row {
-	month: string
-	month_number: number
-	hours: string
-}
 
 export async function getHoursWorkedByYearDb(
 	userId: string,
 	orgId: string,
 	year?: number,
 ): Promise<MonthlyHours[]> {
-	const sql = neon(process.env.DATABASE_URL!)
+	const sql = neon(process.env.DATABASE_URL || '')
 	const currentYear = new Date().getFullYear()
 	const targetYear = year ?? currentYear
 
