@@ -3,7 +3,7 @@
 import { Bar, BarChart, XAxis, YAxis } from 'recharts'
 import { Card, CardContent, CardHeader, CardTitle } from '../card'
 import {
-	ChartConfig,
+	type ChartConfig,
 	ChartContainer,
 	ChartTooltip,
 	ChartTooltipContent,
@@ -24,18 +24,18 @@ export default function HoursWorkedChartFallback() {
 			<CardContent>
 				<div>
 					<div className="mb-4">
-						<label htmlFor="week-select" className="mr-2">
+						<label className="mr-2" htmlFor="week-select">
 							Filter by week:
 						</label>
-						<select id="week-select" className="border p-1 rounded">
+						<select className="border p-1 rounded" id="week-select">
 							<option value={''}>Select a Week</option>
 						</select>
 					</div>
 					<div className="h-96">
 						<ChartContainer
+							className="h-full aspect-auto"
 							config={chartConfig}
 							id="hours-worked-chart"
-							className="h-full aspect-auto"
 						>
 							<BarChart data={[]}>
 								<XAxis
@@ -45,10 +45,10 @@ export default function HoursWorkedChartFallback() {
 									}
 								/>
 								<YAxis domain={[0, 'auto']} />
-								<Bar dataKey="hours" barSize={100}></Bar>
+								<Bar barSize={100} dataKey="hours"></Bar>
 								<ChartTooltip
-									cursor={false}
 									content={<ChartTooltipContent />}
+									cursor={false}
 								/>
 							</BarChart>
 						</ChartContainer>

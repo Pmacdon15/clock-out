@@ -1,17 +1,17 @@
+import { OrganizationSwitcher, UserButton } from '@clerk/nextjs'
+import Link from 'next/link'
+import { Suspense } from 'react'
 import { Button } from '@/components/ui/button'
+import { CardSkeleton } from '@/components/ui/card'
 import HoursWorkedFilterFallback from '@/components/ui/fallbacks/hours-worked-filter-fallback'
+import { HoursWorkedContainer } from '@/components/ui/hours-worked/hours-worked'
+import { YearlyHoursWorked } from '@/components/ui/hours-worked/yearly-hours-worked'
 import {
 	getAllWeeksWithWork,
 	getHoursWorked,
 	getHoursWorkedByYear,
 } from '@/lib/DAL/punch-clock'
 import { getWeekNumber } from '@/lib/utils/utils'
-import { OrganizationSwitcher, UserButton } from '@clerk/nextjs'
-import Link from 'next/link'
-import { Suspense } from 'react'
-import { CardSkeleton } from '@/components/ui/card'
-import { YearlyHoursWorked } from '@/components/ui/hours-worked/yearly-hours-worked'
-import { HoursWorkedContainer } from '@/components/ui/hours-worked/hours-worked'
 
 export default async function HoursWorkedPage(
 	props: PageProps<'/hours-worked'>,
@@ -53,8 +53,8 @@ export default async function HoursWorkedPage(
 			<div className="p-2 w-full md:w-5/6">
 				<Suspense fallback={<CardSkeleton />}>
 					<YearlyHoursWorked
-						hoursWorkedByYearPromise={hoursWorkedByYearPromise}
 						currentYear={currentYear}
+						hoursWorkedByYearPromise={hoursWorkedByYearPromise}
 					/>
 				</Suspense>
 			</div>

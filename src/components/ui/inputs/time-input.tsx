@@ -1,10 +1,10 @@
 'use client'
 import { Label } from '@radix-ui/react-label'
-import { Input } from '../input'
-import { useEffect, useState } from 'react'
-import { Tooltip, TooltipContent, TooltipTrigger } from '../tooltip'
-import PunchClockButton from '../buttons/punch-clock'
 import { Clock } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import PunchClockButton from '../buttons/punch-clock'
+import { Input } from '../input'
+import { Tooltip, TooltipContent, TooltipTrigger } from '../tooltip'
 
 export default function TimeInput({
 	punchOut = false,
@@ -41,30 +41,30 @@ export default function TimeInput({
 					<Label className="px-1 text-gray-400">Time Worked:</Label>
 					<div className="flex items-center gap-2">
 						<Input
+							className="w-30"
+							disabled
+							readOnly
 							type="text"
 							value={elapsedTime}
-							readOnly
-							disabled
-							className="w-30"
 						/>
 						<Clock size={28} />
 					</div>
 				</>
 			)}
 			<Label
-				htmlFor="time-picker"
 				className={`px-1 ${disabled ? 'text-gray-400' : ''}`}
+				htmlFor="time-picker"
 			>
 				{punchOut ? 'Punch Out Time:' : 'Punch In Time:'}
 			</Label>
 			<div className="flex items-center gap-2">
 				<Input
-					type="text"
-					id="time-picker"
-					value={displayTime}
-					readOnly
-					disabled={disabled}
 					className={`bg-background appearance-none w-30 ${disabled ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : ''}`}
+					disabled={disabled}
+					id="time-picker"
+					readOnly
+					type="text"
+					value={displayTime}
 				/>
 				<Clock size={28} />
 			</div>

@@ -1,17 +1,17 @@
 import { auth } from '@clerk/nextjs/server'
 import {
-	HoursWorked,
-	MonthlyHours,
-	TimeCard,
-	Week,
-} from '../types/punch-clock-types'
-import {
 	getAllWeeksWithWorkDb,
 	getHoursWorkedByYearDb,
 	getHoursWorkedDb,
 	getTimeCardDb,
 	getTimeCardsDb,
 } from '../DB/punch-clock-db'
+import type {
+	HoursWorked,
+	MonthlyHours,
+	TimeCard,
+	Week,
+} from '../types/punch-clock-types'
 
 export async function getTimeCard(): Promise<TimeCard | null> {
 	const { userId, orgId } = await auth.protect()
@@ -31,7 +31,7 @@ export async function getEmployeeTimeCards(
 	employeeId?: string,
 ): Promise<TimeCard[] | null> {
 	const { userId, orgId } = await auth.protect()
-	let idToUse
+	let idToUse: string
 	if (employeeId) idToUse = employeeId
 	else idToUse = userId
 
@@ -74,7 +74,7 @@ export async function getAllWeeksWithWorkForEmployee(
 	employeeId?: string,
 ): Promise<Week[]> {
 	const { userId, orgId } = await auth.protect()
-	let idToSubmit
+	let idToSubmit: string
 	if (!employeeId) idToSubmit = userId
 	else idToSubmit = employeeId
 

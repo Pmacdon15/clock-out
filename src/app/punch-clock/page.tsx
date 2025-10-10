@@ -1,9 +1,9 @@
+import { OrganizationSwitcher, SignedIn, UserButton } from '@clerk/nextjs'
+import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import BorderBox from '@/components/ui/containers/border-box'
 import TimeInput from '@/components/ui/inputs/time-input'
 import { getTimeCard } from '@/lib/DAL/punch-clock'
-import { OrganizationSwitcher, SignedIn, UserButton } from '@clerk/nextjs'
-import Link from 'next/link'
 
 export default async function Page() {
 	const timeCard = await getTimeCard()
@@ -20,11 +20,11 @@ export default async function Page() {
 					</Link>
 				</div>
 			</SignedIn>
-			<TimeInput disabled={!!timeCard} clockInTime={timeCard?.time_in} />
+			<TimeInput clockInTime={timeCard?.time_in} disabled={!!timeCard} />
 			<TimeInput
-				punchOut
-				disabled={!timeCard}
 				clockInTime={timeCard?.time_in}
+				disabled={!timeCard}
+				punchOut
 			/>
 		</BorderBox>
 	)

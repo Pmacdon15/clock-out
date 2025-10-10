@@ -12,12 +12,12 @@ import {
 	CardTitle,
 } from '@/components/ui/card'
 import {
-	ChartConfig,
+	type ChartConfig,
 	ChartContainer,
 	ChartTooltip,
 	ChartTooltipContent,
 } from '@/components/ui/chart'
-import { MonthlyHours } from '@/lib/types/punch-clock-types'
+import type { MonthlyHours } from '@/lib/types/punch-clock-types'
 
 const chartConfig = {
 	hours: {
@@ -77,8 +77,8 @@ export function YearlyHoursChart({
 			</CardHeader>
 			<CardContent>
 				<ChartContainer
-					config={chartConfig}
 					className="aspect-auto h-96 w-full"
+					config={chartConfig}
 				>
 					<AreaChart
 						accessibilityLayer
@@ -92,23 +92,23 @@ export function YearlyHoursChart({
 						<CartesianGrid vertical={false} />
 						<YAxis domain={[0, 'auto']} />
 						<XAxis
-							dataKey="month"
-							tickLine={false}
 							axisLine={false}
-							tickMargin={8}
+							dataKey="month"
 							tickFormatter={(value) => value.slice(0, 3)}
+							tickLine={false}
+							tickMargin={8}
 						/>
 						<ChartTooltip
-							cursor={false}
 							content={<ChartTooltipContent indicator="line" />}
+							cursor={false}
 						/>
 						<Area
+							baseLine={0}
 							dataKey="hours"
-							type="monotoneX"
 							fill="var(--color-hours)"
 							fillOpacity={0.4}
 							stroke="var(--color-hours)"
-							baseLine={0}
+							type="monotoneX"
 						/>
 					</AreaChart>
 				</ChartContainer>

@@ -1,8 +1,8 @@
+import { OrganizationSwitcher, UserButton } from '@clerk/nextjs'
+import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import HoursWorkedChartFallback from '@/components/ui/fallbacks/hours-worked-chart-fallbacl'
 import YearlyHoursWorkedFallback from '@/components/ui/fallbacks/yesr-hours-worked-chart-fallback'
-import { OrganizationSwitcher, UserButton } from '@clerk/nextjs'
-import Link from 'next/link'
 
 export default function Loading() {
 	return (

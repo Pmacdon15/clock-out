@@ -8,7 +8,7 @@ export default function BlueTextLink({
 	text: string
 }) {
 	return (
-		<Link href={`${path}`} className="text-blue-500 hover:underline">
+		<Link className="text-blue-500 hover:underline" href={`${path}`}>
 			{text}
 		</Link>
 	)

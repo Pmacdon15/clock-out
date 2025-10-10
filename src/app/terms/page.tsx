@@ -1,9 +1,9 @@
-import TermsContainer from '@/components/ui/containers/terms-container'
-import BackHomeLink from '@/components/ui/links/back-home-link'
 import fs from 'fs/promises'
 import path from 'path'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
+import TermsContainer from '@/components/ui/containers/terms-container'
+import BackHomeLink from '@/components/ui/links/back-home-link'
 
 async function getTermsContent() {
 	const filePath = path.join(process.cwd(), 'TERMS_OF_SERVICE.md')

@@ -12,9 +12,9 @@ export default function PunchClockButton({
 
 	return (
 		<Button
-			variant={'outline'}
 			disabled={isPending || disabled}
 			onClick={() => mutate(punchOut)}
+			variant={'outline'}
 		>
 			{punchOut ? 'Punch Out' : 'Punch In'}
 		</Button>

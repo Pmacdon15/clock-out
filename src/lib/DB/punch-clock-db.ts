@@ -194,7 +194,6 @@ export async function getAllWeeksWithWorkDb(
 	})
 }
 
-
 export async function getHoursWorkedByYearDb(
 	userId: string,
 	orgId: string,

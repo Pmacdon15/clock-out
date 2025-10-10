@@ -1,9 +1,9 @@
 'use client'
 
-import { Week } from '@/lib/types/punch-clock-types'
-import { useHandleParamChange } from '@/lib/utils/filter-utils'
 import { useSearchParams } from 'next/navigation'
 import { use } from 'react'
+import type { Week } from '@/lib/types/punch-clock-types'
+import { useHandleParamChange } from '@/lib/utils/filter-utils'
 import {
 	Select,
 	SelectContent,
@@ -30,7 +30,7 @@ export function WeekSelector({
 
 	return (
 		<div className="mb-4 flex gap-4 items-center">
-			<label htmlFor="week-select" className="mr-2">
+			<label className="mr-2" htmlFor="week-select">
 				Filter by week:
 			</label>
 			<Select

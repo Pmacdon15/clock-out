@@ -1,9 +1,9 @@
 'use client'
 
-import { HoursWorkedChart } from '@/components/ui/charts/hours-worked-chart'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { HoursWorkedChart } from '@/components/ui/charts/hours-worked-chart'
+import type { HoursWorked, Week } from '@/lib/types/punch-clock-types'
 import { WeekSelector } from '../filters/week-selector'
-import { HoursWorked, Week } from '@/lib/types/punch-clock-types'
 
 interface HoursWorkedFilterProps {
 	hoursPromise: Promise<HoursWorked[]>
@@ -25,8 +25,8 @@ export function HoursWorkedContainer({
 					<WeekSelector weeksPromise={weeksPromise} />
 					<div className="h-96">
 						<HoursWorkedChart
-							hoursPromise={hoursPromise}
 							className="h-full aspect-auto"
+							hoursPromise={hoursPromise}
 						/>
 					</div>
 				</div>

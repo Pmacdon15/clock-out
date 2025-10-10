@@ -1,6 +1,6 @@
+import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import TimeInput from '@/components/ui/inputs/time-input'
-import Link from 'next/link'
 
 export default function Loading() {
 	return (
@@ -13,7 +13,7 @@ export default function Loading() {
 					</Link>
 				</div>
 				<TimeInput disabled={false} />
-				<TimeInput punchOut disabled={true} />
+				<TimeInput disabled={true} punchOut />
 			</div>
 		</div>
 	)

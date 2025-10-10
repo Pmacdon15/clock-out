@@ -1,4 +1,4 @@
-import { TimeCard, Week } from '@/lib/types/punch-clock-types'
+import { type TimeCard, Week } from '@/lib/types/punch-clock-types'
 import ListItemEditHours from './list-item-edit-hours'
 
 export default async function EditHoursList({
@@ -11,7 +11,7 @@ export default async function EditHoursList({
 		<ul className="divide-y divide-gray-200">
 			{hours &&
 				hours.map((entry) => (
-					<ListItemEditHours key={entry.id} entry={entry} />
+					<ListItemEditHours entry={entry} key={entry.id} />
 				))}
 		</ul>
 	)

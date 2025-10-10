@@ -1,5 +1,7 @@
 'use client'
-import { OrgMember } from '@/lib/types/org-members'
+import { use } from 'react'
+import type { OrgMember } from '@/lib/types/org-members'
+import { useHandleParamChange } from '@/lib/utils/filter-utils'
 import {
 	Select,
 	SelectContent,
@@ -9,8 +11,6 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '../select'
-import { use } from 'react'
-import { useHandleParamChange } from '@/lib/utils/filter-utils'
 
 export default function OrgMembersFilter({
 	orgMemberPromise,

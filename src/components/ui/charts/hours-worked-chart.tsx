@@ -1,14 +1,14 @@
 'use client'
 
+import { use } from 'react'
+import { Bar, BarChart, Cell, XAxis, YAxis } from 'recharts'
+import type { HoursWorked } from '@/lib/types/punch-clock-types'
 import {
+	type ChartConfig,
 	ChartContainer,
 	ChartTooltip,
 	ChartTooltipContent,
-	ChartConfig,
 } from '../chart'
-import { Bar, BarChart, Cell, XAxis, YAxis } from 'recharts'
-import { use } from 'react'
-import { HoursWorked } from '@/lib/types/punch-clock-types'
 
 const chartConfig = {
 	hours: {
@@ -26,9 +26,9 @@ export function HoursWorkedChart({
 	const hours = use(hoursPromise)
 	return (
 		<ChartContainer
+			className={className}
 			config={chartConfig}
 			id="hours-worked-chart"
-			className={className}
 		>
 			<BarChart data={hours}>
 				<XAxis
@@ -38,14 +38,14 @@ export function HoursWorkedChart({
 					}
 				/>
 				<YAxis domain={[0, 'auto']} />
-				<Bar dataKey="hours" barSize={100}>
+				<Bar barSize={100} dataKey="hours">
 					{hours.map((entry, index) => (
-						<Cell key={`cell-${index}`} fill={entry.fill} />
+						<Cell fill={entry.fill} key={`cell-${index}`} />
 					))}
 				</Bar>
 				<ChartTooltip
-					cursor={false}
 					content={<ChartTooltipContent />}
+					cursor={false}
 				/>
 			</BarChart>
 		</ChartContainer>

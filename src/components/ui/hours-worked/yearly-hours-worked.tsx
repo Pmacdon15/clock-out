@@ -1,5 +1,5 @@
 import { YearlyHoursChart } from '@/components/ui/charts/yearly-hours-chart'
-import { MonthlyHours } from '@/lib/types/punch-clock-types'
+import type { MonthlyHours } from '@/lib/types/punch-clock-types'
 
 interface YearlyHoursWorkedProps {
 	hoursWorkedByYearPromise: Promise<MonthlyHours[]>

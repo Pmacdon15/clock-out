@@ -9,12 +9,12 @@ export default function HoursWorkedFilterFallback() {
 			<CardContent>
 				<div>
 					<div className="mb-4">
-						<label htmlFor="week-select" className="mr-2">
+						<label className="mr-2" htmlFor="week-select">
 							Filter by week:
 						</label>
 						<select
-							id="week-select"
 							className="border p-1 rounded"
+							id="week-select"
 						></select>
 					</div>
 					<div className="h-96"></div>

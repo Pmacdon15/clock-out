@@ -3,10 +3,10 @@ import { dark } from '@clerk/themes'
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
-import Header from '@/components/ui/headers/layout-header'
-import { Providers } from '../components/providers'
 import { Analytics } from '@vercel/analytics/next'
 import PageContainer from '@/components/ui/containers/page-container'
+import Header from '@/components/ui/headers/layout-header'
+import { Providers } from '../components/providers'
 export const experimental_ppr = true
 
 const geistSans = Geist({

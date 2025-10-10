@@ -7,8 +7,8 @@ import {
 	UserButton,
 } from '@clerk/nextjs'
 import { Suspense } from 'react'
-import LinkWithPath from '../components/ui/links/link'
 import BlueTextLink from '@/components/ui/links/blue-text-link'
+import LinkWithPath from '../components/ui/links/link'
 
 export default function Home() {
 	return (

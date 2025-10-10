@@ -52,15 +52,15 @@ function ChartContainer({
 	return (
 		<ChartContext.Provider value={{ config }}>
 			<div
-				data-slot="chart"
-				data-chart={chartId}
 				className={cn(
 					"[&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border/50 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&_.recharts-reference-line_[stroke='#ccc']]:stroke-border flex aspect-video justify-center text-xs [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-hidden [&_.recharts-sector]:outline-hidden [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-surface]:outline-hidden",
 					className,
 				)}
+				data-chart={chartId}
+				data-slot="chart"
 				{...props}
 			>
-				<ChartStyle id={chartId} config={config} />
+				<ChartStyle config={config} id={chartId} />
 				<RechartsPrimitive.ResponsiveContainer>
 					{children}
 				</RechartsPrimitive.ResponsiveContainer>
@@ -193,11 +193,11 @@ function ChartTooltipContent({
 
 						return (
 							<div
-								key={item.dataKey}
 								className={cn(
 									'[&>svg]:text-muted-foreground flex w-full flex-wrap items-stretch gap-2 [&>svg]:h-2.5 [&>svg]:w-2.5',
 									indicator === 'dot' && 'items-center',
 								)}
+								key={item.dataKey}
 							>
 								{formatter &&
 								item?.value !== undefined &&
@@ -317,10 +317,10 @@ function ChartLegendContent({
 
 					return (
 						<div
-							key={item.value}
 							className={cn(
 								'[&>svg]:text-muted-foreground flex items-center gap-1.5 [&>svg]:h-3 [&>svg]:w-3',
 							)}
+							key={item.value}
 						>
 							{itemConfig?.icon && !hideIcon ? (
 								<itemConfig.icon />
