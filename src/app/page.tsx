@@ -8,6 +8,7 @@ import {
 } from '@clerk/nextjs'
 import { Suspense } from 'react'
 import BlueTextLink from '@/components/ui/links/blue-text-link'
+import EditHoursLink from '@/components/ui/links/edit-hours-link'
 import LinkWithPath from '../components/ui/links/link'
 
 export default function Home() {
@@ -54,6 +55,7 @@ export default function Home() {
 									path={'/hours-worked'}
 									text={'Hours Worked'}
 								/>
+								<Suspense><EditHoursLink /></Suspense>
 							</nav>
 						</div>
 					</div>

@@ -1,8 +1,9 @@
 import { OrganizationSwitcher, SignedIn, UserButton } from '@clerk/nextjs'
-import Link from 'next/link'
-import { Button } from '@/components/ui/button'
+import { Suspense } from 'react'
 import BorderBox from '@/components/ui/containers/border-box'
 import TimeInput from '@/components/ui/inputs/time-input'
+import EditHoursLink from '@/components/ui/links/edit-hours-link'
+import LinkWithPath from '@/components/ui/links/link'
 import { getTimeCard } from '@/lib/DAL/punch-clock'
 
 export default async function Page() {
@@ -14,10 +15,14 @@ export default async function Page() {
 					<UserButton />
 					<OrganizationSwitcher />
 				</div>
-				<div className="flex justify-end ">
-					<Link href="/hours-worked">
-						<Button>Hours Worked</Button>
-					</Link>
+				<div className="flex justify-end gap-4">
+					<Suspense>
+						<EditHoursLink />
+					</Suspense>
+					<LinkWithPath
+						path={'/hours-worked'}
+						text={'Hours Worked'}
+					/>
 				</div>
 			</SignedIn>
 			<TimeInput clockInTime={timeCard?.time_in} disabled={!!timeCard} />
