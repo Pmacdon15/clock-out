@@ -1,6 +1,6 @@
 'use client'
 import { Edit } from 'lucide-react'
-import { useState } from 'react'
+import { Activity, useState } from 'react'
 import type { TimeCard } from '@/lib/types/punch-clock-types'
 import EditHoursButton from '../buttons/edit-hours-button'
 import { Input } from '../input'
@@ -19,21 +19,22 @@ export default function ListItemEditHours({
 			key={entry.id}
 		>
 			<div className="col-span-2 lg:col-span-4">
-				{!editHoursState && entry.time_out && (
-					
+				{/* Display times  */}
+				<Activity mode={!editHoursState ? 'visible' : 'hidden'}>
 					<DisplayTimes
 						timeIn={entry.time_in}
 						timeOut={entry.time_out}
 					/>
-				)}
-				{editHoursState && entry.time_out && (
+				</Activity>
+				{/* Display form for editing */}
+				<Activity mode={editHoursState ? 'visible' : 'hidden'}>
 					<EditTimeForm
 						id={entry.id}
 						onSuccess={() => setEditHours(false)}
 						timeIn={entry.time_in}
 						timeOut={entry.time_out}
 					/>
-				)}
+				</Activity>
 			</div>
 			<div className="col-span-1 lg:col-span-1 mt-4 lg:mt-0 text-left">
 				<p className="text-sm text-gray-500">
@@ -60,7 +61,13 @@ export default function ListItemEditHours({
 	)
 }
 
-function DisplayTimes({ timeIn, timeOut }: { timeIn: Date; timeOut: Date }) {
+function DisplayTimes({
+	timeIn,
+	timeOut,
+}: {
+	timeIn: Date
+	timeOut?: Date | null
+}) {
 	return (
 		<div className="grid grid-cols-2 gap-4">
 			<p className="text-sm text-gray-500">
@@ -83,7 +90,7 @@ function EditTimeForm({
 }: {
 	id: number
 	timeIn: Date
-	timeOut: Date
+	timeOut?: Date | null
 	onSuccess: () => void
 }) {
 	return (
