@@ -109,7 +109,7 @@ function EditTimeForm({
 				className="w-full"
 				defaultValue={formatDateForInput(new Date(timeIn))}
 				name="time_in"
-				type="datetime"
+				type="datetime-local"
 			/>
 			<Input
 				className="w-full"
@@ -117,7 +117,7 @@ function EditTimeForm({
 					timeOut ? formatDateForInput(new Date(timeOut)) : ''
 				}
 				name="time_out"
-				type="datetime"
+				type="datetime-local"
 			/>
 			<EditHoursButton onSuccess={() => onSuccess()} punchClockId={id} />
 		</form>
