@@ -16,6 +16,7 @@ export async function editHours(formData: FormData, punchClockId: number) {
 		time_out: formData.get('time_out'),
 	})
 
+	console.log("time_in", validatedFields.data?.time_in)
 	if (!validatedFields.success) {
 		return {
 			error: validatedFields.error.flatten().fieldErrors,
