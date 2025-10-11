@@ -3,7 +3,7 @@ import { auth } from '@clerk/nextjs/server'
 import { updatePunchClock } from '../DB/edit-hours'
 import { EditHoursSchema } from '../zod/edit-hours'
 
-export async function editHours(formData: FormData) {
+export async function editHours(formData: FormData, punchClockId: number) {
 	const { orgId } = await auth.protect()
 
 	if (!orgId) {
@@ -11,7 +11,7 @@ export async function editHours(formData: FormData) {
 	}
 
 	const validatedFields = EditHoursSchema.safeParse({
-		id: Number(formData.get('id')),
+		id: punchClockId,
 		time_in: formData.get('time_in'),
 		time_out: formData.get('time_out'),
 	})

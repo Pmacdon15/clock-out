@@ -2,10 +2,10 @@ import { useMutation } from '@tanstack/react-query'
 import { editHours } from '../actions/edit-hours'
 import { revalidatePathAction } from '../actions/revalidate'
 
-export const usePunchClock = () => {
+export const useEditHours = () => {
 	return useMutation({
-		mutationFn: (formData: FormData) => {
-			return editHours(formData)
+		mutationFn: ({formData, punchClockId}:{formData: FormData, punchClockId: number}) => {
+			return editHours(formData, punchClockId)
 		},
 		onSuccess: () => {
 			revalidatePathAction('/admin/edit-hours')

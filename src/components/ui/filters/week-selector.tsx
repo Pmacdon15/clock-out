@@ -45,8 +45,11 @@ export function WeekSelector({
 				<SelectContent>
 					<SelectGroup>
 						<SelectLabel>Weeks</SelectLabel>
-						{weeks.map((week) => (
-							<SelectItem key={week.value} value={week.value}>
+						{weeks.map((week, index) => (
+							<SelectItem
+								key={`${week.value}-${index}`}
+								value={week.value}
+							>
 								{week.label}
 							</SelectItem>
 						))}

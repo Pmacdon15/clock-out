@@ -2,7 +2,7 @@
 import { Edit } from 'lucide-react'
 import { useState } from 'react'
 import type { TimeCard } from '@/lib/types/punch-clock-types'
-import { Button } from '../button'
+import EditHoursButton from '../buttons/edit-hours-button'
 import { Input } from '../input'
 
 export default function ListItemEditHours({
@@ -56,13 +56,14 @@ export default function ListItemEditHours({
 							name="time_out"
 							type="datetime-local"
 						/>
-						<Button
+						{/* <Button
 							className="w-full lg:w-auto"
 							type="submit"
 							variant={'outline'}
 						>
 							Save
-						</Button>
+						</Button> */}
+						<EditHoursButton punchClockId={entry.id} />
 					</form>
 				)}
 			</div>
