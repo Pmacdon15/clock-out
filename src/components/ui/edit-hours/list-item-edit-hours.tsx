@@ -11,6 +11,14 @@ export default function ListItemEditHours({
 	key: number
 	entry: TimeCard
 }) {
+	function formatDateForInput(date: Date) {
+		const year = date.getFullYear()
+		const month = String(date.getMonth() + 1).padStart(2, '0')
+		const day = String(date.getDate()).padStart(2, '0')
+		const hour = String(date.getHours()).padStart(2, '0')
+		const minute = String(date.getMinutes()).padStart(2, '0')
+		return `${year}-${month}-${day}T${hour}:${minute}`
+	}
 	const [editHoursState, setEditHours] = useState(false)
 
 	return (
@@ -31,16 +39,12 @@ export default function ListItemEditHours({
 						</p>
 					</div>
 				) : (
-					<form
-						// action={editHours}
-						className="grid grid-cols-1 lg:grid-cols-3 gap-4"
-					>
-						<Input name="id" type="hidden" value={entry.id} />
+					<form className="grid grid-cols-1 lg:grid-cols-3 gap-4">						
 						<Input
 							className="w-full"
-							defaultValue={new Date(entry.time_in)
-								.toISOString()
-								.slice(0, 16)}
+							defaultValue={formatDateForInput(
+								new Date(entry.time_in),
+							)}
 							name="time_in"
 							type="datetime-local"
 						/>
@@ -48,22 +52,18 @@ export default function ListItemEditHours({
 							className="w-full"
 							defaultValue={
 								entry.time_out
-									? new Date(entry.time_out)
-											.toISOString()
-											.slice(0, 16)
+									? formatDateForInput(
+											new Date(entry.time_out),
+										)
 									: ''
 							}
 							name="time_out"
 							type="datetime-local"
 						/>
-						{/* <Button
-							className="w-full lg:w-auto"
-							type="submit"
-							variant={'outline'}
-						>
-							Save
-						</Button> */}
-						<EditHoursButton punchClockId={entry.id} />
+						<EditHoursButton
+							onSuccess={() => setEditHours(false)}
+							punchClockId={entry.id}
+						/>
 					</form>
 				)}
 			</div>
