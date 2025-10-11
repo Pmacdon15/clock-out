@@ -4,6 +4,7 @@ import { Activity, useState } from 'react'
 import type { TimeCard } from '@/lib/types/punch-clock-types'
 import EditHoursButton from '../buttons/edit-hours-button'
 import { Input } from '../input'
+import { formatTimeForDisplay } from '@/lib/utils/utils'
 
 export default function ListItemEditHours({
 	entry,
@@ -71,11 +72,11 @@ function DisplayTimes({
 	return (
 		<div className="grid grid-cols-2 gap-4">
 			<p className="text-sm text-gray-500">
-				{new Date(timeIn).toLocaleString()}
+				{new Date(timeIn).toLocaleDateString()} {formatTimeForDisplay(timeIn)}
 			</p>
 			<p className="text-sm text-gray-500">
 				{timeOut
-					? new Date(timeOut).toLocaleString()
+					? `${new Date(timeOut).toLocaleDateString()} ${formatTimeForDisplay(timeOut)}`
 					: 'Not punched out'}
 			</p>
 		</div>

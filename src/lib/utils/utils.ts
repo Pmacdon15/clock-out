@@ -18,3 +18,11 @@ export function getWeekNumber(
 	)
 	return [d.getUTCFullYear(), weekNo]
 }
+
+export function formatTimeForDisplay(date: Date): string {
+	return new Date(date).toLocaleTimeString('en-US', {
+		hour: '2-digit',
+		minute: '2-digit',
+		hour12: true,
+	})
+}
