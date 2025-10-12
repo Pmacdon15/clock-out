@@ -7,26 +7,24 @@ import {
 	UserButton,
 } from '@clerk/nextjs'
 import { Suspense } from 'react'
+import BorderBox from '@/components/ui/containers/border-box'
 import BlueTextLink from '@/components/ui/links/blue-text-link'
 import EditHoursLink from '@/components/ui/links/edit-hours-link'
 import LinkWithPath from '../components/ui/links/link'
 
 export default function Home() {
 	return (
-		<div className="min-h-screen bg-background text-foreground flex flex-col items-center p-8 gap-8">
-			<div className="rounded-xl p-1 bg-gradient-to-r from-blue-500 to-cyan-500 w-full max-w-4xl text-center mt-16 mb-8">
-				<div className="bg-black text-white rounded-lg p-8 shadow-lg">
-					<h1 className="text-4xl font-bold mb-4">
-						Welcome to Clock-Out
-					</h1>
-					<p className="text-xl max-w-2xl mx-auto">
-						Effortlessly track your working hours with our simple
-						and intuitive punch clock system. Stay organized,
-						monitor your productivity, and manage your time
-						effectively.
-					</p>
-				</div>
-			</div>
+		<>
+			<BorderBox>
+				<h1 className="text-4xl font-bold mb-4">
+					Welcome to Clock-Out
+				</h1>
+				<p className="text-xl max-w-2xl mx-auto">
+					Effortlessly track your working hours with our simple and
+					intuitive punch clock system. Stay organized, monitor your
+					productivity, and manage your time effectively.
+				</p>
+			</BorderBox>
 
 			<Suspense>
 				<SignedOut>
@@ -78,6 +76,7 @@ export default function Home() {
 					</nav>
 				</div>
 			</div>
-		</div>
+			{/* // </div> */}
+		</>
 	)
 }
