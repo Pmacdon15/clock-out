@@ -1,8 +1,12 @@
+import { Trash2 } from 'lucide-react'
+import { Button } from '../button'
 import DeleteHoursButton from '../buttons/delete-hours-button'
 import {
 	Dialog,
+	DialogClose,
 	DialogContent,
 	DialogDescription,
+	DialogFooter,
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
@@ -12,7 +16,7 @@ export default function DeleteHoursDialog() {
 	return (
 		<Dialog>
 			<DialogTrigger>
-				<DeleteHoursButton />
+				<Trash2 />
 			</DialogTrigger>
 			<DialogContent>
 				<DialogHeader>
@@ -23,6 +27,16 @@ export default function DeleteHoursDialog() {
 						servers.
 					</DialogDescription>
 				</DialogHeader>
+				<DialogFooter className="sm:justify-end">
+					<DialogClose asChild>
+						<div className='flex gap-2'>
+							<Button type="button" variant="secondary">
+								Cancel
+							</Button>
+							<DeleteHoursButton />
+						</div>
+					</DialogClose>
+				</DialogFooter>
 			</DialogContent>
 		</Dialog>
 	)
