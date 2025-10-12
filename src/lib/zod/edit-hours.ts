@@ -5,3 +5,7 @@ export const EditHoursSchema = z.object({
 	time_in: z.string(),
 	time_out: z.string().nullable(),
 })
+
+export const DeleteHoursSchema = z.object({
+	id: z.number(),	
+})

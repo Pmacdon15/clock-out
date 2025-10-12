@@ -81,7 +81,7 @@ A modern, intuitive time tracking application built with Next.js that helps you 
    yarn dev
    # or
    pnpm dev
-   # or
+   # orw
    bun dev
    ```
 

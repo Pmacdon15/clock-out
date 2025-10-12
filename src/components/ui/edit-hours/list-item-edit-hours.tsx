@@ -4,6 +4,7 @@ import { Activity, useState } from 'react'
 import type { TimeCard } from '@/lib/types/punch-clock-types'
 import { formatTimeForDisplay } from '@/lib/utils/utils'
 import EditHoursButton from '../buttons/edit-hours-button'
+import DeleteHoursDialog from '../dialogs/delete-hours-dialog'
 import { Input } from '../input'
 
 export default function ListItemEditHours({
@@ -49,7 +50,7 @@ export default function ListItemEditHours({
 						: 'N/A'}
 				</p>
 			</div>
-			<div className="col-span-1 lg:col-span-1 flex justify-end lg:justify-end mt-4 lg:mt-0">
+			<div className="col-span-1 lg:col-span-1 flex justify-end lg:justify-end mt-4 lg:mt-0 gap-2">
 				<button
 					className="p-2 rounded-full"
 					onClick={() => setEditHours(!editHoursState)}
@@ -57,6 +58,7 @@ export default function ListItemEditHours({
 				>
 					<Edit size={20} />
 				</button>
+				<DeleteHoursDialog hoursId={entry.id} />
 			</div>
 		</li>
 	)

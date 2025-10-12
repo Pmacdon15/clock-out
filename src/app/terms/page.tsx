@@ -12,6 +12,7 @@ async function getTermsContent() {
 }
 
 export default async function TermsPage() {
+	'use cache'
 	const termsContent = await getTermsContent()
 
 	return (

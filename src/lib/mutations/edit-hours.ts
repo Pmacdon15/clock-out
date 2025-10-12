@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query'
-import { editHours } from '../actions/edit-hours'
+import { deleteHours, editHours } from '../actions/edit-hours'
 import { revalidatePathAction } from '../actions/revalidate'
 
 export const useEditHours = ({
@@ -20,7 +20,7 @@ export const useEditHours = ({
 			return editHours(formData, punchClockId, timeZone)
 		},
 		onSuccess: () => {
-			revalidatePathAction('/admin/edit-hours')
+			revalidatePathAction('/admin/manage-hours')
 			onSuccess?.()
 		},
 		onError: (error) => {
@@ -28,3 +28,19 @@ export const useEditHours = ({
 		},
 	})
 }
+
+export const useDeleteHours = () => {
+	return useMutation({
+		mutationFn: (hoursId: number) => {
+			return deleteHours(hoursId)
+		},
+		onSuccess: () => {
+			revalidatePathAction('/admin/manage-hours')
+			revalidatePathAction('/hours-worked')
+		},
+		onError: (error) => {
+			console.error('Mutation error:', error)
+		},
+	})
+}
+

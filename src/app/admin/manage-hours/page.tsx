@@ -3,14 +3,14 @@ import BorderBox from '@/components/ui/containers/border-box'
 import EditHoursList from '@/components/ui/edit-hours/edit-hours-list'
 import OrgMembersFilter from '@/components/ui/filters/org-member-filter'
 import { WeekSelector } from '@/components/ui/filters/week-selector'
+import UserOrgHeader from '@/components/ui/headers/user-org-header'
 import { fetchOrgMembers } from '@/lib/DAL/org-members'
 import {
 	getAllWeeksWithWorkForEmployee,
 	getEmployeeTimeCards,
 } from '@/lib/DAL/punch-clock'
-import UserOrgHeader from '@/components/ui/headers/user-org-header'
 
-export default async function Page(props: PageProps<'/admin/edit-hours'>) {
+export default async function Page(props: PageProps<'/admin/manage-hours'>) {
 	const searchParams = await props.searchParams
 
 	const employeeIdValue = searchParams.employee
@@ -29,13 +29,13 @@ export default async function Page(props: PageProps<'/admin/edit-hours'>) {
 		<>
 			<UserOrgHeader editHours />
 			<BorderBox>
-				<h1 className="text-2xl font-bold mb-4">Edit Hours</h1>
+				<h1 className="text-2xl font-bold mb-4">Manage Hours</h1>
 				<Suspense>
 					<OrgMembersFilter orgMemberPromise={orgMembersPromise} />
 				</Suspense>
 				<Suspense>
 					<WeekSelector
-						variant="/admin/edit-hours"
+						variant="/admin/manage-hours"
 						weeksPromise={weeksPromise}
 					/>
 				</Suspense>

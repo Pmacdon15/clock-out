@@ -1,8 +1,8 @@
 'use server'
 import { auth } from '@clerk/nextjs/server'
 import moment from 'moment-timezone'
-import { updatePunchClock } from '@/lib/DB/edit-hours'
-import { EditHoursSchema } from '@/lib/zod/edit-hours'
+import { deletePunchClock, updatePunchClock } from '@/lib/DB/edit-hours'
+import { DeleteHoursSchema, EditHoursSchema } from '@/lib/zod/edit-hours'
 
 export async function editHours(
 	formData: FormData,
@@ -59,6 +59,33 @@ export async function editHours(
 
 	try {
 		await updatePunchClock(validatedFields.data)
+	} catch (error) {
+		console.error(error)
+		return {
+			error: 'Something went wrong',
+		}
+	}
+}
+
+export async function deleteHours(hoursId: number) {
+	const { orgId } = await auth.protect()
+
+	if (!orgId) {
+		return
+	}
+
+	const validatedFields = DeleteHoursSchema.safeParse({
+		id: hoursId,
+	})
+
+	if (!validatedFields.success) {
+		return {
+			error: validatedFields.error.flatten().fieldErrors,
+		}
+	}
+
+	try {
+		await deletePunchClock(validatedFields.data)
 	} catch (error) {
 		console.error(error)
 		return {

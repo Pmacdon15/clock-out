@@ -14,14 +14,15 @@ export default function TimeInput({
 	disabled: boolean
 	clockInTime?: Date
 }) {
-	const [currentTime, setCurrentTime] = useState(new Date())
+	const [currentTime, setCurrentTime] = useState<Date | null>(null)
 
 	useEffect(() => {
+		setCurrentTime(new Date())
 		const interval = setInterval(() => setCurrentTime(new Date()), 1000)
 		return () => clearInterval(interval)
 	}, [])
 
-	const formattedCurrentTime = formatTime(currentTime)
+	const formattedCurrentTime = currentTime ? formatTime(currentTime) : ''
 	const displayTime = punchOut
 		? formattedCurrentTime
 		: clockInTime
@@ -29,7 +30,7 @@ export default function TimeInput({
 			: formattedCurrentTime
 
 	const elapsedTime =
-		punchOut && clockInTime
+		punchOut && clockInTime && currentTime
 			? calculateElapsedTime(clockInTime, currentTime)
 			: ''
 
