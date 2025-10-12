@@ -1,9 +1,14 @@
 'use server'
 import { auth } from '@clerk/nextjs/server'
+import moment from 'moment-timezone'
 import { updatePunchClock } from '@/lib/DB/edit-hours'
 import { EditHoursSchema } from '@/lib/zod/edit-hours'
 
-export async function editHours(formData: FormData, punchClockId: number) {
+export async function editHours(
+	formData: FormData,
+	punchClockId: number,
+	timeZone: string,
+) {
 	const { orgId } = await auth.protect()
 
 	if (!orgId) {
@@ -25,9 +30,12 @@ export async function editHours(formData: FormData, punchClockId: number) {
 	let utcTimeOut: string | null = null
 
 	try {
-		utcTimeIn = new Date(timeIn).toISOString()
+		utcTimeIn = moment.tz(`${timeIn}:00`, timeZone).utc().toISOString()
 		if (timeOut) {
-			utcTimeOut = new Date(timeOut).toISOString()
+			utcTimeOut = moment
+				.tz(`${timeOut}:00`, timeZone)
+				.utc()
+				.toISOString()
 		}
 	} catch (error) {
 		console.error('Error converting time to UTC:', error)
