@@ -1,6 +1,6 @@
 import { clerkMiddleware } from '@clerk/nextjs/server'
 
-export default clerkMiddleware()
+export const proxy = clerkMiddleware()
 
 export const config = {
 	matcher: [
@@ -9,5 +9,5 @@ export const config = {
 		'/(punch-clock)(.*)',
 		'/(hours-worked)(.*)',
 	],
-	protectedRoutes: ['/punch-clock', 'hours-worked'],
+	protectedRoutes: ['/punch-clock', 'hours-worked', '/admin/edit-hours'],
 }
