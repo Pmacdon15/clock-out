@@ -66,3 +66,8 @@ export async function editHours(
 		}
 	}
 }
+
+export async function deleteHours(hoursId: number) {
+	await auth.protect()
+	console.log('hoursId:', hoursId)
+}

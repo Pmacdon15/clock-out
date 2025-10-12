@@ -58,7 +58,7 @@ export default function ListItemEditHours({
 				>
 					<Edit size={20} />
 				</button>
-				<DeleteHoursDialog />
+				<DeleteHoursDialog hoursId={entry.id} />
 			</div>
 		</li>
 	)

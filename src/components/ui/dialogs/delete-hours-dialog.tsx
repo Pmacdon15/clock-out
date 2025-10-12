@@ -12,7 +12,7 @@ import {
 	DialogTrigger,
 } from '../dialog'
 
-export default function DeleteHoursDialog() {
+export default function DeleteHoursDialog({ hoursId }: { hoursId: number }) {
 	return (
 		<Dialog>
 			<DialogTrigger>
@@ -29,11 +29,11 @@ export default function DeleteHoursDialog() {
 				</DialogHeader>
 				<DialogFooter className="sm:justify-end">
 					<DialogClose asChild>
-						<div className='flex gap-2'>
+						<div className="flex gap-2">
 							<Button type="button" variant="secondary">
 								Cancel
 							</Button>
-							<DeleteHoursButton />
+							<DeleteHoursButton hoursId={hoursId} />
 						</div>
 					</DialogClose>
 				</DialogFooter>
