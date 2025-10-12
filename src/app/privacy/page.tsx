@@ -12,6 +12,7 @@ async function getPrivacyContent() {
 }
 
 export default async function PrivacyPage() {
+	'use cache'
 	const privacyContent = await getPrivacyContent()
 
 	return (

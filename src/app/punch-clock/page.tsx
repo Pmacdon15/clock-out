@@ -1,7 +1,7 @@
 import { OrganizationSwitcher, SignedIn, UserButton } from '@clerk/nextjs'
 import { Suspense } from 'react'
 import BorderBox from '@/components/ui/containers/border-box'
-import TimeInput from '@/components/ui/inputs/time-input'
+import PunchClockClient from '@/components/ui/punch-clock-client'
 import EditHoursLink from '@/components/ui/links/edit-hours-link'
 import LinkWithPath from '@/components/ui/links/link'
 import { getTimeCard } from '@/lib/DAL/punch-clock'
@@ -25,12 +25,9 @@ export default async function Page() {
 					/>
 				</div>
 			</SignedIn>
-			<TimeInput clockInTime={timeCard?.time_in} disabled={!!timeCard} />
-			<TimeInput
-				clockInTime={timeCard?.time_in}
-				disabled={!timeCard}
-				punchOut
-			/>
+			<Suspense>
+				<PunchClockClient timeCard={timeCard} />
+			</Suspense>
 		</BorderBox>
 	)
 }
