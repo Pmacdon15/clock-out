@@ -15,7 +15,7 @@ export default async function Page() {
 					<UserButton />
 					<OrganizationSwitcher />
 				</div>
-				<div className="flex justify-end gap-4">
+				<div className="flex justify-center gap-4 items-center ">
 					<Suspense>
 						<EditHoursLink />
 					</Suspense>
