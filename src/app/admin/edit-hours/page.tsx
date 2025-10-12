@@ -27,9 +27,7 @@ export default async function Page(props: PageProps<'/admin/edit-hours'>) {
 
 	return (
 		<>
-			<Suspense>
-				<UserOrgHeader />
-			</Suspense>
+			<UserOrgHeader editHours />
 			<BorderBox>
 				<h1 className="text-2xl font-bold mb-4">Edit Hours</h1>
 				<Suspense>
