@@ -1,4 +1,5 @@
 'use server'
+import { DateTime } from 'luxon'
 import { auth } from '@clerk/nextjs/server'
 import { updatePunchClock } from '@/lib/DB/edit-hours'
 import { EditHoursSchema } from '@/lib/zod/edit-hours'
@@ -14,7 +15,6 @@ export async function editHours(
 		return
 	}
 
-	// Get time_in and time_out from formData
 	const timeIn = formData.get('time_in')?.toString()
 	const timeOut = formData.get('time_out')?.toString()
 
@@ -24,13 +24,13 @@ export async function editHours(
 		}
 	}
 
-	// Convert time to UTC
+	// Convert local time (with given timezone) to UTC ISO string
 	let utcTimeIn: string
 	let utcTimeOut: string
 
 	try {
-		utcTimeIn = new Date(`${timeIn} ${timeZone}`).toISOString()
-		utcTimeOut = new Date(`${timeOut} ${timeZone}`).toISOString()
+		utcTimeIn = DateTime.fromISO(timeIn, { zone: timeZone }).toUTC().toISO()
+		utcTimeOut = DateTime.fromISO(timeOut, { zone: timeZone }).toUTC().toISO()
 	} catch (error) {
 		console.error('Error converting time to UTC:', error)
 		return {
@@ -42,10 +42,8 @@ export async function editHours(
 		id: punchClockId,
 		time_in: utcTimeIn,
 		time_out: utcTimeOut,
-		timeZone: timeZone,
 	})
 
-	console.log('time_in', validatedFields.data?.time_in)
 	if (!validatedFields.success) {
 		return {
 			error: validatedFields.error.flatten().fieldErrors,
