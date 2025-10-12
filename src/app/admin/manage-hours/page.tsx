@@ -29,7 +29,7 @@ export default async function Page(props: PageProps<'/admin/manage-hours'>) {
 		<>
 			<UserOrgHeader editHours />
 			<BorderBox>
-				<h1 className="text-2xl font-bold mb-4">Edit Hours</h1>
+				<h1 className="text-2xl font-bold mb-4">Manage Hours</h1>
 				<Suspense>
 					<OrgMembersFilter orgMemberPromise={orgMembersPromise} />
 				</Suspense>
