@@ -1,6 +1,6 @@
 import { Suspense } from 'react'
 import BorderBox from '@/components/ui/containers/border-box'
-import EditHoursList from '@/components/ui/edit-hours/edit-hours-list'
+import ManageHoursList from '@/components/ui/edit-hours/Manage-hours-list'
 import OrgMembersFilter from '@/components/ui/filters/org-member-filter'
 import { WeekSelector } from '@/components/ui/filters/week-selector'
 import UserOrgHeader from '@/components/ui/headers/user-org-header'
@@ -40,7 +40,7 @@ export default async function Page(props: PageProps<'/admin/manage-hours'>) {
 					/>
 				</Suspense>
 				<Suspense>
-					<EditHoursList hoursPromise={hoursPromise} />
+					<ManageHoursList hoursPromise={hoursPromise} />
 				</Suspense>
 			</BorderBox>
 		</>

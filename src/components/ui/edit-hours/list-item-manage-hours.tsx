@@ -7,7 +7,7 @@ import EditHoursButton from '../buttons/edit-hours-button'
 import DeleteHoursDialog from '../dialogs/delete-hours-dialog'
 import { Input } from '../input'
 
-export default function ListItemEditHours({
+export default function ListItemManageHours({
 	entry,
 }: {
 	key: number
@@ -30,7 +30,7 @@ export default function ListItemEditHours({
 				</Activity>
 				{/* Display form for editing */}
 				<Activity mode={editHoursState ? 'visible' : 'hidden'}>
-					<EditTimeForm
+					<ManageTimeForm
 						id={entry.id}
 						onSuccess={() => setEditHours(false)}
 						timeIn={entry.time_in}
@@ -86,7 +86,7 @@ function DisplayTimes({
 	)
 }
 
-function EditTimeForm({
+function ManageTimeForm({
 	id,
 	timeIn,
 	timeOut,

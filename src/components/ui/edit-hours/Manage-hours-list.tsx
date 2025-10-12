@@ -1,7 +1,7 @@
 import type { TimeCard } from '@/lib/types/punch-clock-types'
-import ListItemEditHours from './list-item-edit-hours'
+import ListItemManageHours from './list-item-manage-hours'
 
-export default async function EditHoursList({
+export default async function ManageHoursList({
 	hoursPromise,
 }: {
 	hoursPromise: Promise<TimeCard[] | null>
@@ -10,7 +10,7 @@ export default async function EditHoursList({
 	return (
 		<ul className="divide-y divide-gray-200">
 			{hours?.map((entry) => (
-				<ListItemEditHours entry={entry} key={entry.id} />
+				<ListItemManageHours entry={entry} key={entry.id} />
 			))}
 		</ul>
 	)
