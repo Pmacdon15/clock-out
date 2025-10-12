@@ -3,17 +3,19 @@ import { auth } from '@clerk/nextjs/server'
 import moment from 'moment-timezone'
 import { deletePunchClock, updatePunchClock } from '@/lib/DB/edit-hours'
 import { DeleteHoursSchema, EditHoursSchema } from '@/lib/zod/edit-hours'
+import { isAdminFunction } from '../utils/clerk-utils'
 
 export async function editHours(
 	formData: FormData,
 	punchClockId: number,
 	timeZone: string,
 ) {
-	const { orgId } = await auth.protect()
+	const { isAdmin, orgId } = await isAdminFunction()
 
-	if (!orgId) {
-		return
+	if (!orgId || !isAdmin) {
+		throw new Error("Not Authorized  ")
 	}
+
 
 	// Get time_in and time_out from formData
 	const timeIn = formData.get('time_in')?.toString()
@@ -68,10 +70,10 @@ export async function editHours(
 }
 
 export async function deleteHours(hoursId: number) {
-	const { orgId } = await auth.protect()
+	const { isAdmin, orgId } = await isAdminFunction()
 
-	if (!orgId) {
-		return
+	if (!orgId || !isAdmin) {
+		throw new Error("Not Authorized  ")
 	}
 
 	const validatedFields = DeleteHoursSchema.safeParse({
