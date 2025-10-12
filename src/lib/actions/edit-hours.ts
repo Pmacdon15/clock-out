@@ -1,7 +1,7 @@
 'use server'
 import { auth } from '@clerk/nextjs/server'
-import { updatePunchClock } from '../DB/edit-hours'
-import { EditHoursSchema } from '../zod/edit-hours'
+import { updatePunchClock } from '@/lib/DB/edit-hours'
+import { EditHoursSchema } from '@/lib/zod/edit-hours'
 
 export async function editHours(
 	formData: FormData,
@@ -15,17 +15,34 @@ export async function editHours(
 	}
 
 	// Get time_in and time_out from formData
-	const timeIn = formData.get('time_in')
-	const timeOut = formData.get('time_out')
+	const timeIn = formData.get('time_in')?.toString()
+	const timeOut = formData.get('time_out')?.toString()
+
+	if (!timeIn || !timeOut) {
+		return {
+			error: 'Time in and time out are required',
+		}
+	}
 
 	// Convert time to UTC
-	const utcTimeIn = new Date(`${timeIn} ${timeZone}`).toISOString()
-	const utcTimeOut = new Date(`${timeOut} ${timeZone}`).toISOString()
+	let utcTimeIn: string
+	let utcTimeOut: string
+
+	try {
+		utcTimeIn = new Date(`${timeIn} ${timeZone}`).toISOString()
+		utcTimeOut = new Date(`${timeOut} ${timeZone}`).toISOString()
+	} catch (error) {
+		console.error('Error converting time to UTC:', error)
+		return {
+			error: 'Invalid date or time format',
+		}
+	}
 
 	const validatedFields = EditHoursSchema.safeParse({
 		id: punchClockId,
 		time_in: utcTimeIn,
-		time_out: utcTimeOut,		
+		time_out: utcTimeOut,
+		timeZone: timeZone,
 	})
 
 	console.log('time_in', validatedFields.data?.time_in)
