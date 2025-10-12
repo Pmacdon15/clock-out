@@ -20,7 +20,7 @@ export const useEditHours = ({
 			return editHours(formData, punchClockId, timeZone)
 		},
 		onSuccess: () => {
-			revalidatePathAction('/admin/edit-hours')
+			revalidatePathAction('/admin/manage-hours')
 			onSuccess?.()
 		},
 		onError: (error) => {
@@ -43,7 +43,7 @@ export const useDeleteHours = () => {
 			return editHours(formData, punchClockId, timeZone)
 		},
 		onSuccess: () => {
-			revalidatePathAction('/admin/edit-hours')			
+			revalidatePathAction('/admin/manage-hours')
 		},
 		onError: (error) => {
 			console.error('Mutation error:', error)

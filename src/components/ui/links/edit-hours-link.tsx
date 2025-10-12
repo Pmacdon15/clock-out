@@ -4,6 +4,6 @@ import LinkWithPath from './link'
 export default async function EditHoursLink() {
 	const isAdminBool = await isAdmin()
 	return isAdminBool ? (
-		<LinkWithPath path={'/admin/edit-hours'} text={'Edit Hours'} />
+		<LinkWithPath path={'/admin/manage-hours'} text={'Edit Hours'} />
 	) : null
 }

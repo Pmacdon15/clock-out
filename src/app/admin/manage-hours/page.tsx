@@ -10,7 +10,7 @@ import {
 	getEmployeeTimeCards,
 } from '@/lib/DAL/punch-clock'
 
-export default async function Page(props: PageProps<'/admin/edit-hours'>) {
+export default async function Page(props: PageProps<'/admin/manage-hours'>) {
 	const searchParams = await props.searchParams
 
 	const employeeIdValue = searchParams.employee
@@ -35,7 +35,7 @@ export default async function Page(props: PageProps<'/admin/edit-hours'>) {
 				</Suspense>
 				<Suspense>
 					<WeekSelector
-						variant="/admin/edit-hours"
+						variant="/admin/manage-hours"
 						weeksPromise={weeksPromise}
 					/>
 				</Suspense>

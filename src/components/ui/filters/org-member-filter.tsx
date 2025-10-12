@@ -23,14 +23,14 @@ export default function OrgMembersFilter({
 	const _handleEmployeeChange = (
 		event: React.ChangeEvent<HTMLSelectElement>,
 	) => {
-		handleParamChange('employee', event.target.value, '/admin/edit-hours')
+		handleParamChange('employee', event.target.value, '/admin/manage-hours')
 	}
 	return (
 		<h2 className="flex gap-4 items-center">
 			<span>For</span>
 			<Select
 				onValueChange={(value) =>
-					handleParamChange('employee', value, '/admin/edit-hours')
+					handleParamChange('employee', value, '/admin/manage-hours')
 				}
 			>
 				<SelectTrigger className="w-[180px]">
