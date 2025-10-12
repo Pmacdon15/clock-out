@@ -11,11 +11,13 @@ export const useEditHours = ({
 		mutationFn: ({
 			formData,
 			punchClockId,
+			timeZone,
 		}: {
 			formData: FormData
 			punchClockId: number
+			timeZone: string
 		}) => {
-			return editHours(formData, punchClockId)
+			return editHours(formData, punchClockId, timeZone)
 		},
 		onSuccess: () => {
 			revalidatePathAction('/admin/edit-hours')

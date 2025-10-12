@@ -8,6 +8,7 @@ import {
 	getAllWeeksWithWorkForEmployee,
 	getEmployeeTimeCards,
 } from '@/lib/DAL/punch-clock'
+import UserOrgHeader from '@/components/ui/headers/user-org-header'
 
 export default async function Page(props: PageProps<'/admin/edit-hours'>) {
 	const searchParams = await props.searchParams
@@ -25,20 +26,25 @@ export default async function Page(props: PageProps<'/admin/edit-hours'>) {
 	const hoursPromise = getEmployeeTimeCards(week, employeeId)
 
 	return (
-		<BorderBox>
-			<h1 className="text-2xl font-bold mb-4">Edit Hours</h1>
+		<>
 			<Suspense>
-				<OrgMembersFilter orgMemberPromise={orgMembersPromise} />
+				<UserOrgHeader />
 			</Suspense>
-			<Suspense>
-				<WeekSelector
-					variant="/admin/edit-hours"
-					weeksPromise={weeksPromise}
-				/>
-			</Suspense>
-			<Suspense>
-				<EditHoursList hoursPromise={hoursPromise} />
-			</Suspense>
-		</BorderBox>
+			<BorderBox>
+				<h1 className="text-2xl font-bold mb-4">Edit Hours</h1>
+				<Suspense>
+					<OrgMembersFilter orgMemberPromise={orgMembersPromise} />
+				</Suspense>
+				<Suspense>
+					<WeekSelector
+						variant="/admin/edit-hours"
+						weeksPromise={weeksPromise}
+					/>
+				</Suspense>
+				<Suspense>
+					<EditHoursList hoursPromise={hoursPromise} />
+				</Suspense>
+			</BorderBox>
+		</>
 	)
 }
