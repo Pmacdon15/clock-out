@@ -1,9 +1,7 @@
-import { OrganizationSwitcher, UserButton } from '@clerk/nextjs'
-import Link from 'next/link'
 import { Suspense } from 'react'
-import { Button } from '@/components/ui/button'
 import { CardSkeleton } from '@/components/ui/card'
 import HoursWorkedFilterFallback from '@/components/ui/fallbacks/hours-worked-filter-fallback'
+import UserOrgHeader from '@/components/ui/headers/user-org-header'
 import { HoursWorkedContainer } from '@/components/ui/hours-worked/hours-worked'
 import { YearlyHoursWorked } from '@/components/ui/hours-worked/yearly-hours-worked'
 import {
@@ -12,7 +10,6 @@ import {
 	getHoursWorkedByYear,
 } from '@/lib/DAL/punch-clock'
 import { getWeekNumber } from '@/lib/utils/utils'
-import UserOrgHeader from '@/components/ui/headers/user-org-header'
 
 export default async function HoursWorkedPage(
 	props: PageProps<'/hours-worked'>,

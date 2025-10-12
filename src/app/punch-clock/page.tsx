@@ -1,9 +1,9 @@
 import { OrganizationSwitcher, SignedIn, UserButton } from '@clerk/nextjs'
 import { Suspense } from 'react'
 import BorderBox from '@/components/ui/containers/border-box'
-import PunchClockClient from '@/components/ui/punch-clock-client'
 import EditHoursLink from '@/components/ui/links/edit-hours-link'
 import LinkWithPath from '@/components/ui/links/link'
+import PunchClockClient from '@/components/ui/punch-clock-client'
 import { getTimeCard } from '@/lib/DAL/punch-clock'
 
 export default async function Page() {
