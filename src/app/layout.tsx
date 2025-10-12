@@ -6,7 +6,8 @@ import './globals.css'
 import { Analytics } from '@vercel/analytics/next'
 import PageContainer from '@/components/ui/containers/page-container'
 import Header from '@/components/ui/headers/layout-header'
-import { Providers } from '../components/providers'
+import { Providers } from '../components/providers';
+import { Suspense } from 'react'
 export const experimental_ppr = true
 
 const geistSans = Geist({

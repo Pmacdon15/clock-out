@@ -3,10 +3,10 @@ import { Edit } from 'lucide-react'
 import { Activity, useState } from 'react'
 import type { TimeCard } from '@/lib/types/punch-clock-types'
 import { formatTimeForDisplay } from '@/lib/utils/utils'
-import EditHoursButton from '../buttons/edit-hours-button'
-import { Input } from '../input'
-import DeleteHoursButton from '../buttons/delete-hours-button'
 import { Button } from '../button'
+import EditHoursButton from '../buttons/edit-hours-button'
+import DeleteHoursDialog from '../dialogs/delete-hours-dialog'
+import { Input } from '../input'
 
 export default function ListItemEditHours({
 	entry,
@@ -59,7 +59,7 @@ export default function ListItemEditHours({
 					<Edit size={20} />
 				</Button>
 
-				<DeleteHoursButton />
+				<DeleteHoursDialog />
 			</div>
 		</li>
 	)
