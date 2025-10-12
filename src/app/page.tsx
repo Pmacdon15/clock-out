@@ -55,7 +55,9 @@ export default function Home() {
 									path={'/hours-worked'}
 									text={'Hours Worked'}
 								/>
-								<Suspense><EditHoursLink /></Suspense>
+								<Suspense>
+									<EditHoursLink />
+								</Suspense>
 							</nav>
 						</div>
 					</div>

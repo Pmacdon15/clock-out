@@ -2,8 +2,6 @@
 import { useEditHours } from '@/lib/mutations/edit-hours'
 import { Button } from '../button'
 
-const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
 export default function EditHoursButton({
 	punchClockId,
 	onSuccess,
@@ -21,7 +19,7 @@ export default function EditHoursButton({
 			className="w-full lg:w-auto"
 			disabled={isPending}
 			formAction={(formData: FormData) =>
-				mutate({ formData, punchClockId, timeZone })
+				mutate({ formData, punchClockId })
 			}
 			type="submit"
 			variant={'outline'}
