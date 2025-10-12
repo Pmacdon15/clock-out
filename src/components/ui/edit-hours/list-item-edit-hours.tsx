@@ -5,6 +5,8 @@ import type { TimeCard } from '@/lib/types/punch-clock-types'
 import { formatTimeForDisplay } from '@/lib/utils/utils'
 import EditHoursButton from '../buttons/edit-hours-button'
 import { Input } from '../input'
+import DeleteHoursButton from '../buttons/delete-hours-button'
+import { Button } from '../button'
 
 export default function ListItemEditHours({
 	entry,
@@ -49,14 +51,15 @@ export default function ListItemEditHours({
 						: 'N/A'}
 				</p>
 			</div>
-			<div className="col-span-1 lg:col-span-1 flex justify-end lg:justify-end mt-4 lg:mt-0">
-				<button
-					className="p-2 rounded-full"
+			<div className="col-span-1 lg:col-span-1 flex justify-end lg:justify-end mt-4 lg:mt-0 gap-2">
+				<Button
 					onClick={() => setEditHours(!editHoursState)}
-					type="button"
+					variant={'outline'}
 				>
 					<Edit size={20} />
-				</button>
+				</Button>
+
+				<DeleteHoursButton />
 			</div>
 		</li>
 	)
