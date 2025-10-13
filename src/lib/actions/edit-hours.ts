@@ -53,18 +53,18 @@ export async function editHours(
 		id: punchClockId,
 		time_in: utcTimeIn,
 		time_out: utcTimeOut,
+		user_id: userId,
+		org_id: orgId,
 	})
 
 	console.log('time_in', validatedFields.data?.time_in)
 	if (!validatedFields.success) {
-		return {
-			error: validatedFields.error.flatten().fieldErrors,
-		}
+		throw new Error("Validation Error")
 	}
 
 	try {
 		if (punchClockId) await updatePunchClock(validatedFields.data)
-		else await addPunchClock(validatedFields.data, orgId, userId)
+		else await addPunchClock(validatedFields.data)
 	} catch (error) {
 		console.error(error)
 		return {
