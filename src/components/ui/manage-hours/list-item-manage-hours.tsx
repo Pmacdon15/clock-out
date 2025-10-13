@@ -3,9 +3,7 @@ import { Edit } from 'lucide-react'
 import { Activity, useState } from 'react'
 import type { TimeCard } from '@/lib/types/punch-clock-types'
 import { formatTimeForDisplay } from '@/lib/utils/utils'
-import EditHoursButton from '../buttons/edit-hours-button'
 import DeleteHoursDialog from '../dialogs/delete-hours-dialog'
-import { Input } from '../input'
 import { ManageTimeForm } from './manage-time-form'
 
 export default function ListItemManageHours({

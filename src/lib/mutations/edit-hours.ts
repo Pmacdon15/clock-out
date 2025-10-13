@@ -12,12 +12,14 @@ export const useEditHours = ({
 			formData,
 			punchClockId,
 			timeZone,
+			userId,
 		}: {
 			formData: FormData
 			timeZone: string
 			punchClockId?: number
+			userId?: string
 		}) => {
-			return editHours(formData, timeZone, punchClockId)
+			return editHours(formData, timeZone, punchClockId, userId)
 		},
 		onSuccess: () => {
 			revalidatePathAction('/admin/manage-hours')

@@ -32,7 +32,6 @@ export async function addPunchClock(
 	return result as TimeCard[]
 }
 
-
 export async function deletePunchClock(
 	punchClock: z.infer<typeof DeleteHoursSchema>,
 ): Promise<TimeCard[]> {

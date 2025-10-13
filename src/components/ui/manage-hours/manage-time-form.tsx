@@ -1,17 +1,19 @@
 'use client'
-import EditHoursButton from "../buttons/edit-hours-button"
-import { Input } from "../input"
+import EditHoursButton from '../buttons/edit-hours-button'
+import { Input } from '../input'
 
 export function ManageTimeForm({
 	id,
 	timeIn,
 	timeOut,
 	onSuccess,
+	employeeId,
 }: {
 	id?: number
 	timeIn?: Date
 	timeOut?: Date | null
 	onSuccess?: () => void
+	employeeId?: string
 }) {
 	function formatDateForInput(date: Date) {
 		const year = date.getFullYear()
@@ -40,7 +42,11 @@ export function ManageTimeForm({
 				name="time_out"
 				type="datetime-local"
 			/>
-			<EditHoursButton onSuccess={() => onSuccess?.() || (() => {})} punchClockId={id} />
+			<EditHoursButton
+				employeeId={employeeId}
+				onSuccess={() => onSuccess?.() || (() => {})}
+				punchClockId={id}
+			/>
 		</form>
 	)
 }

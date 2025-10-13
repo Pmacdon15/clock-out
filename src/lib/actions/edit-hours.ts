@@ -1,5 +1,4 @@
 'use server'
-import { auth } from '@clerk/nextjs/server'
 import moment from 'moment-timezone'
 import {
 	addPunchClock,
@@ -13,8 +12,9 @@ export async function editHours(
 	formData: FormData,
 	timeZone: string,
 	punchClockId?: number,
+	userId?: string,
 ) {
-	const { isAdmin, orgId, userId } = await isAdminFunction()
+	const { isAdmin, orgId } = await isAdminFunction()
 
 	if (!orgId || !isAdmin || !userId) {
 		throw new Error('Not Authorized  ')
