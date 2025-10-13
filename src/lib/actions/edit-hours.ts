@@ -14,9 +14,9 @@ export async function editHours(
 	timeZone: string,
 	punchClockId?: number,
 ) {
-	const { isAdmin, orgId } = await isAdminFunction()
+	const { isAdmin, orgId, userId } = await isAdminFunction()
 
-	if (!orgId || !isAdmin) {
+	if (!orgId || !isAdmin || !userId) {
 		throw new Error('Not Authorized  ')
 	}
 
@@ -64,7 +64,7 @@ export async function editHours(
 
 	try {
 		if (punchClockId) await updatePunchClock(validatedFields.data)
-		else await addPunchClock(validatedFields.data)
+		else await addPunchClock(validatedFields.data, userId, orgId)
 	} catch (error) {
 		console.error(error)
 		return {
