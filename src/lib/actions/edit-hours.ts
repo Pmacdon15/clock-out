@@ -16,7 +16,7 @@ export async function editHours(
 ) {
 	const { isAdmin, orgId } = await isAdminFunction()
 
-	if (!orgId || !isAdmin ) {
+	if (!orgId || !isAdmin) {
 		throw new Error('Not Authorized  ')
 	}
 
@@ -48,7 +48,7 @@ export async function editHours(
 			error: 'Invalid date or time format',
 		}
 	}
-
+	//MARK: TODO: add userId And org Id to field
 	const validatedFields = EditHoursSchema.safeParse({
 		id: punchClockId,
 		time_in: utcTimeIn,
@@ -64,7 +64,7 @@ export async function editHours(
 
 	try {
 		if (punchClockId) await updatePunchClock(validatedFields.data)
-		else await addPunchClock(validatedFields.data, userId, orgId)
+		else await addPunchClock(validatedFields.data, orgId, userId)
 	} catch (error) {
 		console.error(error)
 		return {

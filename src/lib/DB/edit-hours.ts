@@ -19,8 +19,8 @@ export async function updatePunchClock(
 
 export async function addPunchClock(
 	punchClock: Omit<z.infer<typeof EditHoursSchema>, 'id'>,
-	userId: string,
 	orgId: string,
+	userId?: string,
 ): Promise<TimeCard[]> {
 	const sql = neon(process.env.DATABASE_URL || '')
 
