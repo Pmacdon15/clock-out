@@ -1,6 +1,6 @@
 import { Suspense } from 'react'
 import BorderBox from '@/components/ui/containers/border-box'
-import ManageHoursList from '@/components/ui/edit-hours/Manage-hours-list'
+import ManageHoursList from '@/components/ui/manage-hours/Manage-hours-list'
 import OrgMembersFilter from '@/components/ui/filters/org-member-filter'
 import { WeekSelector } from '@/components/ui/filters/week-selector'
 import UserOrgHeader from '@/components/ui/headers/user-org-header'

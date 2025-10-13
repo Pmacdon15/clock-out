@@ -8,7 +8,7 @@ export default function EditHoursButton({
 	punchClockId,
 	onSuccess,
 }: {
-	punchClockId: number
+	punchClockId?: number
 	onSuccess: () => void
 }) {
 	const { mutate, isPending } = useEditHours({

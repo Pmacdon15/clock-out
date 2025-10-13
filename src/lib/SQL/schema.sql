@@ -8,4 +8,4 @@ CREATE TABLE time_clock (
     time_out TIMESTAMP
 );
 
--- select * from time_clock;
+select * from time_clock;
