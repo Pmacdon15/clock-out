@@ -1,9 +1,9 @@
-import { isAdmin } from '@/lib/utils/clerk-utils'
+import { isAdminFunction } from '@/lib/utils/clerk-utils'
 import LinkWithPath from './link'
 
 export default async function EditHoursLink() {
-	const isAdminBool = await isAdmin()
-	return isAdminBool ? (
+	const { isAdmin } = await isAdminFunction()
+	return isAdmin ? (
 		<LinkWithPath path={'/admin/manage-hours'} text={'Manage Hours'} />
 	) : null
 }

@@ -1,18 +1,23 @@
 'use server'
-import { auth } from '@clerk/nextjs/server'
 import moment from 'moment-timezone'
-import { deletePunchClock, updatePunchClock } from '@/lib/DB/edit-hours'
+import {
+	addPunchClock,
+	deletePunchClock,
+	updatePunchClock,
+} from '@/lib/DB/edit-hours'
 import { DeleteHoursSchema, EditHoursSchema } from '@/lib/zod/edit-hours'
+import { isAdminFunction } from '../utils/clerk-utils'
 
 export async function editHours(
 	formData: FormData,
-	punchClockId: number,
 	timeZone: string,
+	punchClockId?: number,
+	userId?: string,
 ) {
-	const { orgId } = await auth.protect()
+	const { isAdmin, orgId } = await isAdminFunction()
 
-	if (!orgId) {
-		return
+	if (!orgId || !isAdmin || !userId) {
+		throw new Error('Not Authorized  ')
 	}
 
 	// Get time_in and time_out from formData
@@ -58,7 +63,8 @@ export async function editHours(
 	}
 
 	try {
-		await updatePunchClock(validatedFields.data)
+		if (punchClockId) await updatePunchClock(validatedFields.data)
+		else await addPunchClock(validatedFields.data, userId, orgId)
 	} catch (error) {
 		console.error(error)
 		return {
@@ -68,10 +74,10 @@ export async function editHours(
 }
 
 export async function deleteHours(hoursId: number) {
-	const { orgId } = await auth.protect()
+	const { isAdmin, orgId } = await isAdminFunction()
 
-	if (!orgId) {
-		return
+	if (!orgId || !isAdmin) {
+		throw new Error('Not Authorized  ')
 	}
 
 	const validatedFields = DeleteHoursSchema.safeParse({

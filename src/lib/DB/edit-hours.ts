@@ -17,6 +17,21 @@ export async function updatePunchClock(
 	return result as TimeCard[]
 }
 
+export async function addPunchClock(
+	punchClock: Omit<z.infer<typeof EditHoursSchema>, 'id'>,
+	userId: string,
+	orgId: string,
+): Promise<TimeCard[]> {
+	const sql = neon(process.env.DATABASE_URL || '')
+
+	const result = await sql`
+    INSERT INTO time_clock (user_id, org_id, time_in, time_out)
+    VALUES (${userId}, ${orgId}, ${punchClock.time_in}, ${punchClock.time_out})
+    RETURNING *;
+`
+	return result as TimeCard[]
+}
+
 export async function deletePunchClock(
 	punchClock: z.infer<typeof DeleteHoursSchema>,
 ): Promise<TimeCard[]> {
