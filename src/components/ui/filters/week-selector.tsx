@@ -34,7 +34,7 @@ export function WeekSelector({
 				Filter by week:
 			</label>
 			<Select
-				defaultValue={currentWeek || undefined}
+				defaultValue={currentWeek || weeks[0].value}
 				onValueChange={(value) =>
 					handleParamChange('week', value, variant)
 				}
