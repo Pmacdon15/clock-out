@@ -1,4 +1,5 @@
 'use client'
+import { useSearchParams } from 'next/navigation'
 import { use } from 'react'
 import type { OrgMember } from '@/lib/types/org-members'
 import { useHandleParamChange } from '@/lib/utils/filter-utils'
@@ -19,12 +20,12 @@ export default function OrgMembersFilter({
 }) {
 	const orgMembers = use(orgMemberPromise)
 	const handleParamChange = useHandleParamChange()
+	const searchParams = useSearchParams()
+	const employeeParam = searchParams.get('employee')
 
-	const _handleEmployeeChange = (
-		event: React.ChangeEvent<HTMLSelectElement>,
-	) => {
-		handleParamChange('employee', event.target.value, '/admin/manage-hours')
-	}
+	const defaultValue =
+		employeeParam || (orgMembers.length > 0 ? orgMembers[0].userId : '')
+
 	return (
 		<h2 className="flex gap-4 items-center">
 			<span>For</span>
@@ -32,6 +33,7 @@ export default function OrgMembersFilter({
 				onValueChange={(value) =>
 					handleParamChange('employee', value, '/admin/manage-hours')
 				}
+				value={defaultValue}
 			>
 				<SelectTrigger className="w-[180px]">
 					<SelectValue placeholder="Select a member" />

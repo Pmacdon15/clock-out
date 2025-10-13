@@ -16,7 +16,7 @@ export async function editHours(
 ) {
 	const { isAdmin, orgId } = await isAdminFunction()
 
-	if (!orgId || !isAdmin || !userId) {
+	if (!orgId || !isAdmin ) {
 		throw new Error('Not Authorized  ')
 	}
 
