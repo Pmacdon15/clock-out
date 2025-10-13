@@ -59,7 +59,8 @@ export async function editHours(
 
 	console.log('time_in', validatedFields.data?.time_in)
 	if (!validatedFields.success) {
-		throw new Error("Validation Error")
+		console.error(validatedFields.error.flatten())
+		throw new Error('Validation Error')
 	}
 
 	try {
