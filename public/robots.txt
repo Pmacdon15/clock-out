@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.clockout.patmac.ca
+
+# Sitemaps
+Sitemap: https://www.clockout.patmac.ca/sitemap.xml
