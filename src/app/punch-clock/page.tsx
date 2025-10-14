@@ -16,13 +16,13 @@ export default async function Page() {
 					<OrganizationSwitcher />
 				</div>
 				<div className="flex justify-center gap-4 items-center ">
-					<Suspense>
-						<EditHoursLink />
-					</Suspense>
 					<LinkWithPath
 						path={'/hours-worked'}
 						text={'Hours Worked'}
 					/>
+					<Suspense>
+						<EditHoursLink />
+					</Suspense>
 				</div>
 			</SignedIn>
 			<Suspense>
