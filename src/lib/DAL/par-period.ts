@@ -1,3 +1,1 @@
-export async function fetchPayPeriod(startDate: Date, endDate: Date) {
-	
-}
+export async function fetchPayPeriod(startDate: Date, endDate: Date) {}

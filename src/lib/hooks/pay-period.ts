@@ -3,7 +3,7 @@ import { fetchPayPeriod } from '../DAL/par-period'
 
 export const useFetchPayPeriod = (startDate: Date, endDate: Date) => {
 	return useQuery({
-		queryKey: ['payPeriod', startDate, endDate], 
+		queryKey: ['payPeriod', startDate, endDate],
 		queryFn: () => fetchPayPeriod(startDate, endDate),
 	})
 }
