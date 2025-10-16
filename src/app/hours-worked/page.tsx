@@ -39,6 +39,11 @@ export default async function HoursWorkedPage(
 				</Suspense>
 			</div>
 			<div className="p-2 w-full md:w-5/6">
+				<Suspense fallback={<HoursWorkedFilterFallback />}>
+					<HoursWorkedContainer  />
+				</Suspense>
+			</div>
+			<div className="p-2 w-full md:w-5/6">
 				<Suspense fallback={<CardSkeleton />}>
 					<YearlyHoursWorked
 						currentYear={currentYear}

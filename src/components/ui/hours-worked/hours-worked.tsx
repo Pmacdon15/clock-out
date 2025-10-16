@@ -6,9 +6,9 @@ import type { HoursWorked, Week } from '@/lib/types/punch-clock-types'
 import { WeekSelector } from '../filters/week-selector'
 
 interface HoursWorkedFilterProps {
-	hoursPromise: Promise<HoursWorked[]>
+	hoursPromise?: Promise<HoursWorked[]>
 	// weeks: { label: string, value: string }[];
-	weeksPromise: Promise<Week[]>
+	weeksPromise?: Promise<Week[]>
 }
 
 export function HoursWorkedContainer({
@@ -22,7 +22,9 @@ export function HoursWorkedContainer({
 			</CardHeader>
 			<CardContent>
 				<div>
-					<WeekSelector weeksPromise={weeksPromise} />
+					{weeksPromise && (
+						<WeekSelector weeksPromise={weeksPromise} />
+					)}
 					<div className="h-96">
 						<HoursWorkedChart
 							className="h-full aspect-auto"

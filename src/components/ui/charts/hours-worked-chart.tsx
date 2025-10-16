@@ -20,10 +20,12 @@ export function HoursWorkedChart({
 	hoursPromise,
 	className,
 }: {
-	hoursPromise: Promise<HoursWorked[]>
+	hoursPromise?: Promise<HoursWorked[]>
 	className?: string
 }) {
-	const hours = use(hoursPromise)
+	let hours: HoursWorked[]
+	if (hoursPromise) hours = use(hoursPromise)
+	const { data } = useFetchPayPeriod(!hoursPromise)
 	return (
 		<ChartContainer
 			className={className}
