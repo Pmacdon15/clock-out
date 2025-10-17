@@ -15,7 +15,7 @@ export default function PayPeriodSelector({
 	endDate?: string
 }) {
 	return (
-		<div className='flex flex-col gap-2'>
+		<div className="flex flex-col gap-2">
 			<DateSelector date={startDate} />
 			<DateSelector date={endDate} variant="endDate" />
 		</div>
@@ -40,7 +40,7 @@ function DateSelector({
 				{variant === 'startDate' ? 'Start Date' : 'End Date'}
 			</h1>
 			<Input
-				  className="w-38 md:w-2/6 [&::-webkit-calendar-picker-indicator]:invert text-foreground"
+				className="w-38 md:w-2/6 [&::-webkit-calendar-picker-indicator]:invert "
 				defaultValue={
 					dateToSet ? formatDateForInput(new Date(dateToSet)) : ''
 				}
