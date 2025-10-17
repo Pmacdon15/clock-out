@@ -40,7 +40,7 @@ function DateSelector({
 				{variant === 'startDate' ? 'Start Date' : 'End Date'}
 			</h1>
 			<Input
-				className="w-38 md:w-2/6 text-white bg-transparent border-white [&::-webkit-datetime-edit]:text-white [&::-webkit-calendar-picker-indicator]:filter [&::-webkit-calendar-picker-indicator]:brightness-200"
+				className="w-38 md:w-2/6 [&::-webkit-calendar-picker-indicator]:invert"
 				defaultValue={
 					dateToSet ? formatDateForInput(new Date(dateToSet)) : ''
 				}
