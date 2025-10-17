@@ -45,8 +45,7 @@ function DateSelector({
       <h1 className="w-24 shrink-0">
         {variant === 'startDate' ? 'Start Date' : 'End Date'}
       </h1>
-      <DatePicker
-        className="flex-1"
+      <DatePicker        
         date={
           dateToSet
             ? parse(dateToSet, 'yyyy-MM-dd', new Date())
