@@ -4,10 +4,10 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { HoursWorkedChart } from '@/components/ui/charts/hours-worked-chart'
 import type { HoursWorked, Week } from '@/lib/types/punch-clock-types'
 import { WeekSelector } from '../filters/week-selector'
+import PayPeriodSelector from './pay-period-selector'
 
 interface HoursWorkedFilterProps {
-	hoursPromise: Promise<HoursWorked[]>
-	// weeks: { label: string, value: string }[];
+	hoursPromise: Promise<HoursWorked[]>	
 	weeksPromise?: Promise<Week[]>
 }
 
@@ -18,12 +18,16 @@ export function HoursWorkedContainer({
 	return (
 		<Card>
 			<CardHeader>
-				<CardTitle>{weeksPromise ? 'Hours Worked' : 'Pay Period'}</CardTitle>
+				<CardTitle>
+					{weeksPromise ? 'Hours Worked' : 'Pay Period'}
+				</CardTitle>
 			</CardHeader>
 			<CardContent>
 				<div>
-					{weeksPromise && (
+					{weeksPromise ? (
 						<WeekSelector weeksPromise={weeksPromise} />
+					) : (
+						<PayPeriodSelector />
 					)}
 					<div className="h-96">
 						<HoursWorkedChart
