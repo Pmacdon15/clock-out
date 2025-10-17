@@ -1,9 +1,9 @@
 'use client'
 
+import { format, parse } from 'date-fns'
 import { useSearchParams } from 'next/navigation'
 import { useHandleParamChange } from '@/lib/utils/filter-utils'
 import { DatePicker } from '../inputs/date-picker'
-import { format, parse } from 'date-fns'
 
 export default function PayPeriodSelector({
 	startDate,

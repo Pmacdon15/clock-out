@@ -30,36 +30,27 @@ export function ManageTimeForm({
 	)
 
 	return (
-		<form className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-			<input
-				name="time_in"
-				type="hidden"
-				value={
-					timeInDate && timeInTime
-						? `${timeInDate.toISOString().slice(0, 10)}T${timeInTime}`
-						: ''
-				}
-			/>
-			<input
-				name="time_out"
-				type="hidden"
-				value={
-					timeOutDate && timeOutTime
-						? `${timeOutDate.toISOString().slice(0, 10)}T${timeOutTime}`
-						: ''
-				}
-			/>
-
-			<div className="flex flex-col gap-2">
+		<form className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-x-16">
+			<div className="flex flex-col gap-2 mx-auto">
 				<h1>Start</h1>
 				<DateTimePicker
 					date={timeInDate}
+					name="time_in"
 					setDate={setTimeInDate}
 					setTime={setTimeInTime}
 					time={timeInTime}
 				/>
 			</div>
-<div className='flex flex-col gap-2'><h1>End</h1><DateTimePicker date={timeOutDate} setDate={setTimeOutDate} time={timeOutTime} setTime={setTimeOutTime} /></div>
+			<div className="flex flex-col gap-2 mx-auto">
+				<h1>End</h1>
+				<DateTimePicker
+					date={timeOutDate}
+					name="time_out"
+					setDate={setTimeOutDate}
+					setTime={setTimeOutTime}
+					time={timeOutTime}
+				/>
+			</div>
 			<EditHoursButton
 				employeeId={employeeId}
 				onSuccess={() => onSuccess?.() || (() => {})}

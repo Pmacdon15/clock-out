@@ -96,8 +96,6 @@ export async function getTimeCardsDb(
 	}
 }
 
-
-
 export async function getHoursWorkedDb(
 	userId: string,
 	orgId: string,

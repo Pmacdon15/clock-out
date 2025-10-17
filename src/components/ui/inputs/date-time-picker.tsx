@@ -13,11 +13,32 @@ import {
 	PopoverTrigger,
 } from '@/components/ui/popover'
 
-export function DateTimePicker({date, setDate, time, setTime}: {date?: Date, setDate: (date?: Date) => void, time?: string, setTime: (time: string) => void}) {
+export function DateTimePicker({
+	date,
+	setDate,
+	time,
+	setTime,
+	name,
+}: {
+	date?: Date
+	setDate: (date?: Date) => void
+	time?: string
+	setTime: (time: string) => void
+	name: string
+}) {
 	const [open, setOpen] = React.useState(false)
 
 	return (
 		<div className="flex gap-4">
+			<input
+				name={name}
+				type="hidden"
+				value={
+					date && time
+						? `${date.toISOString().slice(0, 10)}T${time}`
+						: ''
+				}
+			/>
 			<div className="flex flex-col gap-3">
 				<Label className="px-1" htmlFor="date-picker">
 					Date
@@ -55,11 +76,12 @@ export function DateTimePicker({date, setDate, time, setTime}: {date?: Date, set
 				</Label>
 				<Input
 					className="bg-background appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
-					value={time}
-					onChange={(e) => setTime(e.target.value)}
 					id="time-picker"
+					name={`${name}_time`}
+					onChange={(e) => setTime(e.target.value)}
 					step="1"
 					type="time"
+					value={time}
 				/>
 			</div>
 		</div>

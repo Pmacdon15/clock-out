@@ -53,7 +53,6 @@ export async function getHoursWorked(week?: string): Promise<HoursWorked[]> {
 			week,
 		)
 		return hoursWorked
-		
 	} catch (e) {
 		console.error('Error: ', e)
 		return []

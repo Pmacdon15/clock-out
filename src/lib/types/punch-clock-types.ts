@@ -20,7 +20,7 @@ export interface MonthlyHours {
 	month: string
 	hours: number
 }
- export interface HoursWorkedRow {
+export interface HoursWorkedRow {
 	date: string
 	hours: string
 }

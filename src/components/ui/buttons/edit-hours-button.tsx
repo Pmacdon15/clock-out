@@ -19,16 +19,23 @@ export default function EditHoursButton({
 		},
 	})
 	return (
-		<Button
-			className="w-full lg:w-auto"
-			disabled={isPending}
-			formAction={(formData: FormData) =>
-				mutate({ formData, punchClockId, timeZone, userId: employeeId })
-			}
-			type="submit"
-			variant={'outline'}
-		>
-			{!isPending ? 'Save' : 'Saving'}
-		</Button>
+		<div className="px-4 mt-auto">
+			<Button
+				className="w-full lg:w-auto mt-auto"
+				disabled={isPending}
+				formAction={(formData: FormData) =>
+					mutate({
+						formData,
+						punchClockId,
+						timeZone,
+						userId: employeeId,
+					})
+				}
+				type="submit"
+				variant={'outline'}
+			>
+				{!isPending ? 'Save' : 'Saving'}
+			</Button>
+		</div>
 	)
 }
