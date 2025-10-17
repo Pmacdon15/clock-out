@@ -24,6 +24,7 @@ export function HoursWorkedChart({
 	className?: string
 }) {
 	const hours = use(hoursPromise)
+	console.log('Hours: ', hours)
 	const totalHours = hours
 		.reduce((acc, current) => acc + current.hours, 0)
 		.toFixed(2)
