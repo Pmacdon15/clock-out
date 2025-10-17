@@ -7,13 +7,17 @@ import { WeekSelector } from '../filters/week-selector'
 import PayPeriodSelector from './pay-period-selector'
 
 interface HoursWorkedFilterProps {
-	hoursPromise: Promise<HoursWorked[]>	
+	hoursPromise: Promise<HoursWorked[]>
 	weeksPromise?: Promise<Week[]>
+	startDate?: string
+	endDate?: string
 }
 
 export function HoursWorkedContainer({
 	hoursPromise,
 	weeksPromise,
+	startDate,
+	endDate,
 }: HoursWorkedFilterProps) {
 	return (
 		<Card>
@@ -27,7 +31,10 @@ export function HoursWorkedContainer({
 					{weeksPromise ? (
 						<WeekSelector weeksPromise={weeksPromise} />
 					) : (
-						<PayPeriodSelector />
+						<PayPeriodSelector
+							endDate={endDate}
+							startDate={startDate}
+						/>
 					)}
 					<div className="h-96">
 						<HoursWorkedChart

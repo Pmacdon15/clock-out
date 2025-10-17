@@ -9,8 +9,8 @@ export default function PayPeriodSelector({
 	startDate,
 	endDate,
 }: {
-	startDate: string
-	endDate: string
+	startDate?: string
+	endDate?: string
 }) {
 	return (
 		<div>
@@ -40,13 +40,13 @@ function DateSelector({
 				{variant === 'startDate' ? 'Start Date' : 'End Date'}
 			</h1>
 			<Input
-				className="w-2/6 [&::-webkit-datetime-edit]:text-white [&::-webkit-calendar-picker-indicator]:invert"
+				className="w-2/6 text-white bg-transparent border-white focus:ring-white [&::-webkit-datetime-edit]:text-white [&::-webkit-calendar-picker-indicator]:invert"
 				defaultValue={
 					dateToSet ? formatDateForInput(new Date(dateToSet)) : ''
 				}
 				name={variant}
-				onChange={(value) =>
-					handleParamChange(variant, String(value), '/hours-worked')
+				onChange={(e) =>
+					handleParamChange(variant, e.target.value, '/hours-worked')
 				}
 				type="datetime-local"
 			/>
