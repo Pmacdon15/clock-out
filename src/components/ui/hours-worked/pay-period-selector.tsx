@@ -1,3 +1,5 @@
+'use client'
+
 import { useSearchParams } from 'next/navigation'
 import {
 	formatDateForInput,
@@ -28,10 +30,8 @@ function DateSelector({
 	variant?: 'startDate' | 'endDate'
 }) {
 	const searchParams = useSearchParams()
-	let dateToSet: string | null
-	if (variant === 'startDate') dateToSet = searchParams.get('startDate')
-	else if (variant === 'endDate') dateToSet = searchParams.get('endDate')
-	else dateToSet = date ?? ''
+	const dateFromParams = searchParams.get(variant)
+	const dateToSet = dateFromParams ?? date
 
 	const handleParamChange = useHandleParamChange()
 	return (

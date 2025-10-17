@@ -50,7 +50,9 @@ export default async function HoursWorkedPage(
 			<div className="p-2 w-full md:w-5/6">
 				<Suspense fallback={<HoursWorkedFilterFallback />}>
 					<HoursWorkedContainer
+						endDate={endDate}
 						hoursPromise={payPeriodHoursPromise}
+						startDate={startDate}
 					/>
 				</Suspense>
 			</div>
