@@ -14,7 +14,6 @@ function getWeekBounds(date: Date): [Date, Date] {
 
 	return [startOfWeek, endOfWeek]
 }
-
 export async function getPayPeriodHoursWorkedDb(
 	userId: string,
 	orgId: string,
@@ -40,21 +39,21 @@ export async function getPayPeriodHoursWorkedDb(
 
 	const result = (await sql`
             SELECT
-                DATE(time_in) as date,
+                time_in as date,
                 SUM(EXTRACT(EPOCH FROM (time_out - time_in))) / 3600 as hours
             FROM time_clock
             WHERE user_id = ${userId} AND org_id = ${orgId} AND time_out IS NOT NULL
               AND DATE(time_in) >= ${finalStartDate}
               AND DATE(time_in) <= ${finalEndDate}
-            GROUP BY DATE(time_in)
-            ORDER BY date;
+            GROUP BY time_in
+            ORDER BY time_in;
         `) as HoursWorkedRow[]
 
 	return result.map((row) => {
 		const hours = parseFloat(row.hours)
 		const lightness = Math.max(30, 60 - hours * 3)
 		return {
-			...row,
+			date: row.date,
 			hours,
 			fill: `hsl(220, 80%, ${lightness}%)`,
 		}
