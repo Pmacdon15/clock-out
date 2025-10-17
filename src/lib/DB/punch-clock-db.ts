@@ -112,24 +112,21 @@ export async function getHoursWorkedDb(
 
     const result = (await sql`
             SELECT
-                DATE(time_in) as date,
+                time_in as date,
                 SUM(EXTRACT(EPOCH FROM (time_out - time_in))) / 3600 as hours
             FROM time_clock
             WHERE user_id = ${userId} AND org_id = ${orgId} AND time_out IS NOT NULL
-              AND DATE(time_in) >= ${startDate.toISOString().split('T')[0]}
-              AND DATE(time_in) <= ${endDate.toISOString().split('T')[0]}
-            GROUP BY DATE(time_in)
-            ORDER BY date;
+              AND time_in >= ${startDate.toISOString()}
+              AND time_in <= ${endDate.toISOString()}
+            GROUP BY time_in
+            ORDER BY time_in;
         `) as HoursWorkedRow[]
 
     return result.map((row) => {
-      const date = new Date(row.date);
-      date.setHours(0, 0, 0, 0); // Set time to start of day
       const hours = parseFloat(row.hours)
       const lightness = Math.max(30, 60 - hours * 3)
       return {
         ...row,
-        date,
         hours,
         fill: `hsl(220, 80%, ${lightness}%)`,
       }
@@ -137,22 +134,19 @@ export async function getHoursWorkedDb(
   } else {
     const result = (await sql`
             SELECT
-                DATE(time_in) as date,
+                time_in as date,
                 SUM(EXTRACT(EPOCH FROM (time_out - time_in))) / 3600 as hours
             FROM time_clock
             WHERE user_id = ${userId} AND org_id = ${orgId} AND time_out IS NOT NULL
-            GROUP BY DATE(time_in)
-            ORDER BY date;
+            GROUP BY time_in
+            ORDER BY time_in;
         `) as HoursWorkedRow[]
 
     return result.map((row) => {
-      const date = new Date(row.date);
-      date.setHours(0, 0, 0, 0); // Set time to start of day
       const hours = parseFloat(row.hours)
       const lightness = Math.max(30, 60 - hours * 3)
       return {
         ...row,
-        date,
         hours,
         fill: `hsl(220, 80%, ${lightness}%)`,
       }
