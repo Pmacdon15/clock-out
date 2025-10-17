@@ -16,47 +16,47 @@ function getWeekBounds(date: Date): [Date, Date] {
 }
 
 export async function getPayPeriodHoursWorkedDb(
-	userId: string,
-	orgId: string,
-	startDate?: string,
-	endDate?: string,
+  userId: string,
+  orgId: string,
+  startDate?: string,
+  endDate?: string,
 ): Promise<HoursWorked[]> {
-	const sql = neon(process.env.DATABASE_URL || '')
+  const sql = neon(process.env.DATABASE_URL || '')
 
-	let finalStartDate: string | undefined = startDate
-	let finalEndDate: string | undefined = endDate
+  let finalStartDate: string | undefined = startDate
+  let finalEndDate: string | undefined = endDate
 
-	if (!startDate && !endDate) {
-		const [startOfWeek, endOfWeek] = getWeekBounds(new Date())
-		finalStartDate = startOfWeek.toISOString().split('T')[0]
-		finalEndDate = endOfWeek.toISOString().split('T')[0]
-	} else if (startDate && !endDate) {
-		const [_, endOfWeek] = getWeekBounds(new Date(startDate))
-		finalEndDate = endOfWeek.toISOString().split('T')[0]
-	} else if (!startDate && endDate) {
-		const [startOfWeek] = getWeekBounds(new Date(endDate))
-		finalStartDate = startOfWeek.toISOString().split('T')[0]
-	}
+  if (!startDate && !endDate) {
+    const [startOfWeek, endOfWeek] = getWeekBounds(new Date())
+    finalStartDate = startOfWeek.toISOString().split('T')[0]
+    finalEndDate = endOfWeek.toISOString().split('T')[0]
+  } else if (startDate && !endDate) {
+    const [_, endOfWeek] = getWeekBounds(new Date(startDate))
+    finalEndDate = endOfWeek.toISOString().split('T')[0]
+  } else if (!startDate && endDate) {
+    const [startOfWeek] = getWeekBounds(new Date(endDate))
+    finalStartDate = startOfWeek.toISOString().split('T')[0]
+  }
 
-	const result = (await sql`
+  const result = (await sql`
             SELECT
-                DATE(time_in) as date,
+                MIN(time_in) as date,
                 SUM(EXTRACT(EPOCH FROM (time_out - time_in))) / 3600 as hours
             FROM time_clock
             WHERE user_id = ${userId} AND org_id = ${orgId} AND time_out IS NOT NULL
-              AND DATE(time_in) >= ${finalStartDate}
-              AND DATE(time_in) <= ${finalEndDate}
+              AND time_in >= ${finalStartDate} || ' 00:00:00'
+              AND time_in <= ${finalEndDate} || ' 23:59:59'
             GROUP BY DATE(time_in)
             ORDER BY date;
         `) as HoursWorkedRow[]
 
-	return result.map((row) => {
-		const hours = parseFloat(row.hours)
-		const lightness = Math.max(30, 60 - hours * 3)
-		return {
-			...row,
-			hours,
-			fill: `hsl(220, 80%, ${lightness}%)`,
-		}
-	})
+  return result.map((row) => {
+    const hours = parseFloat(row.hours)
+    const lightness = Math.max(30, 60 - hours * 3)
+    return {
+      ...row,
+      hours,
+      fill: `hsl(220, 80%, ${lightness}%)`,
+    }
+  })
 }
