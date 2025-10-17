@@ -2,6 +2,7 @@
 import { formatDateForInput } from '@/lib/utils/filter-utils'
 import EditHoursButton from '../buttons/edit-hours-button'
 import { Input } from '../input'
+import { DateTimePicker } from '../inputs/date-time-picker'
 
 export function ManageTimeForm({
 	id,
@@ -18,8 +19,8 @@ export function ManageTimeForm({
 }) {
 	return (
 		<form className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-			<Input
-				className="[&::-webkit-datetime-edit]:text-white [&::-webkit-calendar-picker-indicator]:invert w-full"
+			{/* <Input
+				className=" w-full"
 				defaultValue={
 					timeIn ? formatDateForInput(new Date(timeIn)) : ''
 				}
@@ -27,13 +28,15 @@ export function ManageTimeForm({
 				type="datetime-local"
 			/>
 			<Input
-				className="[&::-webkit-datetime-edit]:text-white [&::-webkit-calendar-picker-indicator]:invert w-full"
+				className=" w-full"
 				defaultValue={
 					timeOut ? formatDateForInput(new Date(timeOut)) : ''
 				}
 				name="time_out"
 				type="datetime-local"
-			/>
+			/> */}
+			<DateTimePicker />
+			<DateTimePicker />
 			<EditHoursButton
 				employeeId={employeeId}
 				onSuccess={() => onSuccess?.() || (() => {})}
