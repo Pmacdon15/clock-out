@@ -30,11 +30,7 @@ export default async function Page(props: PageProps<'/admin/manage-hours'>) {
 
 
 
-
-	
 	   console.log("test")
-
-
 
 
 
