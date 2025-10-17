@@ -8,7 +8,6 @@ import { Suspense } from 'react'
 import PageContainer from '@/components/ui/containers/page-container'
 import Header from '@/components/ui/headers/layout-header'
 import { Providers } from '../components/providers'
-export const experimental_ppr = true
 
 const geistSans = Geist({
 	variable: '--font-geist-sans',

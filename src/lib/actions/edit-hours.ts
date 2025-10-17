@@ -22,12 +22,26 @@ export async function editHours(
 
 	// Get time_in and time_out from formData
 	const timeIn = formData.get('time_in')?.toString()
-	const timeOut = formData.get('time_out')?.toString()
+	let timeOut = formData.get('time_out')?.toString()
 
-	if (!timeIn) {
+	if (
+		timeIn === undefined ||
+		timeIn === null ||
+		timeIn === '' ||
+		timeIn.endsWith('T')
+	) {
 		return {
 			error: 'Time in is required',
 		}
+	}
+
+	if (
+		timeOut === undefined ||
+		timeOut === null ||
+		timeOut === '' ||
+		timeOut.endsWith('T')
+	) {
+		timeOut = undefined
 	}
 
 	// Convert time to UTC
@@ -35,12 +49,9 @@ export async function editHours(
 	let utcTimeOut: string | null = null
 
 	try {
-		utcTimeIn = moment.tz(`${timeIn}:00`, timeZone).utc().toISOString()
+		utcTimeIn = moment.tz(timeIn, timeZone).utc().toISOString()
 		if (timeOut) {
-			utcTimeOut = moment
-				.tz(`${timeOut}:00`, timeZone)
-				.utc()
-				.toISOString()
+			utcTimeOut = moment.tz(timeOut, timeZone).utc().toISOString()
 		}
 	} catch (error) {
 		console.error('Error converting time to UTC:', error)

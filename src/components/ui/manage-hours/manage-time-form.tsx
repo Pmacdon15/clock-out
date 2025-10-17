@@ -1,7 +1,7 @@
 'use client'
-import { formatDateForInput } from '@/lib/utils/filter-utils'
+import { useState } from 'react'
 import EditHoursButton from '../buttons/edit-hours-button'
-import { Input } from '../input'
+import { DateTimePicker } from '../inputs/date-time-picker'
 
 export function ManageTimeForm({
 	id,
@@ -16,24 +16,41 @@ export function ManageTimeForm({
 	onSuccess?: () => void
 	employeeId?: string
 }) {
+	const [timeInDate, setTimeInDate] = useState<Date | undefined>(
+		timeIn ? new Date(timeIn) : undefined,
+	)
+	const [timeInTime, setTimeInTime] = useState<string>(
+		timeIn ? new Date(timeIn).toTimeString().slice(0, 8) : '00:00:00',
+	)
+	const [timeOutDate, setTimeOutDate] = useState<Date | undefined>(
+		timeOut ? new Date(timeOut) : undefined,
+	)
+	const [timeOutTime, setTimeOutTime] = useState<string>(
+		timeOut ? new Date(timeOut).toTimeString().slice(0, 8) : '00:00:00',
+	)
+
 	return (
-		<form className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-			<Input
-				className="[&::-webkit-datetime-edit]:text-white [&::-webkit-calendar-picker-indicator]:invert w-full"
-				defaultValue={
-					timeIn ? formatDateForInput(new Date(timeIn)) : ''
-				}
-				name="time_in"
-				type="datetime-local"
-			/>
-			<Input
-				className="[&::-webkit-datetime-edit]:text-white [&::-webkit-calendar-picker-indicator]:invert w-full"
-				defaultValue={
-					timeOut ? formatDateForInput(new Date(timeOut)) : ''
-				}
-				name="time_out"
-				type="datetime-local"
-			/>
+		<form className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-x-16">
+			<div className="flex flex-col gap-2 mx-auto">
+				<h1>Start</h1>
+				<DateTimePicker
+					date={timeInDate}
+					name="time_in"
+					setDate={setTimeInDate}
+					setTime={setTimeInTime}
+					time={timeInTime}
+				/>
+			</div>
+			<div className="flex flex-col gap-2 mx-auto">
+				<h1>End</h1>
+				<DateTimePicker
+					date={timeOutDate}
+					name="time_out"
+					setDate={setTimeOutDate}
+					setTime={setTimeOutTime}
+					time={timeOutTime}
+				/>
+			</div>
 			<EditHoursButton
 				employeeId={employeeId}
 				onSuccess={() => onSuccess?.() || (() => {})}
