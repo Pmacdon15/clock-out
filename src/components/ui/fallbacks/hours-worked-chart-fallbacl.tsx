@@ -23,14 +23,7 @@ export default function HoursWorkedChartFallback() {
 			</CardHeader>
 			<CardContent>
 				<div>
-					<div className="mb-4">
-						<label className="mr-2" htmlFor="week-select">
-							Filter by week:
-						</label>
-						<select className="border p-1 rounded" id="week-select">
-							<option value={''}>Select a Week</option>
-						</select>
-					</div>
+					<div className="mb-4"></div>
 					<div className="h-96">
 						<ChartContainer
 							className="h-full aspect-auto"
