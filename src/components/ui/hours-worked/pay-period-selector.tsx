@@ -6,6 +6,7 @@ import {
 	useHandleParamChange,
 } from '@/lib/utils/filter-utils'
 import { Input } from '../input'
+import { DatePicker } from '../inputs/date-picker'
 
 export default function PayPeriodSelector({
 	startDate,
@@ -39,17 +40,18 @@ function DateSelector({
 			<h1 className="w-24 md:w-1/6">
 				{variant === 'startDate' ? 'Start Date' : 'End Date'}
 			</h1>
-			<Input
-				className="w-full [&::-webkit-calendar-picker-indicator]:invert "
+			{/* <Input
+				className="w-38 md:w-2/6 [&::-webkit-calendar-picker-indicator]:invert [&::-webkit-datetime-edit-text]:text-white "
 				defaultValue={
 					dateToSet ? formatDateForInput(new Date(dateToSet)) : ''
 				}
-				name={variant}
+				name={variant}				
 				onChange={(e) =>
 					handleParamChange(variant, e.target.value, '/hours-worked')
 				}
 				type="date"
-			/>
+			/> */}
+			<DatePicker />
 		</div>
 	)
 }
