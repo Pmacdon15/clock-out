@@ -97,20 +97,20 @@ export async function getTimeCardsDb(
 }
 
 export async function getHoursWorkedDb(
-	userId: string,
-	orgId: string,
-	week?: string,
+  userId: string,
+  orgId: string,
+  week?: string,
 ): Promise<HoursWorked[]> {
-	const sql = neon(process.env.DATABASE_URL || '')
+  const sql = neon(process.env.DATABASE_URL || '')
 
-	if (week && week !== '') {
-		const [year, weekNumber] = week.split('-W').map(Number)
-		const startDate = new Date(year, 0, 1 + (weekNumber - 1) * 7)
-		startDate.setDate(startDate.getDate() - startDate.getDay() + 1) // Monday
-		const endDate = new Date(startDate)
-		endDate.setDate(endDate.getDate() + 6) // Sunday
+  if (week && week !== '') {
+    const [year, weekNumber] = week.split('-W').map(Number)
+    const startDate = new Date(year, 0, 1 + (weekNumber - 1) * 7)
+    startDate.setDate(startDate.getDate() - startDate.getDay() + 1) // Monday
+    const endDate = new Date(startDate)
+    endDate.setDate(endDate.getDate() + 6) // Sunday
 
-		const result = (await sql`
+    const result = (await sql`
             SELECT
                 DATE(time_in) as date,
                 SUM(EXTRACT(EPOCH FROM (time_out - time_in))) / 3600 as hours
@@ -122,17 +122,20 @@ export async function getHoursWorkedDb(
             ORDER BY date;
         `) as HoursWorkedRow[]
 
-		return result.map((row) => {
-			const hours = parseFloat(row.hours)
-			const lightness = Math.max(30, 60 - hours * 3)
-			return {
-				...row,
-				hours,
-				fill: `hsl(220, 80%, ${lightness}%)`,
-			}
-		})
-	} else {
-		const result = (await sql`
+    return result.map((row) => {
+      const date = new Date(row.date);
+      date.setHours(0, 0, 0, 0); // Set time to start of day
+      const hours = parseFloat(row.hours)
+      const lightness = Math.max(30, 60 - hours * 3)
+      return {
+        ...row,
+        date,
+        hours,
+        fill: `hsl(220, 80%, ${lightness}%)`,
+      }
+    })
+  } else {
+    const result = (await sql`
             SELECT
                 DATE(time_in) as date,
                 SUM(EXTRACT(EPOCH FROM (time_out - time_in))) / 3600 as hours
@@ -142,16 +145,19 @@ export async function getHoursWorkedDb(
             ORDER BY date;
         `) as HoursWorkedRow[]
 
-		return result.map((row) => {
-			const hours = parseFloat(row.hours)
-			const lightness = Math.max(30, 60 - hours * 3)
-			return {
-				...row,
-				hours,
-				fill: `hsl(220, 80%, ${lightness}%)`,
-			}
-		})
-	}
+    return result.map((row) => {
+      const date = new Date(row.date);
+      date.setHours(0, 0, 0, 0); // Set time to start of day
+      const hours = parseFloat(row.hours)
+      const lightness = Math.max(30, 60 - hours * 3)
+      return {
+        ...row,
+        date,
+        hours,
+        fill: `hsl(220, 80%, ${lightness}%)`,
+      }
+    })
+  }
 }
 
 interface WeekRow {
