@@ -51,7 +51,7 @@ export function HoursWorkedChart({
 					/>
 				</BarChart>
 			</ChartContainer>
-			<h1>Total Hours: {totalHours}</h1>
+			<h1 className='mb-4'>Total Hours: {totalHours}</h1>
 		</>
 	)
 }
