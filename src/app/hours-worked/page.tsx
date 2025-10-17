@@ -17,22 +17,22 @@ export default async function HoursWorkedPage(
 ) {
 	const searchParams = await props.searchParams
 
-	const dateParam = searchParams.date
+	const weekParam = searchParams.week
 	const startDateParam = searchParams.startDate
 	const endDateParam = searchParams.endDate
 
-	const date = Array.isArray(dateParam) ? dateParam[0] : dateParam
+	const week = Array.isArray(weekParam) ? weekParam[0] : weekParam
 	const startDate = Array.isArray(startDateParam)
 		? startDateParam[0]
 		: startDateParam
 	const endDate = Array.isArray(endDateParam) ? endDateParam[0] : endDateParam
 
-	const dateObject = date ? new Date(date) : undefined
+	const dateObject = week ? new Date(week) : new Date()
 	const weekNumberResult = getWeekNumber(dateObject)
 	const currentYear = weekNumberResult?.[0]
 
 	const weeksPromise = getAllWeeksWithWork()
-	const hoursWorkedPromise = getHoursWorked(date)
+	const hoursWorkedPromise = getHoursWorked(week)
 	const payPeriodHoursPromise = getPayPeriodHoursWorked(startDate, endDate)
 	const hoursWorkedByYearPromise = getHoursWorkedByYear(currentYear)
 
