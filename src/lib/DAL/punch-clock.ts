@@ -52,6 +52,7 @@ export async function getHoursWorked(week?: string): Promise<HoursWorked[]> {
 			orgId || userId,
 			week,
 		)
+		console.log('server Hours Worked: ', hoursWorked)
 		return hoursWorked
 	} catch (e) {
 		console.error('Error: ', e)
