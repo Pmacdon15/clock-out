@@ -1,6 +1,7 @@
 import { neon } from '@neondatabase/serverless'
 import type {
 	HoursWorked,
+	HoursWorkedRow,
 	MonthlyHours,
 	TimeCard,
 	Week,
@@ -95,10 +96,7 @@ export async function getTimeCardsDb(
 	}
 }
 
-interface HoursWorkedRow {
-	date: string
-	hours: string
-}
+
 
 export async function getHoursWorkedDb(
 	userId: string,
