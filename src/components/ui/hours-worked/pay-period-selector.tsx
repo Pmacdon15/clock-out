@@ -35,12 +35,12 @@ function DateSelector({
 
 	const handleParamChange = useHandleParamChange()
 	return (
-		<div className="flex w-3/6">
-			<h1 className="w-1/6">
+		<div className="flex w-full md:w-3/6">
+			<h1 className="w-24 md:w-1/6">
 				{variant === 'startDate' ? 'Start Date' : 'End Date'}
 			</h1>
 			<Input
-				className="w-2/6 text-white bg-transparent border-white focus:ring-white [&::-webkit-datetime-edit]:text-white [&::-webkit-calendar-picker-indicator]:invert"
+				className="w-38 md:w-2/6 text-white bg-transparent border-white focus:ring-white [&::-webkit-datetime-edit]:text-white [&::-webkit-calendar-picker-indicator]:invert"
 				defaultValue={
 					dateToSet ? formatDateForInput(new Date(dateToSet)) : ''
 				}
