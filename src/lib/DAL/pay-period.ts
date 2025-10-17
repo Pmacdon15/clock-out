@@ -15,6 +15,7 @@ export async function getPayPeriodHoursWorked(
 			startDate,
 			endDate,
 		)
+		console.log('Server Pay Period Hours: ', result)
 		return result
 	} catch (e) {
 		console.log('Error: ', e)

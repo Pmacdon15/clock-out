@@ -97,61 +97,61 @@ export async function getTimeCardsDb(
 }
 
 export async function getHoursWorkedDb(
-	userId: string,
-	orgId: string,
-	week?: string,
+  userId: string,
+  orgId: string,
+  week?: string,
 ): Promise<HoursWorked[]> {
-	const sql = neon(process.env.DATABASE_URL || '')
+  const sql = neon(process.env.DATABASE_URL || '')
 
-	if (week && week !== '') {
-		const [year, weekNumber] = week.split('-W').map(Number)
-		const startDate = new Date(year, 0, 1 + (weekNumber - 1) * 7)
-		startDate.setDate(startDate.getDate() - startDate.getDay() + 1) // Monday
-		const endDate = new Date(startDate)
-		endDate.setDate(endDate.getDate() + 6) // Sunday
+  if (week && week !== '') {
+    const [year, weekNumber] = week.split('-W').map(Number)
+    const startDate = new Date(year, 0, 1 + (weekNumber - 1) * 7)
+    startDate.setDate(startDate.getDate() - startDate.getDay() + 1) // Monday
+    const endDate = new Date(startDate)
+    endDate.setDate(endDate.getDate() + 6) // Sunday
 
-		const result = (await sql`
+    const result = (await sql`
             SELECT
-                DATE(time_in) as date,
+                time_in as date,
                 SUM(EXTRACT(EPOCH FROM (time_out - time_in))) / 3600 as hours
             FROM time_clock
             WHERE user_id = ${userId} AND org_id = ${orgId} AND time_out IS NOT NULL
-              AND DATE(time_in) >= ${startDate.toISOString().split('T')[0]}
-              AND DATE(time_in) <= ${endDate.toISOString().split('T')[0]}
-            GROUP BY DATE(time_in)
-            ORDER BY date;
+              AND time_in >= ${startDate.toISOString()}
+              AND time_in <= ${endDate.toISOString()}
+            GROUP BY time_in
+            ORDER BY time_in;
         `) as HoursWorkedRow[]
 
-		return result.map((row) => {
-			const hours = parseFloat(row.hours)
-			const lightness = Math.max(30, 60 - hours * 3)
-			return {
-				...row,
-				hours,
-				fill: `hsl(220, 80%, ${lightness}%)`,
-			}
-		})
-	} else {
-		const result = (await sql`
+    return result.map((row) => {
+      const hours = parseFloat(row.hours)
+      const lightness = Math.max(30, 60 - hours * 3)
+      return {
+        ...row,
+        hours,
+        fill: `hsl(220, 80%, ${lightness}%)`,
+      }
+    })
+  } else {
+    const result = (await sql`
             SELECT
-                DATE(time_in) as date,
+                time_in as date,
                 SUM(EXTRACT(EPOCH FROM (time_out - time_in))) / 3600 as hours
             FROM time_clock
             WHERE user_id = ${userId} AND org_id = ${orgId} AND time_out IS NOT NULL
-            GROUP BY DATE(time_in)
-            ORDER BY date;
+            GROUP BY time_in
+            ORDER BY time_in;
         `) as HoursWorkedRow[]
 
-		return result.map((row) => {
-			const hours = parseFloat(row.hours)
-			const lightness = Math.max(30, 60 - hours * 3)
-			return {
-				...row,
-				hours,
-				fill: `hsl(220, 80%, ${lightness}%)`,
-			}
-		})
-	}
+    return result.map((row) => {
+      const hours = parseFloat(row.hours)
+      const lightness = Math.max(30, 60 - hours * 3)
+      return {
+        ...row,
+        hours,
+        fill: `hsl(220, 80%, ${lightness}%)`,
+      }
+    })
+  }
 }
 
 interface WeekRow {
