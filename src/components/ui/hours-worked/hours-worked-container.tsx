@@ -1,5 +1,3 @@
-'use client'
-
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { HoursWorkedChart } from '@/components/ui/charts/hours-worked-chart'
 import type { HoursWorked, Week } from '@/lib/types/punch-clock-types'

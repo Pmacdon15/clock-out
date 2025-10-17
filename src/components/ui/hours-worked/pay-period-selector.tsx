@@ -15,7 +15,7 @@ export default function PayPeriodSelector({
 	endDate?: string
 }) {
 	return (
-		<div>
+		<div className='flex flex-col gap-2'>
 			<DateSelector date={startDate} />
 			<DateSelector date={endDate} variant="endDate" />
 		</div>

@@ -1,8 +1,8 @@
 import { Suspense } from 'react'
 import { CardSkeleton } from '@/components/ui/card'
-import HoursWorkedFilterFallback from '@/components/ui/fallbacks/hours-worked-filter-fallback'
 import UserOrgHeader from '@/components/ui/headers/user-org-header'
-import { HoursWorkedContainer } from '@/components/ui/hours-worked/hours-worked'
+import { HoursWorkedContainer } from '@/components/ui/hours-worked/hours-worked-container'
+import TypeOfHoursSelector from '@/components/ui/hours-worked/type-of-hours-worked-selector'
 import { YearlyHoursWorked } from '@/components/ui/hours-worked/yearly-hours-worked'
 import { getPayPeriodHoursWorked } from '@/lib/DAL/pay-period'
 import {
@@ -39,23 +39,25 @@ export default async function HoursWorkedPage(
 	return (
 		<>
 			<UserOrgHeader />
-			<div className="p-2 w-full md:w-5/6">
-				<Suspense fallback={<HoursWorkedFilterFallback />}>
-					<HoursWorkedContainer
-						hoursPromise={hoursWorkedPromise}
-						weeksPromise={weeksPromise}
-					/>
-				</Suspense>
-			</div>
-			<div className="p-2 w-full md:w-5/6">
-				<Suspense fallback={<HoursWorkedFilterFallback />}>
-					<HoursWorkedContainer
-						endDate={endDate}
-						hoursPromise={payPeriodHoursPromise}
-						startDate={startDate}
-					/>
-				</Suspense>
-			</div>
+			<TypeOfHoursSelector
+				child1={
+					<div className="p-2 w-full md:w-5/6">
+						<HoursWorkedContainer
+							hoursPromise={hoursWorkedPromise}
+							weeksPromise={weeksPromise}
+						/>
+					</div>
+				}
+				child2={
+					<div className="p-2 w-full md:w-5/6">
+						<HoursWorkedContainer
+							endDate={endDate}
+							hoursPromise={payPeriodHoursPromise}
+							startDate={startDate}
+						/>
+					</div>
+				}
+			></TypeOfHoursSelector>
 			<div className="p-2 w-full md:w-5/6">
 				<Suspense fallback={<CardSkeleton />}>
 					<YearlyHoursWorked
