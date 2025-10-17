@@ -6,7 +6,7 @@ import type { HoursWorked, Week } from '@/lib/types/punch-clock-types'
 import { WeekSelector } from '../filters/week-selector'
 
 interface HoursWorkedFilterProps {
-	hoursPromise?: Promise<HoursWorked[]>
+	hoursPromise: Promise<HoursWorked[]>
 	// weeks: { label: string, value: string }[];
 	weeksPromise?: Promise<Week[]>
 }
