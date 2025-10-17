@@ -28,6 +28,7 @@ export function DateTimePicker({
 }) {
 	const [open, setOpen] = React.useState(false)
 
+	// console.log('Time:', time)
 	return (
 		<div className="flex gap-4">
 			<input
