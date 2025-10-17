@@ -4,6 +4,7 @@ import HoursWorkedFilterFallback from '@/components/ui/fallbacks/hours-worked-fi
 import UserOrgHeader from '@/components/ui/headers/user-org-header'
 import { HoursWorkedContainer } from '@/components/ui/hours-worked/hours-worked'
 import { YearlyHoursWorked } from '@/components/ui/hours-worked/yearly-hours-worked'
+import { getPayPeriodHoursWorked } from '@/lib/DAL/pay-period'
 import {
 	getAllWeeksWithWork,
 	getHoursWorked,
@@ -48,8 +49,8 @@ export default async function HoursWorkedPage(
 			</div>
 			<div className="p-2 w-full md:w-5/6">
 				<Suspense fallback={<HoursWorkedFilterFallback />}>
-					<HoursWorkedContainer 
-					hoursPromise={hoursWorkedPromise}
+					<HoursWorkedContainer
+						hoursPromise={payPeriodHoursPromise}
 					/>
 				</Suspense>
 			</div>

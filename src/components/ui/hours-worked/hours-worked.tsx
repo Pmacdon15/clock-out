@@ -18,7 +18,7 @@ export function HoursWorkedContainer({
 	return (
 		<Card>
 			<CardHeader>
-				<CardTitle>Hours Worked</CardTitle>
+				<CardTitle>{weeksPromise ? 'Hours Worked' : 'Pay Period'}</CardTitle>
 			</CardHeader>
 			<CardContent>
 				<div>
