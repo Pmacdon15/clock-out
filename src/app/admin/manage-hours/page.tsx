@@ -26,10 +26,10 @@ export default async function Page(props: PageProps<'/admin/manage-hours'>) {
 	const hoursPromise = getEmployeeTimeCards(week, employeeId)
  
 
-
 	   console.log("test")
 
 
+	
 
 	return (
 		<>
