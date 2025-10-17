@@ -24,6 +24,12 @@ export default async function Page(props: PageProps<'/admin/manage-hours'>) {
 	const orgMembersPromise = fetchOrgMembers()
 	const weeksPromise = getAllWeeksWithWorkForEmployee(employeeId)
 	const hoursPromise = getEmployeeTimeCards(week, employeeId)
+ 
+	   console.log("test")
+
+
+
+
 
 	return (
 		<>
