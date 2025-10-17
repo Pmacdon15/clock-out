@@ -48,7 +48,7 @@ function DateSelector({
 				onChange={(e) =>
 					handleParamChange(variant, e.target.value, '/hours-worked')
 				}
-				type="datetime-local"
+				type="date"
 			/>
 		</div>
 	)
