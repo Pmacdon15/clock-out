@@ -1,10 +1,11 @@
+import type { Route } from 'next'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 export default function LinkWithPath({
 	path,
 	text,
 }: {
-	path: string
+	path: Route
 	text: string
 }) {
 	return (
