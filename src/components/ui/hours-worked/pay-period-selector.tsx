@@ -29,7 +29,7 @@ function DateSelector({
 }) {
   const searchParams = useSearchParams()
   const dateFromParams = searchParams.get(variant)
-  const dateToSet = dateFromParams ?? date
+  const dateToSet = date ?? dateFromParams 
 
   const handleParamChange = useHandleParamChange()
 
