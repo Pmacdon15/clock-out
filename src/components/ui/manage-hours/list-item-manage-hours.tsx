@@ -13,7 +13,7 @@ export default function ListItemManageHours({
 	entry: TimeCard
 }) {
 	const [editHoursState, setEditHours] = useState(false)
-	console.log('Hours entry: ', entry)
+	
 	return (
 		<li
 			className="py-4 grid grid-cols-2 lg:grid-cols-6 gap-4 items-center w-full"
