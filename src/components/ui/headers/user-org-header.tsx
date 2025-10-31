@@ -1,13 +1,11 @@
 import { OrganizationSwitcher, UserButton } from '@clerk/nextjs'
-import { Suspense } from 'react'
 import BorderBox from '../containers/border-box'
-import EditHoursLink from '../links/edit-hours-link'
 import LinkWithPath from '../links/link'
 
 export default function UserOrgHeader({
-	editHours = false,
+	path,
 }: {
-	editHours?: boolean
+	path: '/punch-clock' | '/admin/manage-hours' | '/hours-worked'
 }) {
 	return (
 		<BorderBox>
@@ -17,12 +15,19 @@ export default function UserOrgHeader({
 					<OrganizationSwitcher />
 				</div>
 				<div className="flex flex-wrap gap-4 ">
-					<LinkWithPath path={'/punch-clock'} text={'Punch Clock'} />
-					{!editHours ? (
-						<Suspense>
-							<EditHoursLink />
-						</Suspense>
-					) : (
+					{path !== '/punch-clock' && (
+						<LinkWithPath
+							path={'/punch-clock'}
+							text={'Punch Clock'}
+						/>
+					)}
+					{path !== '/admin/manage-hours' && (
+						<LinkWithPath
+							path={'/admin/manage-hours'}
+							text={'Manage Hours'}
+						/>
+					)}
+					{path !== '/hours-worked' && (
 						<LinkWithPath
 							path={'/hours-worked'}
 							text={'Hours Worked'}

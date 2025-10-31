@@ -11,7 +11,7 @@ export default function Page(props: PageProps<'/admin/manage-hours'>) {
 
 	return (
 		<>
-			<UserOrgHeader editHours />
+			<UserOrgHeader path={'/admin/manage-hours'} />
 			<BorderBox>
 				<h1 className="text-2xl font-bold mb-4">Manage Hours</h1>
 				<Suspense>
