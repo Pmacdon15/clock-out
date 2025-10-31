@@ -1,22 +1,18 @@
 'use client'
-import dynamic from 'next/dynamic'
-
-const DynamicTimeInput = dynamic(() => import('./inputs/time-input'), {
-	ssr: false,
-})
+import { use } from 'react'
+import type { TimeCard } from '@/lib/types/punch-clock-types'
+import TimeInput from './inputs/time-input'
 
 export default function PunchClockClient({
-	timeCard,
+	timeCardPromise,
 }: {
-	timeCard: { time_in?: Date } | null
+	timeCardPromise: Promise<TimeCard | null>
 }) {
+	const timeCard = use(timeCardPromise)
 	return (
 		<>
-			<DynamicTimeInput
-				clockInTime={timeCard?.time_in}
-				disabled={!!timeCard}
-			/>
-			<DynamicTimeInput
+			<TimeInput clockInTime={timeCard?.time_in} disabled={!!timeCard} />
+			<TimeInput
 				clockInTime={timeCard?.time_in}
 				disabled={!timeCard}
 				punchOut

@@ -1,3 +1,5 @@
+'use client'
+import { useOrganization } from '@clerk/nextjs'
 import { Trash2 } from 'lucide-react'
 import { Button } from '../button'
 import DeleteHoursButton from '../buttons/delete-hours-button'
@@ -13,6 +15,10 @@ import {
 } from '../dialog'
 
 export default function DeleteHoursDialog({ hoursId }: { hoursId: number }) {
+	const { membership } = useOrganization()
+	console.log('orginfo:', membership)
+
+	if (membership?.roleName !== 'Admin') return null
 	return (
 		<Dialog>
 			<DialogTrigger>

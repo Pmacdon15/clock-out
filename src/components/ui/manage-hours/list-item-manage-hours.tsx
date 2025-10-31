@@ -1,8 +1,8 @@
 'use client'
-import { Edit } from 'lucide-react'
 import { Activity, useState } from 'react'
 import type { TimeCard } from '@/lib/types/punch-clock-types'
 import { formatTimeForDisplay } from '@/lib/utils/utils'
+import EditTimesButton from '../buttons/edit-times-button'
 import DeleteHoursDialog from '../dialogs/delete-hours-dialog'
 import { ManageTimeForm } from './manage-time-form'
 
@@ -12,8 +12,8 @@ export default function ListItemManageHours({
 	key: number
 	entry: TimeCard
 }) {
-	const [editHoursState, setEditHours] = useState(false)
-	
+	const [editHoursState, setEditHoursState] = useState(false)
+
 	return (
 		<li
 			className="py-4 grid grid-cols-2 lg:grid-cols-6 gap-4 items-center w-full"
@@ -31,7 +31,7 @@ export default function ListItemManageHours({
 				<Activity mode={editHoursState ? 'visible' : 'hidden'}>
 					<ManageTimeForm
 						id={entry.id}
-						onSuccess={() => setEditHours(false)}
+						onSuccess={() => setEditHoursState(false)}
 						timeIn={entry.time_in}
 						timeOut={entry.time_out}
 					/>
@@ -50,13 +50,10 @@ export default function ListItemManageHours({
 				</p>
 			</div>
 			<div className="col-span-1 lg:col-span-1 flex justify-end lg:justify-end mt-4 lg:mt-0 gap-2">
-				<button
-					className="p-2 rounded-full"
-					onClick={() => setEditHours(!editHoursState)}
-					type="button"
-				>
-					<Edit size={20} />
-				</button>
+				<EditTimesButton
+					editHoursState={editHoursState}
+					setEditHours={setEditHoursState}
+				/>
 				<DeleteHoursDialog hoursId={entry.id} />
 			</div>
 		</li>

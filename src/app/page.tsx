@@ -9,7 +9,6 @@ import {
 import { Suspense } from 'react'
 import BorderBox from '@/components/ui/containers/border-box'
 import BlueTextLink from '@/components/ui/links/blue-text-link'
-import EditHoursLink from '@/components/ui/links/edit-hours-link'
 import LinkWithPath from '../components/ui/links/link'
 
 export default function Home() {
@@ -28,7 +27,7 @@ export default function Home() {
 
 			<Suspense>
 				<SignedOut>
-					<div className="rounded-xl p-1 bg-gradient-to-r from-blue-500 to-cyan-500 w-full max-w-md">
+					<div className="rounded-xl p-1 bg-gradient-to-r from-blue-500 to-cyan-500 w-full max-w- md">
 						<div className="bg-black text-white rounded-lg p-4">
 							<div className="flex flex-col sm:flex-row gap-4 items-center w-full justify-center">
 								<SignInButton />
@@ -44,7 +43,7 @@ export default function Home() {
 								<UserButton />
 								<OrganizationSwitcher />
 							</div>
-							<nav className="flex flex-col sm:flex-row gap-4 items-center">
+							<div className="flex flex-col sm:flex-row gap-4 items-center">
 								<LinkWithPath
 									path={'/punch-clock'}
 									text={'Punch Clock'}
@@ -53,10 +52,11 @@ export default function Home() {
 									path={'/hours-worked'}
 									text={'Hours Worked'}
 								/>
-								<Suspense>
-									<EditHoursLink />
-								</Suspense>
-							</nav>
+								<LinkWithPath
+									path={'/admin/manage-hours'}
+									text={'Manage Hours'}
+								/>
+							</div>
 						</div>
 					</div>
 				</SignedIn>

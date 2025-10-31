@@ -1,13 +1,12 @@
 import { OrganizationSwitcher, SignedIn, UserButton } from '@clerk/nextjs'
 import { Suspense } from 'react'
 import BorderBox from '@/components/ui/containers/border-box'
-import EditHoursLink from '@/components/ui/links/edit-hours-link'
 import LinkWithPath from '@/components/ui/links/link'
 import PunchClockClient from '@/components/ui/punch-clock-client'
 import { getTimeCard } from '@/lib/DAL/punch-clock'
 
-export default async function Page() {
-	const timeCard = await getTimeCard()
+export default function Page() {
+	const timeCardPromise = getTimeCard()
 	return (
 		<BorderBox>
 			<SignedIn>
@@ -20,13 +19,14 @@ export default async function Page() {
 						path={'/hours-worked'}
 						text={'Hours Worked'}
 					/>
-					<Suspense>
-						<EditHoursLink />
-					</Suspense>
+					<LinkWithPath
+						path={'/admin/manage-hours'}
+						text={'Manage Hours'}
+					/>
 				</div>
 			</SignedIn>
 			<Suspense>
-				<PunchClockClient timeCard={timeCard} />
+				<PunchClockClient timeCardPromise={timeCardPromise} />
 			</Suspense>
 		</BorderBox>
 	)

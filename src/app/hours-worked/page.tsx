@@ -8,16 +8,13 @@ import { getAllWeeksWithWork } from '@/lib/DAL/punch-clock'
 
 export default function HoursWorkedPage(props: PageProps<'/hours-worked'>) {
 	const weeksPromise = getAllWeeksWithWork()
-	
+
 	return (
 		<>
-			<UserOrgHeader />
+			<UserOrgHeader path={'/hours-worked'} />
 			<TypeOfHoursSelector
 				child1={
-					<div
-						key="weekly"
-						className="p-2 w-full md:w-5/6"
-					>
+					<div className="p-2 w-full md:w-5/6" key="weekly">
 						<Suspense>
 							<HoursWorkedContainer
 								props={props}
@@ -27,10 +24,7 @@ export default function HoursWorkedPage(props: PageProps<'/hours-worked'>) {
 					</div>
 				}
 				child2={
-					<div
-						key="pay-period"
-						className="p-2 w-full md:w-5/6"
-					>
+					<div className="p-2 w-full md:w-5/6" key="pay-period">
 						<Suspense>
 							<HoursWorkedContainer props={props} />
 						</Suspense>
@@ -39,9 +33,7 @@ export default function HoursWorkedPage(props: PageProps<'/hours-worked'>) {
 			/>
 			<div className="p-2 w-full md:w-5/6">
 				<Suspense fallback={<CardSkeleton />}>
-					<YearlyHoursWorked
-						props={props}
-					/>
+					<YearlyHoursWorked props={props} />
 				</Suspense>
 			</div>
 		</>
