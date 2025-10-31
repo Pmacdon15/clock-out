@@ -9,22 +9,24 @@ export default function Page() {
 	const timeCardPromise = getTimeCard()
 	return (
 		<BorderBox>
-			<SignedIn>
-				<div className="flex text-white justify-center">
-					<UserButton />
-					<OrganizationSwitcher />
-				</div>
-				<div className="flex justify-center gap-4 items-center ">
-					<LinkWithPath
-						path={'/hours-worked'}
-						text={'Hours Worked'}
-					/>
-					<LinkWithPath
-						path={'/admin/manage-hours'}
-						text={'Manage Hours'}
-					/>
-				</div>
-			</SignedIn>
+			<Suspense>
+				<SignedIn>
+					<div className="flex text-white justify-center">
+						<UserButton />
+						<OrganizationSwitcher />
+					</div>
+					<div className="flex justify-center gap-4 items-center ">
+						<LinkWithPath
+							path={'/hours-worked'}
+							text={'Hours Worked'}
+						/>
+						<LinkWithPath
+							path={'/admin/manage-hours'}
+							text={'Manage Hours'}
+						/>
+					</div>
+				</SignedIn>
+			</Suspense>
 			<Suspense>
 				<PunchClockClient timeCardPromise={timeCardPromise} />
 			</Suspense>
