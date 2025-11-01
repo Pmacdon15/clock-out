@@ -53,7 +53,7 @@ export default function Home() {
 									text={'Hours Worked'}
 								/>
 								<LinkWithPath
-									path={'/admin/manage-hours'}
+									path={'/manage-hours'}
 									text={'Manage Hours'}
 								/>
 							</div>

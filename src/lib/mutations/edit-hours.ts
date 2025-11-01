@@ -22,7 +22,7 @@ export const useEditHours = ({
 			return editHours(formData, timeZone, punchClockId, userId)
 		},
 		onSuccess: () => {
-			revalidatePathAction('/admin/manage-hours')
+			revalidatePathAction('/manage-hours')
 			revalidatePathAction('/hours-worked')
 			onSuccess?.()
 		},
@@ -38,7 +38,7 @@ export const useDeleteHours = () => {
 			return deleteHours(hoursId)
 		},
 		onSuccess: () => {
-			revalidatePathAction('/admin/manage-hours')
+			revalidatePathAction('/manage-hours')
 			revalidatePathAction('/hours-worked')
 		},
 		onError: (error) => {

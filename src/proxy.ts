@@ -9,5 +9,5 @@ export const config = {
 		'/(punch-clock)(.*)',
 		'/(hours-worked)(.*)',
 	],
-	protectedRoutes: ['/punch-clock', 'hours-worked', '/admin/manage-hours'],
+	protectedRoutes: ['/punch-clock', 'hours-worked', '/manage-hours'],
 }

@@ -6,12 +6,12 @@ import ManageHoursList from '@/components/ui/manage-hours/Manage-hours-list'
 import WeekSelectorWrapper from '@/components/ui/wrappers/week-selector-wrapper'
 import { fetchOrgMembers } from '@/lib/DAL/org-members'
 
-export default function Page(props: PageProps<'/admin/manage-hours'>) {
+export default function Page(props: PageProps<'/manage-hours'>) {
 	const orgMembersPromise = fetchOrgMembers()
 
 	return (
 		<>
-			<UserOrgHeader path={'/admin/manage-hours'} />
+			<UserOrgHeader path={'/manage-hours'} />
 			<BorderBox>
 				<h1 className="text-2xl font-bold mb-4">Manage Hours</h1>
 				<Suspense>

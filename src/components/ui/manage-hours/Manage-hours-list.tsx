@@ -5,7 +5,7 @@ import ListItemManageHours from './list-item-manage-hours'
 export default async function ManageHoursList({
 	props,
 }: {
-	props: PageProps<'/admin/manage-hours'>
+	props: PageProps<'/manage-hours'>
 }) {
 	const searchParams = await props.searchParams
 	const employeeIdValue = searchParams.employee

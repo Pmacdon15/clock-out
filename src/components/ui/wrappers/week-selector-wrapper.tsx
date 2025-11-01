@@ -4,7 +4,7 @@ import { WeekSelector } from '../filters/week-selector'
 export default async function WeekSelectorWrapper({
 	props,
 }: {
-	props: PageProps<'/admin/manage-hours'>
+	props: PageProps<'/manage-hours'>
 }) {
 	const searchParams = await props.searchParams
 
@@ -15,10 +15,5 @@ export default async function WeekSelectorWrapper({
 	const weekParam = searchParams.week
 	const weeksPromise = getAllWeeksWithWorkForEmployee(employeeId)
 
-	return (
-		<WeekSelector
-			variant="/admin/manage-hours"
-			weeksPromise={weeksPromise}
-		/>
-	)
+	return <WeekSelector variant="/manage-hours" weeksPromise={weeksPromise} />
 }

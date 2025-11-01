@@ -5,7 +5,7 @@ import LinkWithPath from '../links/link'
 export default function UserOrgHeader({
 	path,
 }: {
-	path: '/punch-clock' | '/admin/manage-hours' | '/hours-worked'
+	path: '/punch-clock' | '/manage-hours' | '/hours-worked'
 }) {
 	return (
 		<BorderBox>
@@ -21,9 +21,9 @@ export default function UserOrgHeader({
 							text={'Punch Clock'}
 						/>
 					)}
-					{path !== '/admin/manage-hours' && (
+					{path !== '/manage-hours' && (
 						<LinkWithPath
-							path={'/admin/manage-hours'}
+							path={'/manage-hours'}
 							text={'Manage Hours'}
 						/>
 					)}

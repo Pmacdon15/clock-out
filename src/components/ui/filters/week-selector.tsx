@@ -16,7 +16,7 @@ import {
 
 interface WeekSelectorProps {
 	weeksPromise: Promise<Week[]>
-	variant?: '/hours-worked' | '/admin/manage-hours'
+	variant?: '/hours-worked' | '/manage-hours'
 }
 
 export function WeekSelector({

@@ -31,7 +31,7 @@ export default function OrgMembersFilter({
 			<span>For</span>
 			<Select
 				onValueChange={(value) =>
-					handleParamChange('employee', value, '/admin/manage-hours')
+					handleParamChange('employee', value, '/manage-hours')
 				}
 				value={defaultValue}
 			>
