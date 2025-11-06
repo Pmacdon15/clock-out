@@ -27,7 +27,7 @@ export default function OrgMembersFilter({
 		employeeParam || (orgMembers.length > 0 ? orgMembers[0].userId : '')
 
 	return (
-		<h2 className="flex gap-4 items-center">
+		<h2 className="flex items-center gap-4">
 			<span>For</span>
 			<Select
 				onValueChange={(value) =>

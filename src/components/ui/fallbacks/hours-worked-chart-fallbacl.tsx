@@ -26,7 +26,7 @@ export default function HoursWorkedChartFallback() {
 					<div className="mb-4"></div>
 					<div className="h-96">
 						<ChartContainer
-							className="h-full aspect-auto"
+							className="aspect-auto h-full"
 							config={chartConfig}
 							id="hours-worked-chart"
 						>

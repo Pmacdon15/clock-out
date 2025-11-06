@@ -10,8 +10,8 @@ export default function AddHoursListItemForm() {
 	const { membership } = useOrganization()
 	if (membership?.roleName !== 'Admin') return null
 	return (
-		<li className="py-4 grid grid-cols-2 lg:grid-cols-6 items-center w-full">
-			<div className="col-span-2 lg:col-span-5 md:col-span-2">
+		<li className="grid w-full grid-cols-2 items-center py-4 lg:grid-cols-6">
+			<div className="col-span-2 md:col-span-2 lg:col-span-5">
 				<Activity
 					mode={showAddHoursForm && isLoaded ? 'visible' : 'hidden'}
 				>
@@ -21,9 +21,9 @@ export default function AddHoursListItemForm() {
 					/>
 				</Activity>
 			</div>
-			<div className="col-span-2 lg:col-span-6 flex justify-center items-center">
+			<div className="col-span-2 flex items-center justify-center lg:col-span-6">
 				<button
-					className="p-2 rounded-full hover:bg-gray-100"
+					className="rounded-full p-2 hover:bg-gray-100"
 					onClick={() => setShowAddHoursForm(!showAddHoursForm)}
 					type="button"
 				>

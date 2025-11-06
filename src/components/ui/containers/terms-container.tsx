@@ -9,8 +9,8 @@ export default function TermsContainer({
 }) {
 	return (
 		<BorderBox>
-			<div className="max-w-3xl mx-auto">
-				<h1 className="text-3xl font-bold mb-6">{typeOfContainer}</h1>
+			<div className="mx-auto max-w-3xl">
+				<h1 className="mb-6 font-bold text-3xl">{typeOfContainer}</h1>
 				<pre className="whitespace-pre-wrap font-sans">{children}</pre>
 			</div>
 		</BorderBox>

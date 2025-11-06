@@ -12,7 +12,7 @@ export default async function WeekSelectorWrapper({
 	const employeeId = Array.isArray(employeeIdValue)
 		? employeeIdValue[0]
 		: employeeIdValue
-	const weekParam = searchParams.week
+	const _weekParam = searchParams.week
 	const weeksPromise = getAllWeeksWithWorkForEmployee(employeeId)
 
 	return <WeekSelector variant="/manage-hours" weeksPromise={weeksPromise} />

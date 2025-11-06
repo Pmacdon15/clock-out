@@ -30,8 +30,8 @@ export function ManageTimeForm({
 	)
 
 	return (
-		<form className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-x-16">
-			<div className="flex flex-col gap-2 mx-auto">
+		<form className="grid grid-cols-1 gap-4 md:gap-x-16 lg:grid-cols-3">
+			<div className="mx-auto flex flex-col gap-2">
 				<h1>Start</h1>
 				<DateTimePicker
 					date={timeInDate}
@@ -41,7 +41,7 @@ export function ManageTimeForm({
 					time={timeInTime}
 				/>
 			</div>
-			<div className="flex flex-col gap-2 mx-auto">
+			<div className="mx-auto flex flex-col gap-2">
 				<h1>End</h1>
 				<DateTimePicker
 					date={timeOutDate}

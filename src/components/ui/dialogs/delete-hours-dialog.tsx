@@ -33,9 +33,9 @@ export default function DeleteHoursDialog({ hoursId }: { hoursId: number }) {
 						servers.
 					</DialogDescription>
 				</DialogHeader>
-				<DialogFooter className="justify-end sm:justify-end flex flex-col sm:flex-row gap-2 sm:gap-0">
+				<DialogFooter className="flex flex-col justify-end gap-2 sm:flex-row sm:justify-end sm:gap-0">
 					<DialogClose asChild>
-						<div className="flex justify-end gap-2 w-full sm:w-auto">
+						<div className="flex w-full justify-end gap-2 sm:w-auto">
 							<Button type="button" variant="secondary">
 								Cancel
 							</Button>

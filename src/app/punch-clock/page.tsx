@@ -11,11 +11,11 @@ export default function Page() {
 		<BorderBox>
 			<Suspense>
 				<SignedIn>
-					<div className="flex text-white justify-center">
+					<div className="flex justify-center text-white">
 						<UserButton />
 						<OrganizationSwitcher />
 					</div>
-					<div className="flex justify-center gap-4 items-center ">
+					<div className="flex items-center justify-center gap-4">
 						<LinkWithPath
 							path={'/hours-worked'}
 							text={'Hours Worked'}

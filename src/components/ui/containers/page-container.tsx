@@ -4,7 +4,7 @@ export default function PageContainer({
 	children: React.ReactNode
 }) {
 	return (
-		<div className="flex flex-col justify-center items-center p-4 mt-4 gap-4 md:gap-8">
+		<div className="mt-4 flex flex-col items-center justify-center gap-4 p-4 md:gap-8">
 			{children}
 		</div>
 	)

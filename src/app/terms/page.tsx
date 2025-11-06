@@ -16,7 +16,7 @@ export default async function TermsPage() {
 	const termsContent = await getTermsContent()
 
 	return (
-		<div className=" flex flex-col min-h-screen bg-background text-foreground pt-4 md:pt-8 p-2 w-full items-center gap-4">
+		<div className="flex min-h-screen w-full flex-col items-center gap-4 bg-background p-2 pt-4 text-foreground md:pt-8">
 			<TermsContainer typeOfContainer={'Terms of Service'}>
 				<ReactMarkdown remarkPlugins={[remarkGfm]}>
 					{termsContent}

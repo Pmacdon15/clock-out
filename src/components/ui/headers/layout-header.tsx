@@ -4,10 +4,10 @@ import Link from 'next/link'
 export default function Header() {
 	return (
 		<Link href={'/'}>
-			<div className="flex items-center justify-center w-full md:w-4/6 p-4 mx-auto rounded-full border-[3px] border-dashed border-blue-400 mt-8">
+			<div className="mx-auto mt-8 flex w-full items-center justify-center rounded-full border-[3px] border-blue-400 border-dashed p-4 md:w-4/6">
 				<div
 					className={
-						'flex gap-2 text-4xl font-bold justify-center align-middle items-center text-center'
+						'flex items-center justify-center gap-2 text-center align-middle font-bold text-4xl'
 					}
 				>
 					Clock Out <ClockAlert size={34} />

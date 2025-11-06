@@ -76,7 +76,7 @@ export function DateTimePicker({
 					Time
 				</Label>
 				<Input
-					className="bg-background appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
+					className="appearance-none bg-background [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
 					id="time-picker"
 					name={`${name}_time`}
 					onChange={(e) => setTime(e.target.value)}

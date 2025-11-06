@@ -29,7 +29,7 @@ export function WeekSelector({
 	const handleParamChange = useHandleParamChange()
 
 	return (
-		<div className="mb-4 flex gap-4 items-center">
+		<div className="mb-4 flex items-center gap-4">
 			<label className="mr-2" htmlFor="week-select">
 				Filter by week:
 			</label>

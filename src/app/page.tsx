@@ -15,10 +15,10 @@ export default function Home() {
 	return (
 		<>
 			<BorderBox>
-				<h1 className="text-4xl font-bold mb-4">
+				<h1 className="mb-4 font-bold text-4xl">
 					Welcome to Clock-Out
 				</h1>
-				<p className="text-xl max-w-2xl mx-auto">
+				<p className="mx-auto max-w-2xl text-xl">
 					Effortlessly track your working hours with our simple and
 					intuitive punch clock system. Stay organized, monitor your
 					productivity, and manage your time effectively.
@@ -27,9 +27,9 @@ export default function Home() {
 
 			<Suspense>
 				<SignedOut>
-					<div className="rounded-xl p-1 bg-gradient-to-r from-blue-500 to-cyan-500 w-full max-w- md">
-						<div className="bg-black text-white rounded-lg p-4">
-							<div className="flex flex-col sm:flex-row gap-4 items-center w-full justify-center">
+					<div className="max-w- md w-full rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 p-1">
+						<div className="rounded-lg bg-black p-4 text-white">
+							<div className="flex w-full flex-col items-center justify-center gap-4 sm:flex-row">
 								<SignInButton />
 								<SignUpButton />
 							</div>
@@ -37,13 +37,13 @@ export default function Home() {
 					</div>
 				</SignedOut>
 				<SignedIn>
-					<div className="rounded-xl p-1 bg-gradient-to-r from-blue-500 to-cyan-500 w-full max-w-md">
-						<div className="bg-black text-white rounded-lg p-4 flex flex-col items-center gap-6">
+					<div className="w-full max-w-md rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 p-1">
+						<div className="flex flex-col items-center gap-6 rounded-lg bg-black p-4 text-white">
 							<div className="flex items-center gap-4">
 								<UserButton />
 								<OrganizationSwitcher />
 							</div>
-							<div className="flex flex-col sm:flex-row gap-4 items-center">
+							<div className="flex flex-col items-center gap-4 sm:flex-row">
 								<LinkWithPath
 									path={'/punch-clock'}
 									text={'Punch Clock'}
@@ -62,9 +62,9 @@ export default function Home() {
 				</SignedIn>
 			</Suspense>
 
-			<div className="rounded-xl p-1 bg-gradient-to-r from-blue-500 to-cyan-500 w-full max-w-md">
-				<div className="bg-black text-white rounded-lg p-4">
-					<nav className="flex flex-col sm:flex-row gap-4 text-sm justify-center items-center">
+			<div className="w-full max-w-md rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 p-1">
+				<div className="rounded-lg bg-black p-4 text-white">
+					<nav className="flex flex-col items-center justify-center gap-4 text-sm sm:flex-row">
 						<BlueTextLink
 							path={'/terms'}
 							text={'Terms of Service'}

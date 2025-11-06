@@ -13,7 +13,7 @@ export default function Page(props: PageProps<'/manage-hours'>) {
 		<>
 			<UserOrgHeader path={'/manage-hours'} />
 			<BorderBox>
-				<h1 className="text-2xl font-bold mb-4">Manage Hours</h1>
+				<h1 className="mb-4 font-bold text-2xl">Manage Hours</h1>
 				<Suspense>
 					<OrgMembersFilter orgMemberPromise={orgMembersPromise} />
 				</Suspense>

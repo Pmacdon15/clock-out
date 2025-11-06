@@ -22,7 +22,7 @@ export async function HoursWorkedContainer({
 	// endDate,
 }: HoursWorkedFilterProps) {
 	const searchParams = await props.searchParams
-	
+
 	const startDateParam = searchParams.startDate
 	const endDateParam = searchParams.endDate
 
@@ -32,7 +32,7 @@ export async function HoursWorkedContainer({
 	const endDate = Array.isArray(endDateParam) ? endDateParam[0] : endDateParam
 
 	const payPeriodHoursPromise = getPayPeriodHoursWorked(startDate, endDate)
-	
+
 	const weekParam = searchParams.week
 	const week = Array.isArray(weekParam) ? weekParam[0] : weekParam
 	const weeklyHours = getHoursWorked(week)
@@ -58,7 +58,7 @@ export async function HoursWorkedContainer({
 					)}
 					<div className="h-96">
 						<HoursWorkedChart
-							className="h-full aspect-auto"
+							className="aspect-auto h-full"
 							hoursPromise={hoursToShow}
 						/>
 					</div>

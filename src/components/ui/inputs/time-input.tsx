@@ -59,7 +59,7 @@ export default function TimeInput({
 			</Label>
 			<div className="flex items-center gap-2">
 				<Input
-					className={`bg-background appearance-none w-30 ${disabled ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : ''}`}
+					className={`w-30 appearance-none bg-background ${disabled ? 'cursor-not-allowed bg-gray-200 text-gray-400' : ''}`}
 					disabled={disabled}
 					id="time-picker"
 					readOnly

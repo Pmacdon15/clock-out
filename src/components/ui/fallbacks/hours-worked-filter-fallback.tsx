@@ -13,7 +13,7 @@ export default function HoursWorkedFilterFallback() {
 							Filter by week:
 						</label>
 						<select
-							className="border p-1 rounded"
+							className="rounded border p-1"
 							id="week-select"
 						></select>
 					</div>

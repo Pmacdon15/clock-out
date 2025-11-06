@@ -9,12 +9,12 @@ export default function UserOrgHeader({
 }) {
 	return (
 		<BorderBox>
-			<div className="flex flex-col md:flex-row text-white justify-center items-center gap-4 ">
+			<div className="flex flex-col items-center justify-center gap-4 text-white md:flex-row">
 				<div>
 					<UserButton />
 					<OrganizationSwitcher />
 				</div>
-				<div className="flex flex-wrap gap-4 ">
+				<div className="flex flex-wrap gap-4">
 					{path !== '/punch-clock' && (
 						<LinkWithPath
 							path={'/punch-clock'}

@@ -16,7 +16,7 @@ export default function ListItemManageHours({
 
 	return (
 		<li
-			className="py-4 grid grid-cols-2 lg:grid-cols-6 gap-4 items-center w-full"
+			className="grid w-full grid-cols-2 items-center gap-4 py-4 lg:grid-cols-6"
 			key={entry.id}
 		>
 			<div className="col-span-2 lg:col-span-4">
@@ -37,8 +37,8 @@ export default function ListItemManageHours({
 					/>
 				</Activity>
 			</div>
-			<div className="col-span-1 lg:col-span-1 mt-4 lg:mt-0 text-left">
-				<p className="text-sm text-gray-500">
+			<div className="col-span-1 mt-4 text-left lg:col-span-1 lg:mt-0">
+				<p className="text-gray-500 text-sm">
 					Hours:{' '}
 					{entry.time_out
 						? (
@@ -49,7 +49,7 @@ export default function ListItemManageHours({
 						: 'N/A'}
 				</p>
 			</div>
-			<div className="col-span-1 lg:col-span-1 flex justify-end lg:justify-end mt-4 lg:mt-0 gap-2">
+			<div className="col-span-1 mt-4 flex justify-end gap-2 lg:col-span-1 lg:mt-0 lg:justify-end">
 				<EditTimesButton
 					editHoursState={editHoursState}
 					setEditHours={setEditHoursState}
@@ -69,11 +69,11 @@ function DisplayTimes({
 }) {
 	return (
 		<div className="grid grid-cols-2 gap-4">
-			<p className="text-sm text-gray-500">
+			<p className="text-gray-500 text-sm">
 				{new Date(timeIn).toLocaleDateString()}{' '}
 				{formatTimeForDisplay(timeIn)}
 			</p>
-			<p className="text-sm text-gray-500">
+			<p className="text-gray-500 text-sm">
 				{timeOut
 					? `${new Date(timeOut).toLocaleDateString()} ${formatTimeForDisplay(timeOut)}`
 					: 'Not punched out'}

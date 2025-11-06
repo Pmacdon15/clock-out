@@ -14,7 +14,7 @@ export default function HoursWorkedPage(props: PageProps<'/hours-worked'>) {
 			<UserOrgHeader path={'/hours-worked'} />
 			<TypeOfHoursSelector
 				child1={
-					<div className="p-2 w-full md:w-5/6" key="weekly">
+					<div className="w-full p-2 md:w-5/6" key="weekly">
 						<Suspense>
 							<HoursWorkedContainer
 								props={props}
@@ -24,14 +24,14 @@ export default function HoursWorkedPage(props: PageProps<'/hours-worked'>) {
 					</div>
 				}
 				child2={
-					<div className="p-2 w-full md:w-5/6" key="pay-period">
+					<div className="w-full p-2 md:w-5/6" key="pay-period">
 						<Suspense>
 							<HoursWorkedContainer props={props} />
 						</Suspense>
 					</div>
 				}
 			/>
-			<div className="p-2 w-full md:w-5/6">
+			<div className="w-full p-2 md:w-5/6">
 				<Suspense fallback={<CardSkeleton />}>
 					<YearlyHoursWorked props={props} />
 				</Suspense>

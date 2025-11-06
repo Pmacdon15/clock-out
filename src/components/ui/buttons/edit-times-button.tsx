@@ -13,7 +13,7 @@ export default function EditTimesButton({
 	if (membership?.roleName !== 'Admin') return null
 	return (
 		<button
-			className="p-2 rounded-full"
+			className="rounded-full p-2"
 			onClick={() => setEditHours(!editHoursState)}
 			type="button"
 		>

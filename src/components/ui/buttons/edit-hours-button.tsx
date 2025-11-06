@@ -19,9 +19,9 @@ export default function EditHoursButton({
 		},
 	})
 	return (
-		<div className="px-4 mt-auto">
+		<div className="mt-auto px-4">
 			<Button
-				className="w-full lg:w-auto mt-auto"
+				className="mt-auto w-full lg:w-auto"
 				disabled={isPending}
 				formAction={(formData: FormData) =>
 					mutate({
