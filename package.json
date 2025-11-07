@@ -7,7 +7,7 @@
 		"build": "next build --turbopack",
 		"start": "next start",
 		"lint": "biome check  --write --unsafe",
-		"format": "biome format --write --unsafe",
+		"format": "biome format --write ",
 		"postbuild": "next-sitemap --config next-sitemap.config.cjs"
 	},
 	"dependencies": {
@@ -43,7 +43,7 @@
 		"zod": "^4.1.12"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.2.0",
+		"@biomejs/biome": "^2.3.4",
 		"@tailwindcss/postcss": "^4",
 		"@types/node": "^20",
 		"@types/react": "^19",
