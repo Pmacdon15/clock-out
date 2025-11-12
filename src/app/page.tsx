@@ -27,9 +27,9 @@ export default function Home() {
 
 			<Suspense>
 				<SignedOut>
-					<div className="max-w- md w-full rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 p-1">
+					<div className="rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 p-1">
 						<div className="rounded-lg bg-black p-4 text-white">
-							<div className="flex w-full flex-col items-center justify-center gap-4 sm:flex-row">
+							<div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
 								<SignInButton />
 								<SignUpButton />
 							</div>
