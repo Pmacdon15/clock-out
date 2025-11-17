@@ -43,10 +43,12 @@ export async function HoursWorkedContainer({
 			<CardContent>
 				<div>
 					{weeksPromise ? (
-						<WeekSelector weeksPromise={weeksPromise} />
+						<WeekSelector							
+							weeksPromise={weeksPromise}
+						/>
 					) : (
 						<PayPeriodSelector
-							endDate={endDate}
+							endDate={endDate}							
 							startDate={startDate}
 						/>
 					)}

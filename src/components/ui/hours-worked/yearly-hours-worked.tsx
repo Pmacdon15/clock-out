@@ -10,8 +10,16 @@ export async function YearlyHoursWorked({
 	const searchParams = await props.searchParams
 	const weekParam = searchParams.week
 	const week = Array.isArray(weekParam) ? weekParam[0] : weekParam
+	const startDateParam = searchParams.startDate
+	const startDate = Array.isArray(startDateParam)
+		? startDateParam[0]
+		: startDateParam
 
-	const dateObject = week ? new Date(week) : new Date()
+	const dateObject = startDate
+		? new Date(startDate)
+		: week
+		? new Date(week)
+		: new Date()
 	const weekNumberResult = getWeekNumber(dateObject)
 	const currentYear = weekNumberResult?.[0]
 	const yearlyHours = await getHoursWorkedByYear(currentYear)

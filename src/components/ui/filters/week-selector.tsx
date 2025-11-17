@@ -37,7 +37,7 @@ export function WeekSelector({
 				onValueChange={(value) =>
 					handleParamChange('week', value, variant)
 				}
-				value={currentWeek || weeks[0]?.value || undefined}
+				value={currentWeek || undefined}
 			>
 				<SelectTrigger>
 					<SelectValue placeholder="Select a Week" />
