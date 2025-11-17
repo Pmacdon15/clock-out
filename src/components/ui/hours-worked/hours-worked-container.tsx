@@ -8,18 +8,12 @@ import PayPeriodSelector from './pay-period-selector'
 
 interface HoursWorkedFilterProps {
 	props: PageProps<'/hours-worked'>
-	// hoursPromise: Promise<HoursWorked[]>
 	weeksPromise?: Promise<Week[]>
-	startDate?: string
-	endDate?: string
 }
 
 export async function HoursWorkedContainer({
 	props,
-	// hoursPromise,
 	weeksPromise,
-	// startDate,
-	// endDate,
 }: HoursWorkedFilterProps) {
 	const searchParams = await props.searchParams
 
