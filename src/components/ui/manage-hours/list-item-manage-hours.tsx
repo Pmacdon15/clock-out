@@ -38,7 +38,7 @@ export default function ListItemManageHours({
 				</Activity>
 			</div>
 			<div className="col-span-1 mt-4 text-left lg:col-span-1 lg:mt-0">
-				<p className="text-gray-500 text-sm">
+				<p className="text-sm">
 					Hours:{' '}
 					{entry.time_out
 						? (
@@ -69,11 +69,11 @@ function DisplayTimes({
 }) {
 	return (
 		<div className="grid grid-cols-2 gap-4">
-			<p className="text-gray-500 text-sm">
+			<p className="text-sm">
 				{new Date(timeIn).toLocaleDateString()}{' '}
 				{formatTimeForDisplay(timeIn)}
 			</p>
-			<p className="text-gray-500 text-sm">
+			<p className="text-sm">
 				{timeOut
 					? `${new Date(timeOut).toLocaleDateString()} ${formatTimeForDisplay(timeOut)}`
 					: 'Not punched out'}

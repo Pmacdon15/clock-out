@@ -1,7 +1,7 @@
 import type { Route } from 'next'
 import Link from 'next/link'
 
-export default function BlueTextLink({
+export default function TextLink({
 	path,
 	text,
 }: {
@@ -9,7 +9,7 @@ export default function BlueTextLink({
 	text: string
 }) {
 	return (
-		<Link className="text-blue-500 hover:underline" href={path}>
+		<Link className="hover:underline" href={path}>
 			{text}
 		</Link>
 	)

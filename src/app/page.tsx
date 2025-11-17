@@ -8,7 +8,7 @@ import {
 } from '@clerk/nextjs'
 import { Suspense } from 'react'
 import BorderBox from '@/components/ui/containers/border-box'
-import BlueTextLink from '@/components/ui/links/blue-text-link'
+import TextLink from '@/components/ui/links/text-link'
 import LinkWithPath from '../components/ui/links/link'
 
 export default function Home() {
@@ -28,7 +28,7 @@ export default function Home() {
 			<Suspense>
 				<SignedOut>
 					<div className="rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 p-1">
-						<div className="rounded-lg bg-black p-4 text-white">
+						<div className="rounded-lg bg-background p-4 text-white">
 							<div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
 								<SignInButton />
 								<SignUpButton />
@@ -37,46 +37,35 @@ export default function Home() {
 					</div>
 				</SignedOut>
 				<SignedIn>
-					<div className="w-full max-w-md rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 p-1">
-						<div className="flex flex-col items-center gap-6 rounded-lg bg-black p-4 text-white">
-							<div className="flex items-center gap-4">
-								<UserButton />
-								<OrganizationSwitcher />
-							</div>
-							<div className="flex flex-col items-center gap-4 sm:flex-row">
-								<LinkWithPath
-									path={'/punch-clock'}
-									text={'Punch Clock'}
-								/>
-								<LinkWithPath
-									path={'/hours-worked'}
-									text={'Hours Worked'}
-								/>
-								<LinkWithPath
-									path={'/manage-hours'}
-									text={'Manage Hours'}
-								/>
-							</div>
+					<BorderBox>
+						<div className="flex items-center gap-4">
+							<UserButton />
+							<OrganizationSwitcher />
 						</div>
-					</div>
+						<div className="flex flex-col items-center gap-4 sm:flex-row">
+							<LinkWithPath
+								path={'/punch-clock'}
+								text={'Punch Clock'}
+							/>
+							<LinkWithPath
+								path={'/hours-worked'}
+								text={'Hours Worked'}
+							/>
+							<LinkWithPath
+								path={'/manage-hours'}
+								text={'Manage Hours'}
+							/>
+						</div>
+					</BorderBox>
 				</SignedIn>
 			</Suspense>
 
-			<div className="w-full max-w-md rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 p-1">
-				<div className="rounded-lg bg-black p-4 text-white">
-					<nav className="flex flex-col items-center justify-center gap-4 text-sm sm:flex-row">
-						<BlueTextLink
-							path={'/terms'}
-							text={'Terms of Service'}
-						/>
-						<BlueTextLink
-							path={'/privacy'}
-							text={'Privacy Policy'}
-						/>
-					</nav>
-				</div>
-			</div>
-			{/* // </div> */}
+			<BorderBox>
+				<nav className="flex flex-col items-center justify-center gap-4 text-sm sm:flex-row">
+					<TextLink path={'/terms'} text={'Terms of Service'} />
+					<TextLink path={'/privacy'} text={'Privacy Policy'} />
+				</nav>
+			</BorderBox>
 		</>
 	)
 }

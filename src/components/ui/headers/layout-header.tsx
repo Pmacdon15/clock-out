@@ -1,18 +1,15 @@
 import { ClockAlert } from 'lucide-react'
 import Link from 'next/link'
+import BorderBox from '../containers/border-box'
 
 export default function Header() {
 	return (
-		<Link href={'/'}>
-			<div className="mx-auto mt-8 flex w-full items-center justify-center rounded-full border-[3px] border-blue-400 border-dashed p-4 md:w-4/6">
-				<div
-					className={
-						'flex items-center justify-center gap-2 text-center align-middle font-bold text-4xl'
-					}
-				>
+		<Link className="flex w-full items-center justify-center" href={'/'}>
+			<BorderBox>
+				<span className="flex justify-center gap-4 text-center text-4xl">
 					Clock Out <ClockAlert size={34} />
-				</div>
-			</div>
+				</span>
+			</BorderBox>
 		</Link>
 	)
 }
