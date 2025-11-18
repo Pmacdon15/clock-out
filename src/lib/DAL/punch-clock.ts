@@ -13,6 +13,7 @@ import type {
 	TimeCard,
 	Week,
 } from '../types/punch-clock-types'
+import { cacheTag } from 'next/cache'
 
 export async function getTimeCard(): Promise<TimeCard | null> {
 	const { userId, orgId } = await auth.protect()
@@ -31,6 +32,7 @@ export async function getEmployeeTimeCards(
 	week?: string,
 	employeeId?: string,
 ): Promise<TimeCard[] | null> {
+	'use cache: private'
 	const { userId, orgId } = await auth.protect()
 	let idToUse: string
 	if (employeeId) idToUse = employeeId
@@ -47,6 +49,7 @@ export async function getEmployeeTimeCards(
 
 export async function getHoursWorked(week?: string): Promise<HoursWorked[]> {
 	'use cache: private'
+	cacheTag("hours-worked-manage-hours")
 	const { userId, orgId } = await auth.protect()
 	try {
 		const hoursWorked = await getHoursWorkedDb(
@@ -76,6 +79,7 @@ export async function getAllWeeksWithWork(): Promise<Week[]> {
 export async function getAllWeeksWithWorkForEmployee(
 	employeeId?: string,
 ): Promise<Week[]> {
+	'use cache: private'
 	const { userId, orgId } = await auth.protect()
 	let idToSubmit: string
 	if (!employeeId) idToSubmit = userId

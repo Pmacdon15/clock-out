@@ -1,6 +1,5 @@
 'use client'
 
-import { useSearchParams } from 'next/navigation'
 import { use } from 'react'
 import type { Week } from '@/lib/types/punch-clock-types'
 import { useHandleParamChange } from '@/lib/utils/filter-utils'
@@ -16,16 +15,18 @@ import {
 
 interface WeekSelectorProps {
 	weeksPromise: Promise<Week[]> | undefined
+	weekPromise: Promise<string | string[] | undefined>
 	variant?: '/hours-worked' | '/manage-hours'
 }
 
 export function WeekSelector({
 	weeksPromise,
+	weekPromise,
 	variant = '/hours-worked',
 }: WeekSelectorProps) {
 	const weeks = use(weeksPromise ?? Promise.resolve([]))
-	const searchParams = useSearchParams()
-	const currentWeek = searchParams.get('week')
+
+	const currentWeek = use(weekPromise)
 	const handleParamChange = useHandleParamChange()
 
 	return (
@@ -37,7 +38,7 @@ export function WeekSelector({
 				onValueChange={(value) =>
 					handleParamChange('week', value, variant)
 				}
-				value={currentWeek || undefined}
+				value={Array.isArray(currentWeek) ? currentWeek[0] : currentWeek}
 			>
 				<SelectTrigger>
 					<SelectValue placeholder="Select a Week" />

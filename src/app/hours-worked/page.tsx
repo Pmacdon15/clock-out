@@ -7,11 +7,13 @@ import { getAllWeeksWithWork, getHoursWorked } from '@/lib/DAL/punch-clock'
 
 export default function HoursWorkedPage(props: PageProps<'/hours-worked'>) {
 	const weeksPromise = getAllWeeksWithWork()
-	
+
+	const weekPromise = props.searchParams.then((search) => search.week)
+
 	const weeklyHoursPromise = props.searchParams.then((search) =>
 		getHoursWorked(String(search.week)),
 	)
-	
+
 	const payPeriodHoursPromise = props.searchParams.then((search) =>
 		getPayPeriodHoursWorked(
 			String(search.startDate),
@@ -31,6 +33,7 @@ export default function HoursWorkedPage(props: PageProps<'/hours-worked'>) {
 				payPeriodHoursPromise={payPeriodHoursPromise}
 				startDateEndDatePromise={startDateEndDatePromise}
 				weeklyHoursPromise={weeklyHoursPromise}
+				weekPromise={weekPromise}
 				weeksPromise={weeksPromise}
 			/>
 

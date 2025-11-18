@@ -16,6 +16,7 @@ interface HoursWorkedFilterProps {
 		endDate: string | string[] | undefined
 	}>
 	weeksPromise?: Promise<Week[]>
+	weekPromise: Promise<string | string[] | undefined>
 }
 
 export function HoursWorkedContainer({
@@ -23,34 +24,36 @@ export function HoursWorkedContainer({
 	weeklyHoursPromise,
 	startDateEndDatePromise,
 	weeksPromise,
+	weekPromise,
 }: HoursWorkedFilterProps) {
-
-
 	const [typeOfHours, setTypeOfHours] = useState('Weekly')
 	const handleClick = () => {
 		setTypeOfHours(typeOfHours !== 'Weekly' ? 'Weekly' : 'pay-period')
 	}
 
-		const hoursToShowPromise = typeOfHours ==='Weekly'
-		? weeklyHoursPromise
-		: payPeriodHoursPromise
+	const hoursToShowPromise =
+		typeOfHours === 'Weekly' ? weeklyHoursPromise : payPeriodHoursPromise
 
 	return (
 		<div className="w-5/6">
 			<Button onClick={handleClick} variant={'outline'}>
-				Show {typeOfHours !== 'weekly' ? ' Weekly' : 'Pay Period'}
+				Show {typeOfHours !== 'Weekly' ? ' Weekly' : 'Pay Period'}
 			</Button>
 			<Card>
 				<CardHeader>
 					<CardTitle>
-						{weeksPromise ? 'Weekly' : 'Pay Period'}
+						{typeOfHours}
 					</CardTitle>
 				</CardHeader>
 				<CardContent>
 					<div>
-						{typeOfHours === 'weekly' ? (
+						{typeOfHours === 'Weekly' ? (
 							<Suspense>
-								<WeekSelector weeksPromise={weeksPromise} />
+								{/* //?TODO SHOW FALL BACK */}
+								<WeekSelector
+									weekPromise={weekPromise}
+									weeksPromise={weeksPromise}
+								/>
 							</Suspense>
 						) : (
 							<Suspense>

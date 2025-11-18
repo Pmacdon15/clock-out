@@ -5,9 +5,14 @@ import UserOrgHeader from '@/components/ui/headers/user-org-header'
 import ManageHoursList from '@/components/ui/manage-hours/Manage-hours-list'
 import WeekSelectorWrapper from '@/components/ui/wrappers/week-selector-wrapper'
 import { fetchOrgMembers } from '@/lib/DAL/org-members'
+import { getAllWeeksWithWorkForEmployee } from '@/lib/DAL/punch-clock'
 
 export default function Page(props: PageProps<'/manage-hours'>) {
 	const orgMembersPromise = fetchOrgMembers()
+	const weekPromise = props.searchParams.then((search) => search.week)
+	const weeksPromise = props.searchParams.then((search) =>
+		getAllWeeksWithWorkForEmployee(String(search.employee)),
+	)
 
 	return (
 		<>
@@ -17,9 +22,10 @@ export default function Page(props: PageProps<'/manage-hours'>) {
 				<Suspense>
 					<OrgMembersFilter orgMemberPromise={orgMembersPromise} />
 				</Suspense>
-				<Suspense>
-					<WeekSelectorWrapper props={props} />
-				</Suspense>
+				<WeekSelectorWrapper
+					weekPromise={weekPromise}
+					weeksPromise={weeksPromise}
+				/>
 				<Suspense>
 					<ManageHoursList props={props} />
 				</Suspense>
