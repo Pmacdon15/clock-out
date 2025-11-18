@@ -33,6 +33,7 @@ export async function getEmployeeTimeCards(
 	employeeId?: string,
 ): Promise<TimeCard[] | null> {
 	'use cache: private'
+	cacheTag("employee-time-cards")
 	const { userId, orgId } = await auth.protect()
 	let idToUse: string
 	if (employeeId) idToUse = employeeId
@@ -80,6 +81,7 @@ export async function getAllWeeksWithWorkForEmployee(
 	employeeId?: string,
 ): Promise<Week[]> {
 	'use cache: private'
+	cacheTag("weeks-worked-for-employee")
 	const { userId, orgId } = await auth.protect()
 	let idToSubmit: string
 	if (!employeeId) idToSubmit = userId
