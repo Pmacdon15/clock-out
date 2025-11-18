@@ -24,14 +24,16 @@ export function HoursWorkedContainer({
 	startDateEndDatePromise,
 	weeksPromise,
 }: HoursWorkedFilterProps) {
-	const hoursToShowPromise = weeksPromise
+
+
+	const [typeOfHours, setTypeOfHours] = useState('Weekly')
+	const handleClick = () => {
+		setTypeOfHours(typeOfHours !== 'Weekly' ? 'Weekly' : 'pay-period')
+	}
+
+		const hoursToShowPromise = typeOfHours ==='Weekly'
 		? weeklyHoursPromise
 		: payPeriodHoursPromise
-
-	const [typeOfHours, setTypeOfHours] = useState('weekly')
-	const handleClick = () => {
-		setTypeOfHours(typeOfHours !== 'weekly' ? 'weekly' : 'pay-period')
-	}
 
 	return (
 		<div className="w-5/6">
