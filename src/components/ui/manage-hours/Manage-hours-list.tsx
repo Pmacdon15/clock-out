@@ -7,7 +7,7 @@ export default async function ManageHoursList({
 }: {
 	hoursPromise: Promise<TimeCard[] | null>
 }) {
-	const hours = await hoursPromise	
+	const hours = await hoursPromise
 
 	return (
 		<ul className="divide-y divide-gray-200">

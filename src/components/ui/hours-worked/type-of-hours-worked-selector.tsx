@@ -12,7 +12,6 @@
 // 	weeklyHoursPromise: Promise<HoursWorked[]>
 // 	weeksPromise: Promise<Week[]>
 // }) {
-	
 
 // 	return (
 // 		// <>

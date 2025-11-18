@@ -1,5 +1,5 @@
 import { auth } from '@clerk/nextjs/server'
-
+import { cacheTag } from 'next/cache'
 import {
 	getAllWeeksWithWorkDb,
 	getHoursWorkedByYearDb,
@@ -13,7 +13,6 @@ import type {
 	TimeCard,
 	Week,
 } from '../types/punch-clock-types'
-import { cacheTag } from 'next/cache'
 
 export async function getTimeCard(): Promise<TimeCard | null> {
 	const { userId, orgId } = await auth.protect()
@@ -33,7 +32,7 @@ export async function getEmployeeTimeCards(
 	employeeId?: string,
 ): Promise<TimeCard[] | null> {
 	'use cache: private'
-	cacheTag("employee-time-cards")
+	cacheTag('employee-time-cards')
 	const { userId, orgId } = await auth.protect()
 	let idToUse: string
 	if (employeeId) idToUse = employeeId
@@ -50,14 +49,14 @@ export async function getEmployeeTimeCards(
 
 export async function getHoursWorked(week?: string): Promise<HoursWorked[]> {
 	'use cache: private'
-	cacheTag("hours-worked-manage-hours")
+	cacheTag('hours-worked-manage-hours')
 	const { userId, orgId } = await auth.protect()
 	try {
 		const hoursWorked = await getHoursWorkedDb(
 			userId,
 			orgId || userId,
 			week,
-		)	
+		)
 		return hoursWorked
 	} catch (e) {
 		console.error('Error: ', e)
@@ -81,7 +80,7 @@ export async function getAllWeeksWithWorkForEmployee(
 	employeeId?: string,
 ): Promise<Week[]> {
 	'use cache: private'
-	cacheTag("weeks-worked-for-employee")
+	cacheTag('weeks-worked-for-employee')
 	const { userId, orgId } = await auth.protect()
 	let idToSubmit: string
 	if (!employeeId) idToSubmit = userId

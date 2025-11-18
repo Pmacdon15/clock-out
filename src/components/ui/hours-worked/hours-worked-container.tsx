@@ -35,15 +35,13 @@ export function HoursWorkedContainer({
 		typeOfHours === 'Weekly' ? weeklyHoursPromise : payPeriodHoursPromise
 
 	return (
-		<div className="w-5/6">
-			<Button onClick={handleClick} variant={'outline'}>
+		<div className="flex w-full flex-col gap-2 p-2 md:w-5/6">
+			<Button className="w-38" onClick={handleClick} variant={'outline'}>
 				Show {typeOfHours !== 'Weekly' ? ' Weekly' : 'Pay Period'}
 			</Button>
 			<Card>
 				<CardHeader>
-					<CardTitle>
-						{typeOfHours}
-					</CardTitle>
+					<CardTitle>{typeOfHours}</CardTitle>
 				</CardHeader>
 				<CardContent>
 					<div>

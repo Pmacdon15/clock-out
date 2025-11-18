@@ -68,7 +68,7 @@ export async function getTimeCardsDb(
 	const sql = neon(process.env.DATABASE_URL)
 
 	let weekToUse = week
-	if (!weekToUse || weekToUse === "undefined") {
+	if (!weekToUse || weekToUse === 'undefined') {
 		// Get the last week they worked
 		const weeksResult = await sql`
       SELECT DISTINCT
@@ -109,42 +109,42 @@ export async function getTimeCardsDb(
 }
 
 export async function getHoursWorkedDb(
-  userId: string,
-  orgId: string,
-  week?: string,
+	userId: string,
+	orgId: string,
+	week?: string,
 ): Promise<HoursWorked[]> {
 	if (!process.env.DATABASE_URL) {
 		console.error('DATABASE_URL is not defined.')
 		return []
 	}
-  const sql = neon(process.env.DATABASE_URL)
+	const sql = neon(process.env.DATABASE_URL)
 
-  let startDate: Date | null = null;
-  let endDate: Date | null = null;
+	let startDate: Date | null = null
+	let endDate: Date | null = null
 
-  if (week && week !== '' && week !== "undefined") {
-    try {
-      const [year, weekNumber] = week.split('-W').map(Number)
-      startDate = new Date(year, 0, 1 + (weekNumber - 1) * 7)
-      startDate.setDate(startDate.getDate() - startDate.getDay() + 1) // Monday
-      endDate = new Date(startDate)
-      endDate.setDate(endDate.getDate() + 6) // Sunday
-    } catch (error) {
-      console.error('Error parsing week string:', error)
-    }
-  }
+	if (week && week !== '' && week !== 'undefined') {
+		try {
+			const [year, weekNumber] = week.split('-W').map(Number)
+			startDate = new Date(year, 0, 1 + (weekNumber - 1) * 7)
+			startDate.setDate(startDate.getDate() - startDate.getDay() + 1) // Monday
+			endDate = new Date(startDate)
+			endDate.setDate(endDate.getDate() + 6) // Sunday
+		} catch (error) {
+			console.error('Error parsing week string:', error)
+		}
+	}
 
-  if (!startDate || !endDate) {
-    const currentDate = new Date();
-    const currentDay = currentDate.getDay();
-    startDate = new Date(currentDate);
-    startDate.setDate(startDate.getDate() - currentDay + 1); // Monday
-    endDate = new Date(startDate);
-    endDate.setDate(endDate.getDate() + 6); // Sunday
-  }
+	if (!startDate || !endDate) {
+		const currentDate = new Date()
+		const currentDay = currentDate.getDay()
+		startDate = new Date(currentDate)
+		startDate.setDate(startDate.getDate() - currentDay + 1) // Monday
+		endDate = new Date(startDate)
+		endDate.setDate(endDate.getDate() + 6) // Sunday
+	}
 
-  try {
-    const result = (await sql`
+	try {
+		const result = (await sql`
       SELECT
         time_in as date,
         SUM(EXTRACT(EPOCH FROM (time_out - time_in))) / 3600 as hours
@@ -156,19 +156,19 @@ export async function getHoursWorkedDb(
       ORDER BY time_in;
     `) as HoursWorkedRow[]
 
-    return result.map((row) => {
-      const hours = parseFloat(row.hours)
-      const lightness = Math.max(30, 60 - hours * 3)
-      return {
-        ...row,
-        hours,
-        fill: `hsl(220, 80%, ${lightness}%)`,
-      }
-    })
-  } catch (error) {
-    console.error('Error fetching hours worked:', error)
-    return []
-  }
+		return result.map((row) => {
+			const hours = parseFloat(row.hours)
+			const lightness = Math.max(30, 60 - hours * 3)
+			return {
+				...row,
+				hours,
+				fill: `hsl(220, 80%, ${lightness}%)`,
+			}
+		})
+	} catch (error) {
+		console.error('Error fetching hours worked:', error)
+		return []
+	}
 }
 
 interface WeekRow {
