@@ -1,5 +1,5 @@
 import { auth } from '@clerk/nextjs/server'
-import { cacheTag } from 'next/cache'
+
 import {
 	getAllWeeksWithWorkDb,
 	getHoursWorkedByYearDb,
@@ -46,15 +46,13 @@ export async function getEmployeeTimeCards(
 }
 
 export async function getHoursWorked(week?: string): Promise<HoursWorked[]> {
-	'use cache: private'
 	const { userId, orgId } = await auth.protect()
 	try {
 		const hoursWorked = await getHoursWorkedDb(
 			userId,
 			orgId || userId,
 			week,
-		)
-		console.log('server Hours Worked: ', hoursWorked)
+		)	
 		return hoursWorked
 	} catch (e) {
 		console.error('Error: ', e)
@@ -63,8 +61,7 @@ export async function getHoursWorked(week?: string): Promise<HoursWorked[]> {
 }
 
 export async function getAllWeeksWithWork(): Promise<Week[]> {
-	'use cache: private'
-	cacheTag('allWeeksWorked')
+	
 	const { userId, orgId } = await auth.protect()
 	try {
 		const weeks = await getAllWeeksWithWorkDb(userId, orgId || userId)

@@ -1,17 +1,19 @@
 'use client'
 
 import { format, parse } from 'date-fns'
-import { useSearchParams } from 'next/navigation'
+import { use } from 'react'
 import { useHandleParamChange } from '@/lib/utils/filter-utils'
 import { DatePicker } from '../inputs/date-picker'
 
-export default function PayPeriodSelector({
-	startDate,
-	endDate,
+export default function PayPeriodSelectorPayPeriodSelector({
+	startDateEndDatePromise,
 }: {
-	startDate?: string
-	endDate?: string
+	startDateEndDatePromise: Promise<{
+		startDate: string | string[] | undefined
+		endDate: string | string[] | undefined
+	}>
 }) {
+	const { startDate, endDate } = use(startDateEndDatePromise)
 	return (
 		<div className="flex w-full flex-col gap-2">
 			<DateSelector date={startDate} />
@@ -24,13 +26,9 @@ function DateSelector({
 	date,
 	variant = 'startDate',
 }: {
-	date?: string
+	date?: string | string[]
 	variant?: 'startDate' | 'endDate'
 }) {
-	const searchParams = useSearchParams()
-	const dateFromParams = searchParams.get(variant)
-	const dateToSet = date ?? dateFromParams
-
 	const handleParamChange = useHandleParamChange()
 
 	const handleDateChange = (newDate?: Date) => {
@@ -47,8 +45,8 @@ function DateSelector({
 			</h1>
 			<DatePicker
 				date={
-					dateToSet
-						? parse(dateToSet, 'yyyy-MM-dd', new Date())
+					date
+						? parse(String(date), 'yyyy-MM-dd', new Date())
 						: undefined
 				}
 				onSelect={handleDateChange}

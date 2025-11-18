@@ -15,7 +15,7 @@ import {
 } from '../select'
 
 interface WeekSelectorProps {
-	weeksPromise: Promise<Week[]>
+	weeksPromise: Promise<Week[]> | undefined
 	variant?: '/hours-worked' | '/manage-hours'
 }
 
@@ -23,7 +23,7 @@ export function WeekSelector({
 	weeksPromise,
 	variant = '/hours-worked',
 }: WeekSelectorProps) {
-	const weeks = use(weeksPromise)
+	const weeks = use(weeksPromise ?? Promise.resolve([]))
 	const searchParams = useSearchParams()
 	const currentWeek = searchParams.get('week')
 	const handleParamChange = useHandleParamChange()
