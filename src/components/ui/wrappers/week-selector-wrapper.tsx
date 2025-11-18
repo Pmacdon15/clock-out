@@ -1,19 +1,22 @@
-import { getAllWeeksWithWorkForEmployee } from '@/lib/DAL/punch-clock'
+import { Suspense } from 'react'
+import type { Week } from '@/lib/types/punch-clock-types'
 import { WeekSelector } from '../filters/week-selector'
 
-export default async function WeekSelectorWrapper({
-	props,
+export default function WeekSelectorWrapper({
+	weekPromise,
+	weeksPromise,
 }: {
-	props: PageProps<'/manage-hours'>
+	weeksPromise: Promise<Week[]>
+	weekPromise: Promise<string | string[] | undefined>
 }) {
-	const searchParams = await props.searchParams
-
-	const employeeIdValue = searchParams.employee
-	const employeeId = Array.isArray(employeeIdValue)
-		? employeeIdValue[0]
-		: employeeIdValue
-
-	const weeksPromise = getAllWeeksWithWorkForEmployee(employeeId)
-
-	return <WeekSelector variant="/manage-hours" weeksPromise={weeksPromise} />
+	//TODO: SHOW FALL BACK
+	return (
+		<Suspense>
+			<WeekSelector
+				variant="/manage-hours"
+				weekPromise={weekPromise}
+				weeksPromise={weeksPromise}
+			/>
+		</Suspense>
+	)
 }

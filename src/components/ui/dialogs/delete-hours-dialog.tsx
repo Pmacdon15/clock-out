@@ -16,7 +16,7 @@ import {
 
 export default function DeleteHoursDialog({ hoursId }: { hoursId: number }) {
 	const { membership } = useOrganization()
-	console.log('orginfo:', membership)
+	// console.log('orginfo:', membership)
 
 	if (membership?.roleName !== 'Admin') return null
 	return (

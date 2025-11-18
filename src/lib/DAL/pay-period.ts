@@ -5,7 +5,7 @@ import type { HoursWorked } from '../types/punch-clock-types'
 export async function getPayPeriodHoursWorked(
 	startDate?: string,
 	endDate?: string,
-): Promise<HoursWorked[]> {
+): Promise<HoursWorked[]> {	
 	'use cache: private'
 	const { userId, orgId } = await auth.protect()
 	if (!userId || !orgId) return [] as HoursWorked[]
@@ -16,7 +16,7 @@ export async function getPayPeriodHoursWorked(
 			startDate,
 			endDate,
 		)
-		console.log('Server Pay Period Hours: ', result)
+		
 		return result
 	} catch (e) {
 		console.log('Error: ', e)

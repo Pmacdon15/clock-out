@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query'
 import { deleteHours, editHours } from '../actions/edit-hours'
-import { revalidatePathAction } from '../actions/revalidate'
+import { revalidatePathAction, updateTagAction } from '../actions/revalidate'
 
 export const useEditHours = ({
 	onSuccess,
@@ -22,7 +22,8 @@ export const useEditHours = ({
 			return editHours(formData, timeZone, punchClockId, userId)
 		},
 		onSuccess: () => {
-			revalidatePathAction('/manage-hours')
+			updateTagAction('weeks-worked-for-employee')
+			updateTagAction('employee-time-cards')
 			revalidatePathAction('/hours-worked')
 			onSuccess?.()
 		},
@@ -38,7 +39,8 @@ export const useDeleteHours = () => {
 			return deleteHours(hoursId)
 		},
 		onSuccess: () => {
-			revalidatePathAction('/manage-hours')
+			updateTagAction('weeks-worked-for-employee')
+			updateTagAction('employee-time-cards')
 			revalidatePathAction('/hours-worked')
 		},
 		onError: (error) => {

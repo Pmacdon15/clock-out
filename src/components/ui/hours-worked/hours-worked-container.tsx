@@ -1,65 +1,80 @@
+'use client'
+import { Suspense, useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { HoursWorkedChart } from '@/components/ui/charts/hours-worked-chart'
-import { getPayPeriodHoursWorked } from '@/lib/DAL/pay-period'
-import { getHoursWorked } from '@/lib/DAL/punch-clock'
-import type { Week } from '@/lib/types/punch-clock-types'
+import type { HoursWorked, Week } from '@/lib/types/punch-clock-types'
+import { Button } from '../button'
+import { HoursWorkedChartFallback } from '../fallbacks/hours-worked-chart-fallback'
 import { WeekSelector } from '../filters/week-selector'
 import PayPeriodSelector from './pay-period-selector'
 
 interface HoursWorkedFilterProps {
-	props: PageProps<'/hours-worked'>
+	payPeriodHoursPromise: Promise<HoursWorked[]>
+	weeklyHoursPromise: Promise<HoursWorked[]>
+	startDateEndDatePromise: Promise<{
+		startDate: string | string[] | undefined
+		endDate: string | string[] | undefined
+	}>
 	weeksPromise?: Promise<Week[]>
+	weekPromise: Promise<string | string[] | undefined>
 }
 
-export async function HoursWorkedContainer({
-	props,
+export function HoursWorkedContainer({
+	payPeriodHoursPromise,
+	weeklyHoursPromise,
+	startDateEndDatePromise,
 	weeksPromise,
+	weekPromise,
 }: HoursWorkedFilterProps) {
-	const searchParams = await props.searchParams
+	const [typeOfHours, setTypeOfHours] = useState('Weekly')
+	const handleClick = () => {
+		setTypeOfHours(typeOfHours !== 'Weekly' ? 'Weekly' : 'pay-period')
+	}
 
-	const startDateParam = searchParams.startDate
-	const endDateParam = searchParams.endDate
-
-	const startDate = Array.isArray(startDateParam)
-		? startDateParam[0]
-		: startDateParam
-	const endDate = Array.isArray(endDateParam) ? endDateParam[0] : endDateParam
-
-	const payPeriodHoursPromise = getPayPeriodHoursWorked(startDate, endDate)
-
-	const weekParam = searchParams.week
-	const week = Array.isArray(weekParam) ? weekParam[0] : weekParam
-	const weeklyHours = getHoursWorked(week)
-
-	const hoursToShow = weeksPromise ? weeklyHours : payPeriodHoursPromise
+	const hoursToShowPromise =
+		typeOfHours === 'Weekly' ? weeklyHoursPromise : payPeriodHoursPromise
 
 	return (
-		<Card>
-			<CardHeader>
-				<CardTitle>
-					{weeksPromise ? 'Hours Worked' : 'Pay Period'}
-				</CardTitle>
-			</CardHeader>
-			<CardContent>
-				<div>
-					{weeksPromise ? (
-						<WeekSelector							
-							weeksPromise={weeksPromise}
-						/>
-					) : (
-						<PayPeriodSelector
-							endDate={endDate}							
-							startDate={startDate}
-						/>
-					)}
-					<div className="h-96">
-						<HoursWorkedChart
-							className="aspect-auto h-full"
-							hoursPromise={hoursToShow}
-						/>
+		<div className="w-5/6">
+			<Button onClick={handleClick} variant={'outline'}>
+				Show {typeOfHours !== 'Weekly' ? ' Weekly' : 'Pay Period'}
+			</Button>
+			<Card>
+				<CardHeader>
+					<CardTitle>
+						{typeOfHours}
+					</CardTitle>
+				</CardHeader>
+				<CardContent>
+					<div>
+						{typeOfHours === 'Weekly' ? (
+							<Suspense>
+								{/* //?TODO SHOW FALL BACK */}
+								<WeekSelector
+									weekPromise={weekPromise}
+									weeksPromise={weeksPromise}
+								/>
+							</Suspense>
+						) : (
+							<Suspense>
+								<PayPeriodSelector
+									startDateEndDatePromise={
+										startDateEndDatePromise
+									}
+								/>
+							</Suspense>
+						)}
+						<div className="h-96">
+							<Suspense fallback={<HoursWorkedChartFallback />}>
+								<HoursWorkedChart
+									className="aspect-auto h-full"
+									hoursPromise={hoursToShowPromise}
+								/>
+							</Suspense>
+						</div>
 					</div>
-				</div>
-			</CardContent>
-		</Card>
+				</CardContent>
+			</Card>
+		</div>
 	)
 }

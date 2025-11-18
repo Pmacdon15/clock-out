@@ -1,39 +1,45 @@
 import { Suspense } from 'react'
-import { CardSkeleton } from '@/components/ui/card'
 import UserOrgHeader from '@/components/ui/headers/user-org-header'
 import { HoursWorkedContainer } from '@/components/ui/hours-worked/hours-worked-container'
-import TypeOfHoursSelector from '@/components/ui/hours-worked/type-of-hours-worked-selector'
 import { YearlyHoursWorked } from '@/components/ui/hours-worked/yearly-hours-worked'
-import { getAllWeeksWithWork } from '@/lib/DAL/punch-clock'
+import { getPayPeriodHoursWorked } from '@/lib/DAL/pay-period'
+import { getAllWeeksWithWork, getHoursWorked } from '@/lib/DAL/punch-clock'
 
 export default function HoursWorkedPage(props: PageProps<'/hours-worked'>) {
 	const weeksPromise = getAllWeeksWithWork()
 
+	const weekPromise = props.searchParams.then((search) => search.week)
+
+	const weeklyHoursPromise = props.searchParams.then((search) =>
+		getHoursWorked(String(search.week)),
+	)
+
+	const payPeriodHoursPromise = props.searchParams.then((search) =>
+		getPayPeriodHoursWorked(
+			String(search.startDate),
+			String(search.endDate),
+		),
+	)
+
+	const startDateEndDatePromise = props.searchParams.then((search) => ({
+		startDate: search.startDate,
+		endDate: search.endDate,
+	}))
+
 	return (
 		<>
 			<UserOrgHeader path={'/hours-worked'} />
-			<TypeOfHoursSelector
-				child1={
-					<div className="w-full p-2 md:w-5/6" key="weekly">
-						<Suspense>
-							<HoursWorkedContainer
-								props={props}
-								weeksPromise={weeksPromise}
-							/>
-						</Suspense>
-					</div>
-				}
-				child2={
-					<div className="w-full p-2 md:w-5/6" key="pay-period">
-						<Suspense>
-							<HoursWorkedContainer props={props} />
-						</Suspense>
-					</div>
-				}
+			<HoursWorkedContainer
+				payPeriodHoursPromise={payPeriodHoursPromise}
+				startDateEndDatePromise={startDateEndDatePromise}
+				weeklyHoursPromise={weeklyHoursPromise}
+				weekPromise={weekPromise}
+				weeksPromise={weeksPromise}
 			/>
+
 			<div className="w-full p-2 md:w-5/6">
-				<Suspense fallback={<CardSkeleton />}>
-					<YearlyHoursWorked props={props} />
+				<Suspense>
+					<YearlyHoursWorked />
 				</Suspense>
 			</div>
 		</>

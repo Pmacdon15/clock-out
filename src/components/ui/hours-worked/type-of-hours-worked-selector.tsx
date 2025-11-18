@@ -1,35 +1,30 @@
-'use client'
+// 'use client'
+// import { useState } from 'react'
+// import type { HoursWorked, Week } from '@/lib/types/punch-clock-types'
+// import { HoursWorkedContainer } from './hours-worked-container'
 
-import { Activity, useState } from 'react'
-import { Button } from '../button'
+// export default function TypeOfHoursSelector({
+// 	payPeriodHoursPromise,
+// 	weeklyHoursPromise,
+// 	weeksPromise,
+// }: {
+// 	payPeriodHoursPromise: Promise<HoursWorked[]>
+// 	weeklyHoursPromise: Promise<HoursWorked[]>
+// 	weeksPromise: Promise<Week[]>
+// }) {
+	
 
-export default function TypeOfHoursSelector({
-	child1,
-	child2,
-}: {
-	child1: React.ReactNode
-	child2: React.ReactNode
-}) {
-	const [typeOfHours, setTypeOfHours] = useState('Weekly')
-	return (
-		<>
-			<Button
-				onClick={() =>
-					setTypeOfHours(
-						typeOfHours !== 'weekly' ? 'weekly' : 'pay-period',
-					)
-				}
-				variant={'outline'}
-			>
-				Show {typeOfHours !== 'weekly' ? ' Weekly' : 'Pay Period'}
-			</Button>
-			<Activity mode={typeOfHours === 'weekly' ? 'visible' : 'hidden'}>
-				{child1}
-			</Activity>
-
-			<Activity mode={typeOfHours !== 'weekly' ? 'visible' : 'hidden'}>
-				{child2}
-			</Activity>
-		</>
-	)
-}
+// 	return (
+// 		// <>
+// 			<div className="w-full p-2 md:w-5/6">
+// 				<HoursWorkedContainer
+// 					payPeriodHoursPromise={payPeriodHoursPromise}
+// 					weeklyHoursPromise={weeklyHoursPromise}
+// 					weeksPromise={
+// 						typeOfHours === 'weekly' ? weeksPromise : undefined
+// 					}
+// 				/>
+// 			</div>
+// 		{/* </> */}
+// 	)
+// }
