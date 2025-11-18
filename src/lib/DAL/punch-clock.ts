@@ -46,6 +46,7 @@ export async function getEmployeeTimeCards(
 }
 
 export async function getHoursWorked(week?: string): Promise<HoursWorked[]> {
+	'use cache: private'
 	const { userId, orgId } = await auth.protect()
 	try {
 		const hoursWorked = await getHoursWorkedDb(
@@ -61,7 +62,7 @@ export async function getHoursWorked(week?: string): Promise<HoursWorked[]> {
 }
 
 export async function getAllWeeksWithWork(): Promise<Week[]> {
-	
+	'use cache: private'
 	const { userId, orgId } = await auth.protect()
 	try {
 		const weeks = await getAllWeeksWithWorkDb(userId, orgId || userId)

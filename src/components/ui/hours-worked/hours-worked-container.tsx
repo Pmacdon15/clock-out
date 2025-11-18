@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { HoursWorkedChart } from '@/components/ui/charts/hours-worked-chart'
 import type { HoursWorked, Week } from '@/lib/types/punch-clock-types'
 import { Button } from '../button'
-import HoursWorkedChartFallback from '../fallbacks/hours-worked-chart-fallbacl'
+import { HoursWorkedChartFallback } from '../fallbacks/hours-worked-chart-fallback'
 import { WeekSelector } from '../filters/week-selector'
 import PayPeriodSelector from './pay-period-selector'
 
@@ -34,7 +34,7 @@ export function HoursWorkedContainer({
 	}
 
 	return (
-		<div className='w-5/6'>
+		<div className="w-5/6">
 			<Button onClick={handleClick} variant={'outline'}>
 				Show {typeOfHours !== 'weekly' ? ' Weekly' : 'Pay Period'}
 			</Button>

@@ -50,6 +50,9 @@ export async function getPayPeriodHoursWorkedDb(
 			}
 		})
 	} catch (error) {
+		if (error instanceof Error && error.name === 'AbortError') {
+			return []
+		}
 		console.error(error)
 		return []
 	}

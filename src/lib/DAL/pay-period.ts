@@ -6,6 +6,7 @@ export async function getPayPeriodHoursWorked(
 	startDate?: string,
 	endDate?: string,
 ): Promise<HoursWorked[]> {	
+	'use cache: private'
 	const { userId, orgId } = await auth.protect()
 	if (!userId || !orgId) return [] as HoursWorked[]
 	try {

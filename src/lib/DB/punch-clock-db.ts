@@ -186,29 +186,36 @@ export async function getAllWeeksWithWorkDb(
 		return []
 	}
 	const sql = neon(process.env.DATABASE_URL)
-	const result = (await sql`
-        SELECT DISTINCT
-            to_char(time_in, 'IYYY') as year,
-            to_char(time_in, 'IW') as week,
-            date_trunc('week', time_in) as week_start_date
-        FROM time_clock
-        WHERE user_id = ${userId} AND org_id = ${orgId} AND time_out IS NOT NULL
-        ORDER BY year DESC, week DESC;
-    `) as WeekRow[]
+	try {
+		const result = (await sql`
+			SELECT DISTINCT
+				to_char(time_in, 'IYYY') as year,
+				to_char(time_in, 'IW') as week,
+				date_trunc('week', time_in) as week_start_date
+			FROM time_clock
+			WHERE user_id = ${userId} AND org_id = ${orgId} AND time_out IS NOT NULL
+			ORDER BY year DESC, week DESC;
+		`) as WeekRow[]
 
-	return result.map((row) => {
-		const year = row.year
-		const week = String(row.week).padStart(2, '0')
-		const value = `${year}-W${week}`
+		return result.map((row) => {
+			const year = row.year
+			const week = String(row.week).padStart(2, '0')
+			const value = `${year}-W${week}`
 
-		const date = new Date(row.week_start_date)
-		const month = date.toLocaleString('default', { month: 'long' })
-		const dayOfMonth = date.getDate()
-		const weekOfMonth = Math.ceil(dayOfMonth / 7)
-		const label = `${month} W${weekOfMonth}`
+			const date = new Date(row.week_start_date)
+			const month = date.toLocaleString('default', { month: 'long' })
+			const dayOfMonth = date.getDate()
+			const weekOfMonth = Math.ceil(dayOfMonth / 7)
+			const label = `${month} W${weekOfMonth}`
 
-		return { label, value }
-	})
+			return { label, value }
+		})
+	} catch (error) {
+		if (error instanceof Error && error.name === 'AbortError') {
+			return []
+		}
+		throw error
+	}
 }
 
 export async function getHoursWorkedByYearDb(
