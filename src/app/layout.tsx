@@ -4,7 +4,6 @@ import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import { Analytics } from '@vercel/analytics/next'
-import { Suspense } from 'react'
 import PageContainer from '@/components/ui/containers/page-container'
 import Footer from '@/components/ui/footer'
 import Header from '@/components/ui/headers/layout-header'
@@ -42,10 +41,8 @@ export default function RootLayout({
 				>
 					<Providers>
 						<PageContainer>
-							<Suspense>
-								<Header />
-							</Suspense>
-							<main className="flex w-full flex-col items-center gap-8">
+							<Header />
+							<main className="flex w-full flex-1 flex-col items-center gap-8">
 								{children}
 							</main>
 							<Footer />
