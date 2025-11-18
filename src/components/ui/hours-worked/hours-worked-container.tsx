@@ -28,7 +28,7 @@ export function HoursWorkedContainer({
 }: HoursWorkedFilterProps) {
 	const [typeOfHours, setTypeOfHours] = useState('Weekly')
 	const handleClick = () => {
-		setTypeOfHours(typeOfHours !== 'Weekly' ? 'Weekly' : 'pay-period')
+		setTypeOfHours(typeOfHours !== 'Weekly' ? 'Weekly' : 'Pay Period')
 	}
 
 	const hoursToShowPromise =
