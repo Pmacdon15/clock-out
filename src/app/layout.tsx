@@ -6,9 +6,9 @@ import './globals.css'
 import { Analytics } from '@vercel/analytics/next'
 import { Suspense } from 'react'
 import PageContainer from '@/components/ui/containers/page-container'
+import Footer from '@/components/ui/footer'
 import Header from '@/components/ui/headers/layout-header'
 import { Providers } from '../components/providers'
-import Footer from '@/components/ui/footer'
 
 const geistSans = Geist({
 	variable: '--font-geist-sans',
@@ -45,7 +45,9 @@ export default function RootLayout({
 							<Suspense>
 								<Header />
 							</Suspense>
-							<main className='w-full flex flex-col gap-8 items-center'>{children}</main>
+							<main className="flex w-full flex-col items-center gap-8">
+								{children}
+							</main>
 							<Footer />
 							<Analytics />
 						</PageContainer>
