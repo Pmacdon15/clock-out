@@ -18,7 +18,7 @@ export default function Home() {
 				<h1 className="mb-4 font-bold text-4xl">
 					Welcome to Clock-Out
 				</h1>
-				<p className="mx-auto max-w-2xl text-xl">
+				<p className="mx-auto max-w-2xl indent-6 text-xl">
 					Effortlessly track your working hours with our simple and
 					intuitive punch clock system. Stay organized, monitor your
 					productivity, and manage your time effectively.
