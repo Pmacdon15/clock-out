@@ -17,6 +17,7 @@ export interface Week {
 }
 
 export interface MonthlyHours {
+	year: string
 	month: string
 	hours: number
 }

@@ -217,22 +217,19 @@ export async function getAllWeeksWithWorkDb(
 		throw error
 	}
 }
-
 export async function getHoursWorkedByYearDb(
 	userId: string,
 	orgId: string,
-	year?: number,
 ): Promise<MonthlyHours[]> {
 	if (!process.env.DATABASE_URL) {
 		console.error('DATABASE_URL is not defined.')
 		return []
 	}
 	const sql = neon(process.env.DATABASE_URL)
-	const currentYear = new Date().getFullYear()
-	const targetYear = year ?? currentYear
 
 	const result = await sql`
         SELECT
+            EXTRACT(YEAR FROM time_in) as year,
             to_char(time_in, 'Month') as month,
             EXTRACT(MONTH FROM time_in) as month_number,
             SUM(EXTRACT(EPOCH FROM (time_out - time_in))) / 3600 as hours
@@ -240,14 +237,17 @@ export async function getHoursWorkedByYearDb(
         WHERE user_id = ${userId}
           AND org_id = ${orgId}
           AND time_out IS NOT NULL
-          AND EXTRACT(YEAR FROM time_in) = ${targetYear}
-        GROUP BY month, month_number
-        ORDER BY month_number;
+        GROUP BY year, month, month_number
+        ORDER BY year, month_number;
     `
 
-	const monthlyHoursMap = new Map<string, number>()
+	const monthlyHoursMap = new Map<string, Map<string, number>>()
 	result.forEach((row) => {
-		monthlyHoursMap.set(row.month.trim(), parseFloat(row.hours))
+		const year = row.year.toString()
+		if (!monthlyHoursMap.has(year)) {
+			monthlyHoursMap.set(year, new Map())
+		}
+		monthlyHoursMap.get(year)?.set(row.month.trim(), parseFloat(row.hours))
 	})
 
 	const allMonths = [
@@ -265,8 +265,16 @@ export async function getHoursWorkedByYearDb(
 		'December',
 	]
 
-	return allMonths.map((month) => ({
-		month: month,
-		hours: monthlyHoursMap.get(month) || 0,
-	}))
+	const output: MonthlyHours[] = []
+	monthlyHoursMap.forEach((months, year) => {
+		allMonths.forEach((month) => {
+			output.push({
+				year,
+				month,
+				hours: months.get(month) || 0,
+			})
+		})
+	})
+
+	return output
 }

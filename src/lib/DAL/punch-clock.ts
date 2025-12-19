@@ -95,15 +95,12 @@ export async function getAllWeeksWithWorkForEmployee(
 	}
 }
 
-export async function getHoursWorkedByYear(
-	year?: number,
-): Promise<MonthlyHours[]> {
+export async function getHoursWorkedByYear(): Promise<MonthlyHours[]> {
 	const { userId, orgId } = await auth.protect()
 	try {
 		const hoursWorked = await getHoursWorkedByYearDb(
 			userId,
 			orgId || userId,
-			year,
 		)
 		return hoursWorked
 	} catch (e) {

@@ -1,8 +1,8 @@
 'use client'
 
 import { TrendingDown, TrendingUp } from 'lucide-react'
+import { useState } from 'react'
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from 'recharts'
-
 import {
 	Card,
 	CardContent,
@@ -17,6 +17,13 @@ import {
 	ChartTooltip,
 	ChartTooltipContent,
 } from '@/components/ui/chart'
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from '@/components/ui/select'
 import type { MonthlyHours } from '@/lib/types/punch-clock-types'
 
 const chartConfig = {
@@ -26,15 +33,19 @@ const chartConfig = {
 	},
 } satisfies ChartConfig
 
-export function YearlyHoursChart({
-	data,
-	year,
-}: {
-	data: MonthlyHours[]
-	year?: number
-}) {
+export function YearlyHoursChart({ data }: { data: MonthlyHours[] }) {
+	const [selectedYear, setSelectedYear] = useState<string>('all')
+
+	// Get unique years from data
+	const years = Array.from(new Set(data.map((item) => item.year)))
+
+	const filteredData = data.filter((item) => {
+		if (selectedYear === 'all') return true
+		return item.year === selectedYear
+	})
+
 	// Get the last month with hours and the month before it
-	const monthsWithHours = data.filter((month) => month.hours > 0)
+	const monthsWithHours = filteredData.filter((month) => month.hours > 0)
 	const lastMonthWithHours = monthsWithHours[monthsWithHours.length - 1]
 	const secondLastMonthWithHours = monthsWithHours[monthsWithHours.length - 2]
 
@@ -72,7 +83,22 @@ export function YearlyHoursChart({
 			<CardHeader>
 				<CardTitle>Yearly Hours</CardTitle>
 				<CardDescription>
-					Showing total hours worked for {year}
+					<Select
+						onValueChange={setSelectedYear}
+						value={selectedYear}
+					>
+						<SelectTrigger className="w-[180px]">
+							<SelectValue placeholder="Select year" />
+						</SelectTrigger>
+						<SelectContent>
+							<SelectItem value="all">All Years</SelectItem>
+							{years.map((year) => (
+								<SelectItem key={year} value={year}>
+									{year}
+								</SelectItem>
+							))}
+						</SelectContent>
+					</Select>
 				</CardDescription>
 			</CardHeader>
 			<CardContent>
@@ -82,7 +108,7 @@ export function YearlyHoursChart({
 				>
 					<AreaChart
 						accessibilityLayer
-						data={data}
+						data={filteredData}
 						margin={{
 							left: 12,
 							right: 12,
@@ -120,7 +146,9 @@ export function YearlyHoursChart({
 							{trendingMessage} {trendingIcon}
 						</div>
 						<div className="flex items-center gap-2 text-muted-foreground leading-none">
-							January - December {year}
+							{selectedYear === 'all'
+								? 'All Years'
+								: selectedYear}
 						</div>
 					</div>
 				</div>
