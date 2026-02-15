@@ -1,12 +1,11 @@
 import type * as React from 'react'
-
 import { cn } from '@/lib/utils/utils'
 
 function Card({ className, ...props }: React.ComponentProps<'div'>) {
 	return (
 		<div
 			className={cn(
-				'flex flex-col gap-6 rounded-xl border bg-background py-6 text-card-foreground shadow-sm',
+				'bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm',
 				className,
 			)}
 			data-slot="card"
@@ -31,7 +30,7 @@ function CardHeader({ className, ...props }: React.ComponentProps<'div'>) {
 function CardTitle({ className, ...props }: React.ComponentProps<'div'>) {
 	return (
 		<div
-			className={cn('font-semibold leading-none', className)}
+			className={cn('leading-none font-semibold', className)}
 			data-slot="card-title"
 			{...props}
 		/>
@@ -81,15 +80,6 @@ function CardFooter({ className, ...props }: React.ComponentProps<'div'>) {
 	)
 }
 
-function CardSkeleton({ className, ...props }: React.ComponentProps<'div'>) {
-	return (
-		<div
-			className={cn('animate-pulse rounded-xl bg-muted/70', className)}
-			{...props}
-		/>
-	)
-}
-
 export {
 	Card,
 	CardHeader,
@@ -98,5 +88,4 @@ export {
 	CardAction,
 	CardDescription,
 	CardContent,
-	CardSkeleton,
 }
