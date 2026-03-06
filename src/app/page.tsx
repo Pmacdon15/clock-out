@@ -1,7 +1,6 @@
 import {
 	OrganizationSwitcher,
-	SignedIn,
-	SignedOut,
+	Show,
 	SignInButton,
 	SignUpButton,
 	UserButton,
@@ -26,7 +25,7 @@ export default function Home() {
 			</BorderBox>
 
 			<Suspense>
-				<SignedOut>
+				<Show when="signed-out">
 					<div className="rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 p-1">
 						<div className="rounded-lg bg-background p-4 text-white">
 							<div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -35,8 +34,8 @@ export default function Home() {
 							</div>
 						</div>
 					</div>
-				</SignedOut>
-				<SignedIn>
+				</Show>
+				<Show when="signed-in">
 					<BorderBox>
 						<div className="flex items-center gap-4">
 							<UserButton />
@@ -57,7 +56,7 @@ export default function Home() {
 							/>
 						</div>
 					</BorderBox>
-				</SignedIn>
+				</Show>
 			</Suspense>
 
 			<BorderBox>

@@ -1,4 +1,4 @@
-import { OrganizationSwitcher, SignedIn, UserButton } from '@clerk/nextjs'
+import { OrganizationSwitcher, Show, UserButton } from '@clerk/nextjs'
 import { Suspense } from 'react'
 import BorderBox from '@/components/ui/containers/border-box'
 import LinkWithPath from '@/components/ui/links/link'
@@ -10,7 +10,7 @@ export default function Page() {
 	return (
 		<BorderBox>
 			<Suspense>
-				<SignedIn>
+				<Show when="signed-in">
 					<div className="flex justify-center text-white">
 						<UserButton />
 						<OrganizationSwitcher />
@@ -25,7 +25,7 @@ export default function Page() {
 							text={'Manage Hours'}
 						/>
 					</div>
-				</SignedIn>
+				</Show>
 			</Suspense>
 			<Suspense>
 				<PunchClockClient timeCardPromise={timeCardPromise} />
